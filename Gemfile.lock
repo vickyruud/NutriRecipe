@@ -132,7 +132,15 @@ GEM
     websocket-extensions (0.1.5)
 
 PLATFORMS
+<<<<<<< HEAD
   ruby
+=======
+<<<<<<< HEAD
+  ruby
+=======
+  -darwin-20
+>>>>>>> 782f37ccee9e42166b3edcd1047417a8a4694cb1
+>>>>>>> main
   x86_64-linux
 
 DEPENDENCIES

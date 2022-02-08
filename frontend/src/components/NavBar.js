@@ -17,7 +17,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Form from './NewRecipe/Form'
+import { Link as Link1} from "react-router-dom";
+
 
 const ResponsiveAppBar = (props) => {
   let name = 'User?';
@@ -41,7 +42,6 @@ const ResponsiveAppBar = (props) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    console.log(event.currentTarget)
     setAnchorElUser(event.currentTarget);
   };
 
@@ -101,9 +101,13 @@ const ResponsiveAppBar = (props) => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  {page === 'Add New Recipe' && <Form />}
-                  {page === 'My Recipe' && <Form />}
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    {/*page*/}
+                    {page==='Add New Recipe' && <Link1  to="/newrecipe" underline="none">Add a new Recipe</Link1>}
+                    {page==='My Recipes' && <Link1  to="/myrecipes" underline="none">My Recipes</Link1>}
+                    {page==='Admin' && <Link1  to="/admin" underline="none">Admin</Link1>}
+                  </Typography>
+
                 </MenuItem>
               ))}
             </Menu>
@@ -126,8 +130,11 @@ const ResponsiveAppBar = (props) => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page === 'Add New Recipe' && <Form />}
-                {page === 'My Recipe' && <Form />}
+                {/*page*/}
+                {page==='Add New Recipe' && <Link1  to="/newrecipe" underline="none">Add a new Recipe</Link1>}
+                {page==='My Recipes' && <Link1  to="/myrecipes" underline="none">My Recipes</Link1>}
+                {page==='Admin' && <Link1  to="/admin" underline="none">Admin</Link1>}
+
               </Button>
             ))}
           </Box>
