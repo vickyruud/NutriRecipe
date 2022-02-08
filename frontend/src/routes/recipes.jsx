@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar';
 
 
 
-export default function Users() {
+export default function Recipes() {
 
   const [message, setMessage] = useState('Hello')
 
@@ -22,7 +22,7 @@ export default function Users() {
 
   return (
     <main>
-      <NavBar login_name = {'Final Project'} login_right={1} />
+      {/* <NavBar login_name = {'Final Project'} login_right={1} /> */}
       <h2>Recipe : {message}</h2>
       <button onClick={fetchRecipes}>Get Recipe</button>
       <Link  to="/">Back to home</Link>
