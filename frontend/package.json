@@ -9,26 +9,15 @@
     "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.4.0",
     "@mui/styled-engine-sc": "^5.3.0",
-<<<<<<< HEAD
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "styled-components": "^5.3.3",
-    "web-vitals": "^2.1.4"
-=======
     "axios": "^0.18.0",
     "react": "^17.0.2",
     "react-dom": "^16.8.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "2.1.8",
     "styled-components": "^5.3.3"
->>>>>>> main
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -36,15 +25,11 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-<<<<<<< HEAD
-  "proxy": "http://localhost:3001"
-=======
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:3000"
->>>>>>> main
+  "proxy": "http://localhost:3001"
 }
