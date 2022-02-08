@@ -12,9 +12,9 @@ export default function Users() {
     axios.get('/users') // You can simply make your requests to "/api/whatever you want"
     .then((response) => {
       // handle success
-      console.log(response.data[0].name) // The entire response from the Rails API
+      console.log(response.data[0]) // The entire response from the Rails API
 
-      setMessage(response.data[0].name);
+      setMessage(response.data[0].username);
       
     }) 
   }

@@ -1,0 +1,9 @@
+#login-paper {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
+}
+
+#login-submit-button {
+  margin-top: 10px;
+}

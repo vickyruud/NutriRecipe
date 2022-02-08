@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import NavBar from './components/NavBar';
 import './App.css';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 
 class App extends Component {
@@ -38,7 +40,10 @@ class App extends Component {
         {/* <NavBar login_name = {''} /> {/* Unregistered User */}
         <h1>{ this.state.message }</h1>
         <Link  to="/users">User</Link> ||
-        <Link  to="/recipes">Recipes</Link>
+        <Link to="/recipes">Recipes</Link>
+        {/* <Login></Login> */}
+        <Signup />
+
       </div>
       
     );
