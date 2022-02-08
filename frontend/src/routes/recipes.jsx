@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar';
 
 
 
-export default function Users() {
+export default function Recipes() {
 
   const [message, setMessage] = useState('Hello')
 

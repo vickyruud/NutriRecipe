@@ -14,7 +14,7 @@ export default function Users() {
       // handle success
       console.log(response.data[0].name) // The entire response from the Rails API
 
-      setMessage(response.data[0].name);
+      setMessage(response.data[0].username);
       
     }) 
   }
