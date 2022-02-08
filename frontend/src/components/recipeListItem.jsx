@@ -4,7 +4,7 @@ import React from "react";
 export default function recipeListItem(props){
 const {id,name,description,ingredients,steps,serving_size,estimated_time,rating,image_url} = props.recipe
   return( 
-  <article key={id}>
+  <article key={id} className="recipe">
     <div>
     <h4>{rating}</h4>
     <span role="img" aria-label="Star">⭐️⭐️⭐️⭐️</span>
