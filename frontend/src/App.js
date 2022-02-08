@@ -13,8 +13,6 @@ const App = (props) => {
   
     const [user, setUser] = useState({})
     
-  
-
 
   const createUser = (user) => {
     axios.post('/users', user) 
@@ -27,8 +25,6 @@ const App = (props) => {
    
   }
 
- 
-
   const signUp = (event) => {
     event.preventDefault();
     const user = {
@@ -38,26 +34,23 @@ const App = (props) => {
     } 
     createUser(user)
   }
-  
 
-  const fetchRecipes = () => {
-    axios.get('/api/recipes') // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
+  // const fetchRecipes = () => {
+  //   axios.get('/api/recipes') // You can simply make your requests to "/api/whatever you want"
+  //   .then((response) => {
+  //     // handle success
+  //     console.log(response.data) // The entire response from the Rails API
 
-      console.log(response) // Just the message
-      this.setState({
-        message: response.data[0].name
-      });
-    }) 
-  }
+  //       console.log(response); // Just the message
+  //       this.setState({
+  //         message: response.data[0].name,
+  //       });
+  //     });
+  //   })
 
- 
     return (
-      
       <div className="App">
-        <NavBar login_name = {'Final Project'} login_right={1} /> 
+        <NavBar login_name={"Final Project"} login_right={1} />
         {/*<NavBar login_name = {'Registered User'} login_right={0} /> */}
         {/* <NavBar login_name = {''} /> {/* Unregistered User */}
         <h1>Welcome</h1>
@@ -68,9 +61,9 @@ const App = (props) => {
         <Login />
 
       </div>
-      
     );
 }
+
 
 
 export default App;
