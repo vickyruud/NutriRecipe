@@ -8,7 +8,7 @@ import axios from 'axios';
 const Signup = () => {
   const paperStyle = { padding: '30px 20px', width: 300, margin: '20px auto' };
   const headerStyle = { margin: 0 };
-  const avatarStyle = { backgroundColor: '#1bbd7e' };
+  const avatarStyle = { backgroundColor: 'blue' };
   const textFieldStyle = { margin: '10px 0 0 0' };
   const loginButtonStyle = {margin: '10px 0 0 0'}
 
