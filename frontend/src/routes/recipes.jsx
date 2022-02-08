@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import RecipeList from "../components/RecipeList";
+import '../App.css';
 
 export default function Recipes() {
   const [message, setMessage] = useState("");

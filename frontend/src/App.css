@@ -31,3 +31,7 @@
     transform: rotate(360deg);
   }
 }
+.recipeImg{
+  height: 200px;
+  width:200;
+}
