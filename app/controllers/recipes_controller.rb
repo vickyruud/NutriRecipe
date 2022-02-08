@@ -13,6 +13,8 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     puts "new recipe page loaded"
+    @categories=Category.all
+    render :json => @categories
   end
 
   def create
