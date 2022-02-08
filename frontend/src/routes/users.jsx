@@ -9,7 +9,7 @@ export default function Users() {
   const [message, setMessage] = useState('Hello')
 
   const fetchUsers = () => {
-    axios.get('/api/users') // You can simply make your requests to "/api/whatever you want"
+    axios.get('/users') // You can simply make your requests to "/api/whatever you want"
     .then((response) => {
       // handle success
       console.log(response.data[0].name) // The entire response from the Rails API
