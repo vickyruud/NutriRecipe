@@ -15,7 +15,7 @@ export default function Recipes() {
         // handle success
         console.log(response.data[0].name); // The entire response from the Rails API
 
-        setMessage(response.data[0].name);
+        // setMessage(response.data[0].name);
         setRecipes(response.data);
       })
       .catch((err) => {
@@ -26,9 +26,12 @@ export default function Recipes() {
     <main>
       <NavBar login_name={"Final Project"} login_right={1} />
       <h2>{message}</h2>
-      <button onClick={fetchRecipes}>Get Recipe</button>
-      <RecipeList recipes={recipes} />
+      <div style={{display:"flex",flexDirection:"row"}} >
+      <button onClick={fetchRecipes}>Get Recipe </button>
       <Link to="/">Back to home</Link>
+      </div>
+      <RecipeList recipes={recipes} />
+      
     </main>
   );
 }

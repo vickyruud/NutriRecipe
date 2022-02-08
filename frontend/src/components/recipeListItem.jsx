@@ -4,8 +4,9 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Button from './Button';
 
 export default function RecipeListItem(props) {
   const {
@@ -22,11 +23,11 @@ export default function RecipeListItem(props) {
   const ingredientObj = eval(ingredients);
   const [readMore, setReadMore] = useState(false)
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 400, height: 500 }}>
       <CardMedia
         component="img"
-        alt="green iguana"
-        height="140"
+        alt="photo"
+        height="200"
         image={image_url}
       />
       <CardContent>
@@ -34,13 +35,13 @@ export default function RecipeListItem(props) {
           {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {description}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
+        <Button size="small">Serving Size</Button>
         <Button size="small">Learn More</Button>
+        <Button size="small">Nutri Facts</Button>
       </CardActions>
     </Card>
   );
