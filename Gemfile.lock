@@ -132,6 +132,7 @@ GEM
     websocket-extensions (0.1.5)
 
 PLATFORMS
+  -darwin-20
   x86_64-linux
 
 DEPENDENCIES

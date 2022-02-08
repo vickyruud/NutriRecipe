@@ -17,6 +17,8 @@ export default function Users() {
       setMessage(response.data[0].name);
       
     }) 
+    .catch(err=>{
+      console.log(err)})
   }
 
   return (
