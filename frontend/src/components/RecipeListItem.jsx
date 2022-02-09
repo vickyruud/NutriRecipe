@@ -47,4 +47,3 @@ export default function RecipeListItem(props) {
     </Card>
   );
 }
-// style={{background:"transparent"}}
