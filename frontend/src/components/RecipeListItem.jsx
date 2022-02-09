@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 // import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Button from './Button';
+import Typography from "@mui/material/Typography";
+import Button from "./Button";
 
 export default function RecipeListItem(props) {
   const {
@@ -19,22 +19,24 @@ export default function RecipeListItem(props) {
     rating,
     image_url,
   } = props.recipe;
+
   const ingredientObj = eval(ingredients);
-  const [readMore, setReadMore] = useState(false)
+  const [readMore, setReadMore] = useState(false);
   return (
-    <Card sx={{ maxWidth: 400, height: 500 }}>
-      <CardMedia
-        component="img"
-        alt="photo"
-        height="200"
-        image={image_url}
-      />
+    <Card sx={{ maxWidth: 400, height: 400 }}>
+      <CardMedia component="img" alt="photo" height="200" image={image_url} />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h6" component="div">
           {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {description}
+          {readMore ? description : `${description.substring(0, 70)}...`}
+          <button
+            style={{ background: "transparent", border: "none" }}
+            onClick={() => setReadMore(!readMore)}
+          >
+            {readMore ? "show less" : "read more"}
+          </button>
         </Typography>
       </CardContent>
       <CardActions>
