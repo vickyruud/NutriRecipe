@@ -10,11 +10,17 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import IngredientList from "./IngredientList"
 
-
 const NewRecipeForm = (props) => {
+  const Input = styled('input')({
+    display: 'none',
+  });
+
   const [category, setCategory] = React.useState('');
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -29,7 +35,7 @@ const NewRecipeForm = (props) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>General Information</Typography>
+          <Typography sx={{ fontSize: 20 }}>General Information</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -64,7 +70,7 @@ const NewRecipeForm = (props) => {
             label="Serving size"
           />
           <FormControl required variant="standard" sx={{ m: 1, minWidth: 350 }}>
-            <InputLabel>Category</InputLabel>
+            <InputLabel sx={{ fontSize: 20 }}>Category</InputLabel>
             <Select
               required
               id="category"
@@ -88,7 +94,7 @@ const NewRecipeForm = (props) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Ingredient List</Typography>
+          <Typography sx={{ fontSize: 20 }}>Ingredient List</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -103,7 +109,7 @@ const NewRecipeForm = (props) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Steps to Make</Typography>
+          <Typography sx={{ fontSize: 20 }}>Steps to Make</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -133,25 +139,24 @@ const NewRecipeForm = (props) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Upload an Image</Typography>
+          <Typography sx={{ fontSize: 20 }}>Upload an Image</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            <Box
-              component="form"
-              sx={{
-                '& .MuiTextField-root': { m: 1, width: '99ch' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <CloudUploadIcon sx={{
-                '& .MuiTextField-root': { m: 1, width: '99ch' },
-              }}/>
-            </Box>
+          <Typography align="center">
+
+              <Stack direction="row" alignItems="center" spacing={2}>
+                <label htmlFor="contained-button-file">
+                  <Input accept="image/*" id="contained-button-file" multiple type="file"/>
+                  <Button variant="contained" component="span">
+                    <CloudUploadIcon sx={{ fontSize: 40 }} />
+                  </Button>
+                </label>
+              </Stack>
+       
           </Typography>
         </AccordionDetails>
       </Accordion>
+      
     </div>
   );
 }
