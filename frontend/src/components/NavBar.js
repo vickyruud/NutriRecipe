@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from "react";
+import axios from "axios";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -18,7 +19,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link as Link1} from "react-router-dom";
-
 
 const ResponsiveAppBar = (props) => {
   console.log(props.login_name)
@@ -132,9 +132,9 @@ const ResponsiveAppBar = (props) => {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {/*page*/}
-                {page==='Add New Recipe' && <Link1  to="/newrecipe" underline="none">Add a new Recipe</Link1>}
-                {page==='My Recipes' && <Link1  to="/myrecipes" underline="none">My Recipes</Link1>}
-                {page==='Admin' && <Link1  to="/admin" underline="none">Admin</Link1>}
+                {page==='Add New Recipe' && <Link1  to="/newrecipe">Add a new Recipe</Link1>}
+                {page==='My Recipes' && <Link1  to="/myrecipes">My Recipes</Link1>}
+                {page==='Admin' && <Link1  to="/admin">Admin</Link1>}
 
               </Button>
             ))}
