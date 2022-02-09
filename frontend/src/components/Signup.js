@@ -7,7 +7,7 @@ import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 const Signup = (props) => {
   const paperStyle = { padding: '30px 20px', width: 300, margin: '20px auto' };
   const headerStyle = { margin: 0 };
-  const avatarStyle = { backgroundColor: '#1bbd7e' };
+  const avatarStyle = { backgroundColor: '#0068d3' };
   const textFieldStyle = { margin: '10px 0 0 0' };
 
   return (
