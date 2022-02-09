@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
@@ -22,13 +22,16 @@ export default function Recipes() {
         console.log(err);
       });
   };
+  useEffect(()=>{
+    fetchRecipes()
+
+  },[])
   return (
     <main>
       <NavBar login_name={"Final Project"} login_right={1} />
       <h2>{message}</h2>
       <div style={{display:"flex",flexDirection:"row"}} >
-      <button onClick={fetchRecipes}>Get Recipe </button>
-      <Link to="/">Back to home</Link>
+    
       </div>
       <RecipeList recipes={recipes} />
       
