@@ -39,25 +39,25 @@ const NewRecipeForm = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-          <Box
-            component="form"
-            sx={{
-              '& > :not(style)': { m: 1, width: '99ch' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <TextField required id="name" label="Enter an Introduction of your Recipe" variant="outlined" />
-          </Box>
-          <Box
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 1, width: '30ch' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        
+            <Box
+              component="form"
+              sx={{
+                '& > :not(style)': { m: 1, width: '99ch' },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField required id="name" label="Enter an Introduction of your Recipe" variant="outlined" />
+            </Box>
+            <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '30ch' },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+          
         <div> 
           <TextField
             required
@@ -67,10 +67,10 @@ const NewRecipeForm = (props) => {
           <TextField
             required
             id="serving_size"
-            label="Serving size"
+            label="Serving size (people)"
           />
           <FormControl required variant="standard" sx={{ m: 1, minWidth: 350 }}>
-            <InputLabel sx={{ fontSize: 20 }}>Category</InputLabel>
+            <InputLabel sx={{ fontSize: 18 }}>Category</InputLabel>
             <Select
               required
               id="category"
@@ -125,6 +125,7 @@ const NewRecipeForm = (props) => {
                 id="steps"
                 label="Steps"
                 multiline
+                rows={5}
                 maxRows={100}
                 onChange={handleChange}
                 variant="standard"
@@ -156,7 +157,15 @@ const NewRecipeForm = (props) => {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      
+      <Box text-align='center'>
+        <Stack direction="row" spacing={2}alignItems="center">
+          <Button variant="contained">Save your Recipe</Button>
+          <Button variant="outlined" href="#outlined-buttons">
+            View Nutrition Info
+          </Button>
+        </Stack>
+      </Box>
+ 
     </div>
   );
 }

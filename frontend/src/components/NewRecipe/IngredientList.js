@@ -11,7 +11,8 @@ const NewIngredientList = (props) => {
     console.log(event.target.value)
     setIngredients(event.target.value);
   };
-
+  const addIngredient=()=>{};
+    console.log('add ingredient')
   return (
     <div className="NewIngredientList">
       <Box
@@ -24,11 +25,13 @@ const NewIngredientList = (props) => {
       >
          
          <FormControl required variant="standard" sx={{ m: 1, minWidth: 350 }}>
-          <Fab color="primary" label="Add a new Ingredient">
-            <AddIcon />
-          </Fab>
+     
+            <Fab color="primary" label="Add a new Ingredient"onClick={addIngredient}>
+              <AddIcon />
+            </Fab>
+ 
         </FormControl>
-
+        
         <IngredientItem />
         <IngredientItem />
         <IngredientItem />
