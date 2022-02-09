@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import { Button } from "@mui/material";
 
 const App = (props) => {
   // Instantiation
@@ -20,6 +21,18 @@ const App = (props) => {
     });
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      axios.post('/login', {
+        headers: {"Authenticate": localStorage.token}
+      })
+        .then(resp => {
+          console.log(resp.data)
+          setUser(resp.data.user);
+      })
+    }
+  }, [])
+
   const signUp = (event) => {
     event.preventDefault();
     const user = {
@@ -29,6 +42,12 @@ const App = (props) => {
     };
     createUser(user);
   };
+
+  const logout = (e) => {
+    e.preventDefault();
+    setUser('');
+    localStorage.removeItem("token");
+  }
 
   // const fetchRecipes = () => {
   //   axios.get('/api/recipes') // You can simply make your requests to "/api/whatever you want"
@@ -45,15 +64,18 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <NavBar login_name={"Final Project"} login_right={1} />
+      {user && <NavBar login_name={user.username} login_right={1} logout={logout} />}
+      {!user && <NavBar login_name={""} login_right={1} logout={logout} />}
       {/*<NavBar login_name = {'Registered User'} login_right={0} /> */}
       {/* <NavBar login_name = {''} /> {/* Unregistered User */}
       <h1>Welcome</h1>
       <Link to="/users">User</Link> ||
       <Link to="/recipes">Recipes</Link>
       {/* <Login></Login> */}
-      <Signup signUp={signUp} />
-      <Login />
+      {!user && <Signup signUp={signUp} />}
+      {/* <Signup signUp={signUp} logout={logout} /> */}
+      {user && <div>{user.username} <Button onClick={logout} >Log Out </Button></div>}
+      {/* <Login /> */}
     </div>
   );
 };

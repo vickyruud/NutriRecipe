@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Paper, Avatar, Typography, TextField, Button } from '@mui/material';
 import './login.css'
 import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 import axios from 'axios';
 
 
-const Signup = () => {
+const Login = () => {
   const paperStyle = { padding: '30px 20px', width: 300, margin: '20px auto' };
   const headerStyle = { margin: 0 };
-  const avatarStyle = { backgroundColor: 'blue' };
+  const avatarStyle = { backgroundColor: '#0068d3' };
   const textFieldStyle = { margin: '10px 0 0 0' };
   const loginButtonStyle = {margin: '10px 0 0 0'}
 
   const [user, setUser] = useState('');
   
   const userLogin = (user) => {
-    axios.post('/login', user) 
+    axios.get('/auto_login', {
+      headers: {
+        "content-type": "application/json"
+      },
+      body: {email: user.email, password: user.password } 
+    }, user) 
     .then((resp) => {
       // handle success
-      console.log(resp.data.token)
       localStorage.setItem("token", resp.data.token)
       setUser(resp.data.user);
       console.log(resp.data);
     })
    
   }
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      axios.post('/login', {
+        headers: {"Authenticate": localStorage.token}
+      })
+        .then(resp => {
+          setUser(user);
+      })
+    }
+  })
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -55,4 +69,4 @@ const Signup = () => {
   )
 }
 
-export default Signup;
+export default Login;

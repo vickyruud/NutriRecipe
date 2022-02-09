@@ -21,7 +21,8 @@ import { Link as Link1} from "react-router-dom";
 
 
 const ResponsiveAppBar = (props) => {
-  let name = 'User?';
+  console.log(props.login_name)
+  let name = '';
   let pages = [];
   let settings = [];
   if (props.login_name !=='') {
@@ -105,7 +106,7 @@ const ResponsiveAppBar = (props) => {
                     {/*page*/}
                     {page==='Add New Recipe' && <Link1  to="/newrecipe" underline="none">Add a new Recipe</Link1>}
                     {page==='My Recipes' && <Link1  to="/myrecipes" underline="none">My Recipes</Link1>}
-                    {page==='Admin' && <Link1  to="/admin" underline="none">Admin</Link1>}
+                    {page === 'Admin' && <Link1 to="/admin" underline="none">Admin</Link1>}
                   </Typography>
 
                 </MenuItem>
