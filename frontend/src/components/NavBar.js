@@ -21,6 +21,21 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link as Link1} from "react-router-dom";
 
 const ResponsiveAppBar = (props) => {
+  console.log(props.login_name)
+  let name = '';
+  let pages = [];
+  let settings = [];
+  if (props.login_name !=='') {
+    pages.push('My Recipes', 'Add New Recipe');
+    settings.push('Sign Out');
+    name = props.login_name
+    if (props.login_right === 1) {
+      pages.push('Admin')
+    }
+  } else {
+      settings.push('Sign In', 'Sign Up');
+  }
+  
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -38,20 +53,6 @@ const ResponsiveAppBar = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  let name = 'User?';
-  let pages = [];
-  let settings = [];
-  if (props.login_name !=='') {
-    pages.push('My Recipes', 'Add New Recipe');
-    settings.push('Sign Out');
-    name = props.login_name
-    if (props.login_right === 1) {
-      pages.push('Admin')
-    }
-  } else {
-      settings.push('Sign In', 'Sign Up');
-  }
 
   return (
     <AppBar position="static">
@@ -103,9 +104,9 @@ const ResponsiveAppBar = (props) => {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     {/*page*/}
-                    {page==='Add New Recipe' && <Link1  to="/newrecipe">Add a new Recipe</Link1>}
-                    {page==='My Recipes' && <Link1  to="/myrecipes">My Recipes</Link1>}
-                    {page==='Admin' && <Link1  to="/admin">Admin</Link1>}
+                    {page==='Add New Recipe' && <Link1  to="/newrecipe" underline="none">Add a new Recipe</Link1>}
+                    {page==='My Recipes' && <Link1  to="/myrecipes" underline="none">My Recipes</Link1>}
+                    {page === 'Admin' && <Link1 to="/admin" underline="none">Admin</Link1>}
                   </Typography>
 
                 </MenuItem>

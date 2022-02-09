@@ -1,23 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+// import Button from '@mui/material/Button';
+import Typography from "@mui/material/Typography";
+import Button from "./Button";
 
+export default function RecipeListItem(props) {
+  const {
+    id,
+    name,
+    description,
+    ingredients,
+    steps,
+    serving_size,
+    estimated_time,
+    rating,
+    image_url,
+  } = props.recipe;
 
-export default function recipeListItem(props){
-const {id,name,description,ingredients,steps,serving_size,estimated_time,rating,image_url} = props.recipe
-  return( 
-  <article key={id} className="recipe">
-    <div>
-    <h4>{rating}</h4>
-    <span role="img" aria-label="Star">⭐️⭐️⭐️⭐️</span>
-      <h1>{name}</h1>
-    {/* <h2>{serving_size}</h2>
-    <h2>{estimated_time}</h2> */}
-    </div>
-      <img class= "recipeImg" src={image_url}
-    alt ={name} />
-    {/* <h2>{description}</h2>
-    <h2>{ingredients}</h2>  */}
-    
-    </article>
-
-  )
+  const ingredientObj = eval(ingredients);
+  const [readMore, setReadMore] = useState(false);
+  return (
+    <Card sx={{ maxWidth: 400, height: 400 }}>
+      <CardMedia component="img" alt="photo" height="200" image={image_url} />
+      <CardContent>
+        <Typography gutterBottom variant="h6" component="div">
+          {name}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {readMore ? description : `${description.substring(0, 70)}...`}
+          <button
+            style={{ background: "transparent", border: "none" }}
+            onClick={() => setReadMore(!readMore)}
+          >
+            {readMore ? "show less" : "read more"}
+          </button>
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Serving Size</Button>
+        <Button size="small">Learn More</Button>
+        <Button size="small">Nutri Facts</Button>
+      </CardActions>
+    </Card>
+  );
 }
