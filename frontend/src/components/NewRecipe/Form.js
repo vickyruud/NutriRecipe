@@ -14,6 +14,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import TextEditor from './TextEditor'
 import IngredientList from "./IngredientList"
 
 const NewRecipeForm = (props) => {
@@ -24,11 +25,13 @@ const NewRecipeForm = (props) => {
   const [category, setCategory] = React.useState('');
   const handleChange = (event) => {
     setCategory(event.target.value);
+  
   };
   const categories=[].concat(props.categories)
  
   return (
     <div className="NewRecipe">
+          <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">CREATE A NEW RECIPE</Typography>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -39,16 +42,7 @@ const NewRecipeForm = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <Box
-              component="form"
-              sx={{
-                '& > :not(style)': { m: 1, width: '99ch' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField required id="name" label="Enter an Introduction of your Recipe" variant="outlined" />
-            </Box>
+
             <Box
               component="form"
               sx={{
@@ -57,23 +51,30 @@ const NewRecipeForm = (props) => {
               noValidate
               autoComplete="off"
             >
-          
         <div> 
           <TextField
             required
-            id="estimated_time"
+            name="recipe_name"
+            label="Enter your recipe name here"
+            sx={{ m: 1, width: '90ch' }}
+          />
+        </div>
+        <div> 
+          <TextField
+            required
+            name="estimated_time"
             label="Time estimated (mins)"
           />
           <TextField
             required
-            id="serving_size"
+            name="serving_size"
             label="Serving size (people)"
           />
           <FormControl required variant="standard" sx={{ m: 1, minWidth: 350 }}>
             <InputLabel sx={{ fontSize: 18 }}>Category</InputLabel>
             <Select
               required
-              id="category"
+              name="category"
               value={category}
               onChange={handleChange}
               label="Set a Category"
@@ -112,26 +113,16 @@ const NewRecipeForm = (props) => {
           <Typography sx={{ fontSize: 20 }}>Steps to Make</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            <Box
-              component="form"
-              sx={{
-                '& .MuiTextField-root': { m: 1, width: '99ch' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField
-                id="steps"
-                label="Steps"
-                multiline
-                rows={5}
-                maxRows={100}
-                onChange={handleChange}
-                variant="standard"
-              />
-            </Box>
-          </Typography>
+          <Box>
+            <TextEditor
+              name="steps"
+              multiline
+              maxRows={100}
+              onChange={handleChange}
+              variant="standard"
+            />
+          </Box>
+       
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -144,21 +135,19 @@ const NewRecipeForm = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography align="center">
-
-              <Stack direction="row" alignItems="center" spacing={2}>
-                <label htmlFor="contained-button-file">
-                  <Input accept="image/*" id="contained-button-file" multiple type="file"/>
-                  <Button variant="contained" component="span">
-                    <CloudUploadIcon sx={{ fontSize: 40 }} />
-                  </Button>
-                </label>
-              </Stack>
-       
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <label htmlFor="contained-button-file">
+                <Input accept="image/*" id="contained-button-file" multiple type="file"/>
+                <Button variant="contained"component="span">
+                  <CloudUploadIcon sx={{ fontSize: 40 }} name="image_url"/>
+                </Button>
+              </label>
+            </Stack>
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Box text-align='center'>
-        <Stack direction="row" spacing={2}alignItems="center">
+      <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
+        <Stack direction="row" spacing={10} >
           <Button variant="contained">Save your Recipe</Button>
           <Button variant="outlined" href="#outlined-buttons">
             View Nutrition Info

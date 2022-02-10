@@ -1,16 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const NewIngredientItem = (props) => {
-  const [ingredient, setIngredient] = React.useState({});
-  const handleChange = (event) => {
-    console.log(event.target.value)
-    setIngredient(event.target.value);
-  };
-
+const NewIngredientItem = (props) => {  
   return (
     <div className="NewIngredientItem">
       <Box
@@ -24,22 +18,27 @@ const NewIngredientItem = (props) => {
         <div> 
           <TextField
             required
-            id="name"
+            name="name"
             label="Ingredient"
-
+            onChange={props.onChange}
+            value={props.ingredient.name}
           />
           <TextField
             required
-            id="unit"
+            name="unit"
             label="Unit"
+            onChange={props.onChange}
+            value={props.ingredient.unit}
           />
           <TextField
             required
-            id="quantity"
+            name="quantity"
             label="Quantity"
+            onChange={props.onChange}
+            value={props.ingredient.quantity}
           />
           <Fab color="primary" aria-label="Delete">
-            <DeleteIcon />
+            <DeleteIcon onClick={()=>props.onDelete(props.index)}/>
           </Fab>
         </div>
         
