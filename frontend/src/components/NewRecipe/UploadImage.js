@@ -11,7 +11,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 
 const Upload = (props) => {
-  const image_url="";
+  let image_url="";
   const [imageSelected, setImageSelected] = useState("")
   const uploadImage = (files) => {
     if (imageSelected !=="") {

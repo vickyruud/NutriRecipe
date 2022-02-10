@@ -32,7 +32,7 @@ export default function Recipes() {
   }, []);
   return (
     <main>
-      <NavBar login_name={"Final Project"} login_right={1} />
+      {/* <NavBar login_name={"Final Project"} login_right={1} /> */}
       <h2>{message}</h2>
       <div style={{ display: "flex", flexDirection: "row" }}></div>
       {selectRecipe ? (

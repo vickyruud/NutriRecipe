@@ -26,13 +26,13 @@ const ResponsiveAppBar = (props) => {
   let settings = [];
   if (props.login_name !=='') {
     pages.push('My Recipes', 'Add New Recipe');
-    settings.push('Sign Out');
+    settings.push('Logout');
     name = props.login_name
     if (props.login_right === 1) {
       pages.push('Admin')
     }
   } else {
-      settings.push('Sign In', 'Sign Up');
+      settings.push('Login', 'Sign Up');
   }
   
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -163,8 +163,13 @@ const ResponsiveAppBar = (props) => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem  key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                  {setting === 'Sign Up' && <Typography onClick={props.signUp}>Sign Up</Typography>}
+                  {setting === 'Login' && <Typography onClick={props.login}>Login</Typography>}
+                  {setting === 'Logout' && <Typography onClick={props.logout}>Logout</Typography>}
+                  
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>

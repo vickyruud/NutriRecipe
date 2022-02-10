@@ -5,6 +5,7 @@ import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Button  from "./components/Button";
+import Recipes from "./routes/recipes";
 
 
 const App = (props) => {
@@ -67,19 +68,16 @@ const App = (props) => {
 
   return (
     <div className="App">
-      {user && <NavBar login_name={user.username} login_right={1} logout={logout} />}
-      {!user && <NavBar login_name={""} login_right={1} logout={logout} />}
+      {user && <NavBar logout={logout}  login_name={user.username} login_right={1} logout={logout} />}
+      {!user && <NavBar login_name={""} signUp={showSignup} login={showLogin} login_right={1}  />}
       <div className="main">
 
       {/*<NavBar login_name = {'Registered User'} login_right={0} /> */}
       {/* <NavBar login_name = {''} /> {/* Unregistered User */}
       <h1>Welcome</h1>
       <Link to="/users">User</Link> ||
-      <Link to="/recipes">Recipes</Link>
-      {!user &&<Button  onClick={showSignup} id='signup-submit-button' type='submit' variant='contained' color='primary'>Sign up</Button>}
-      {!user && <Button onClick={showLogin} id='signup-submit-button' type='submit' variant='contained' color='primary'>Login</Button>}
+      {user && <Recipes />}
       {!user && renderForm()}
-      {user && <div>{user.username} <Button onClick={logout} >Log Out </Button></div>}
       </div>
     </div>
   );
