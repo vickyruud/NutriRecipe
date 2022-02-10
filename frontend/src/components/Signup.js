@@ -28,7 +28,8 @@ const Signup = (props) => {
     }
 
     const handleSubmit = (evt) => {
-        evt.preventDefault()
+      evt.preventDefault();
+      console.log(email);
         fetch(`http://localhost:3000/users`, {
             method: "POST",
             headers: {
