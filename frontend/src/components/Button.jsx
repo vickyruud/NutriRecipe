@@ -70,7 +70,7 @@ CustomButton.propTypes = {
 export default function UseButton(props) {
   return (
     <Stack spacing={2} direction="row">
-      <CustomButton onClick={() => console.log('click!')}>{props.children}</CustomButton>
+      <CustomButton onClick={props.onClick}>{props.children}</CustomButton>
       
     </Stack>
   );
