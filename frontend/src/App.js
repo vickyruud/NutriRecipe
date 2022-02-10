@@ -1,5 +1,4 @@
 import React, { Component, useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import "./App.css";
@@ -7,60 +6,56 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { Button } from "@mui/material";
 
+
 const App = (props) => {
   // Instantiation
 
-  const [user, setUser] = useState({});
 
-  const createUser = (user) => {
-    axios.post("/users", user).then((resp) => {
-      // handle success
-      console.log(resp.data.token);
-      localStorage.setItem("token", resp.data.token);
-      setUser(resp.data.user);
-    });
-  };
+  const [user, setUser] = useState({})
+  const [form, setForm] = useState("")
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      axios.post('/login', {
-        headers: {"Authenticate": localStorage.token}
+    const token = localStorage.getItem("token")
+
+    if(token !== null){
+      fetch(`http://localhost:3000/auto_login`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
-        .then(resp => {
-          console.log(resp.data)
-          setUser(resp.data.user);
+      .then(resp => resp.json())
+      .then(data => {
+        setUser(data)
+        console.log(data)
       })
+    } else {
+      setUser('');
     }
   }, [])
 
-  const signUp = (event) => {
-    event.preventDefault();
-    const user = {
-      username: event.target[0].value,
-      email: event.target[1].value,
-      password: event.target[2].value,
-    };
-    createUser(user);
-  };
+  const handleLogin = (user) => {
+    setUser(user)
+  }
+ 
 
-  const logout = (e) => {
+  const handleAuthClick = () => {
+    const token = localStorage.getItem("token")
+    fetch(`http://localhost:3000/user_is_authed`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => console.log(data))
+  }
+  console.log(user);
+
+  
+    const logout = (e) => {
     e.preventDefault();
     setUser('');
     localStorage.removeItem("token");
   }
-
-  // const fetchRecipes = () => {
-  //   axios.get('/api/recipes') // You can simply make your requests to "/api/whatever you want"
-  //   .then((response) => {
-  //     // handle success
-  //     console.log(response.data) // The entire response from the Rails API
-
-  //       console.log(response); // Just the message
-  //       this.setState({
-  //         message: response.data[0].name,
-  //       });
-  //     });
-  //   })
 
   return (
     <div className="App">
@@ -72,10 +67,19 @@ const App = (props) => {
       <Link to="/users">User</Link> ||
       <Link to="/recipes">Recipes</Link>
       {/* <Login></Login> */}
-      {!user && <Signup signUp={signUp} />}
+      {/* {!user && <Signup signUp={signUp} />} */}
       {/* <Signup signUp={signUp} logout={logout} /> */}
+     
+      <Button onClick={handleAuthClick} >Access authorized route </Button>
+
+      {!user && <Login handleLogin={handleLogin}/>}
+
+      {!user && <Signup handleLogin={handleLogin}/>}
+      
+      
+      
+
       {user && <div>{user.username} <Button onClick={logout} >Log Out </Button></div>}
-      {/* <Login /> */}
     </div>
   );
 };

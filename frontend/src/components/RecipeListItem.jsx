@@ -23,10 +23,10 @@ export default function RecipeListItem(props) {
   const ingredientObj = eval(ingredients);
   const [readMore, setReadMore] = useState(false);
   return (
-    <Card sx={{ maxWidth: 400, height: 400 }}>
+    <Card elevation={20} sx={{ maxWidth: 400, height: 450 }}>
       <CardMedia component="img" alt="photo" height="200" image={image_url} />
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom variant="h8" component="div">
           {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
