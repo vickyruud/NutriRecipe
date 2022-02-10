@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 // import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
 import Button from "./Button";
+import Rating from "./Rating";
 
 export default function RecipeListItem(props) {
   const {
@@ -21,13 +22,19 @@ export default function RecipeListItem(props) {
   } = props.recipe;
 
   const ingredientObj = eval(ingredients);
+  const viewRecipe=()=>{
+    props.setSelectRecipe({...props.recipe})
+    
+  }
   const [readMore, setReadMore] = useState(false);
+  console.log("recipes====>", props.recipe)
   return (
     <Card elevation={20} sx={{ maxWidth: 400, height: 450 }}>
       <CardMedia component="img" alt="photo" height="200" image={image_url} />
       <CardContent>
         <Typography gutterBottom variant="h8" component="div">
-          {name}
+        <div style={{display:"flex",flexDirection:"row"}} >{name} </div>
+        <Rating></Rating>
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {readMore ? description : `${description.substring(0, 70)}...`}
@@ -39,10 +46,13 @@ export default function RecipeListItem(props) {
           </button>
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Serving Size</Button>
-        <Button size="small">Learn More</Button>
-        <Button size="small">Nutri Facts</Button>
+      <CardActions >
+        {/* <Button size="small">Serving Size</Button> */}
+        
+        <Button size="small"style={{margin: '0 auto', display: "flex"}} onClick={viewRecipe} >View Recipe</Button>
+
+        {/* <Button size="small">Nutri Facts</Button> */}
+        
       </CardActions>
     </Card>
   );
