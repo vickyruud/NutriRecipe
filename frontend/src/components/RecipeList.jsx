@@ -22,7 +22,7 @@ export default function ResponsiveGrid(props) {
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        paddingTop: 5,
+        padding: 5,
       }}
     >
       <Grid

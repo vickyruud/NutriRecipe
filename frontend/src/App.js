@@ -74,10 +74,8 @@ const App = (props) => {
 
       {/*<NavBar login_name = {'Registered User'} login_right={0} /> */}
       {/* <NavBar login_name = {''} /> {/* Unregistered User */}
-      <h1>Welcome</h1>
-      <Link to="/users">User</Link> ||
-      {user && <Recipes />}
       {!user && renderForm()}
+      <Recipes />
       </div>
     </div>
   );

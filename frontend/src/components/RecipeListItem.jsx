@@ -30,11 +30,11 @@ export default function RecipeListItem(props) {
   const [readMore, setReadMore] = useState(false);
   console.log("recipes====>", props.recipe)
   return (
-    <Card className="recipe-card" elevation={20} sx={{ maxWidth: 500, height: 500 }}>
+    <Card className="recipe-card" elevation={20} sx={{ maxWidth: "500", height: "auto" }}>
       <CardMedia component="img" alt="photo" height="250" image={image_url} />
-      <CardContent>
+      <CardContent style={{display: "flex", flexDirection:"column", alignItems:"flex-start"}}>
         <Typography gutterBottom variant="h8" component="div">
-        <div style={{display:"flex",flexDirection:"row"}} >{name} </div>
+        {name}
         <Rating></Rating>
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -47,9 +47,9 @@ export default function RecipeListItem(props) {
           </button>
         </Typography>
       </CardContent>
-      <CardActions className="view-recipe-button" >
+      <CardActions className="view-recipe-button"  >
+        <Button size="small" onClick={viewRecipe} style={{marginBottom: -50}} >View Recipe</Button>
         {/* <Button size="small">Serving Size</Button> */}
-        <Button id="view-recipe-button" size="small" onClick={viewRecipe} >View Recipe</Button>
 
         {/* <Button size="small">Nutri Facts</Button> */}
         
