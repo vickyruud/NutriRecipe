@@ -1,12 +1,11 @@
 // import React from "react"
 import RecipeListItem from "./RecipeListItem";
-
-
 import * as React from "react";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import NavBar from "./NavBar";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   ...theme.typography.body2,
@@ -17,7 +16,15 @@ import Grid from "@mui/material/Grid";
 
 export default function ResponsiveGrid(props) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        paddingTop: 5,
+      }}
+    >
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
@@ -25,10 +32,14 @@ export default function ResponsiveGrid(props) {
       >
         {props.recipes.map((recipe, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <RecipeListItem recipe={recipe} />
+            <RecipeListItem
+              setSelectRecipe={props.setSelectRecipe}
+              recipe={recipe}
+            />
           </Grid>
         ))}
       </Grid>
     </Box>
   );
 }
+// ,display:"flex", flexDirection:"row",justifyContent:"center"
