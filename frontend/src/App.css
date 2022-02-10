@@ -45,6 +45,7 @@
   align-items: flex-start;
 }
 
-#view-recipe-button {
-  font-size: 5000;
+.signup-buttons {
+  display: flex;
+  justify-content: space-between;
 }

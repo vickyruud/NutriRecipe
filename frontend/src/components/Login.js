@@ -62,8 +62,10 @@ const Login = (props) => {
         <form className='login-form' onSubmit={handleSubmit}>
           <TextField onChange={handleUsernameChange} style={textFieldStyle} variant='standard' fullWidth label='Username' placeholder='Enter your username' />
           <TextField onChange={handlePasswordChange} style={textFieldStyle} variant='standard' fullWidth label='Password' type="password" placeholder='Enter a password' />
+          <div className='signup-buttons'>
           <Button style={loginButtonStyle} type='submit' variant='contained' color='primary'>Login</Button>
-          
+          <Button  onClick={props.cancel} style={loginButtonStyle} variant='contained' color='primary'>Cancel</Button>
+          </div>
         </form>
       </Paper>
     </Grid>
