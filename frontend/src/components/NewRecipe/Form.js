@@ -17,12 +17,48 @@ import TextEditor from './TextEditor'
 import IngredientList from "./IngredientList"
 
 const NewRecipeForm = (props) => {
-  const [category, setCategory] = React.useState('');
+  const category = "";
   const handleChange = (event) => {
-    setCategory(event.target.value);
+   // setCategory(event.target.value);
+    console.log(event.target.name);
+    recipe[event.target.name]=event.target.value;
+
   };
-  const categories=[].concat(props.categories)
- 
+  const handleSave = (event) => {
+    event.preventDefault();
+    recipe.user_id = 1; //hard-coded
+    recipe.category_id = category.id;
+    recipe.name = event.target.elements.recipe_name.value;
+    recipe.description = event.target.elements.description.value;
+    recipe.serving_size = event.target.elements.serving_size.value;
+    recipe.estimated_time = event.target.elements.estimated_time.value;
+    recipe.steps = event.target.elements.steps.value;
+    recipe.rating = event.target.elements.rating.value;
+    recipe.image_url = event.target.elements.image_url.value;
+  
+
+
+
+  }
+
+  /*
+  let handleChange = (event, i) => {
+    let newIngredients = [...ingredients];
+    let newIngredient = {...newIngredients[i],[event.target.name]:event.target.value};
+    newIngredients[i] = newIngredient;
+    console.log('update ingredient')
+    setIngredients(newIngredients);
+  }
+*/
+
+  console.log(props.cate)
+  const categories=[].concat(props.cates)
+  
+  const recipe = props.recipe || {};
+
+  const handleSaveRecipe = () => {
+
+  }
   return (
     <div className="NewRecipe">
           <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">ADD A NEW RECIPE</Typography>
