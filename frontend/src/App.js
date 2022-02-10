@@ -11,7 +11,8 @@ const App = (props) => {
   // Instantiation
 
 
- const [user, setUser] = useState({})
+  const [user, setUser] = useState({})
+  const [form, setForm] = useState("")
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -35,7 +36,6 @@ const App = (props) => {
   const handleLogin = (user) => {
     setUser(user)
   }
-
  
 
   const handleAuthClick = () => {
