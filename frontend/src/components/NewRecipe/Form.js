@@ -10,28 +10,22 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import UploadImage from "./UploadImage";
 import TextEditor from './TextEditor'
 import IngredientList from "./IngredientList"
 
 const NewRecipeForm = (props) => {
-  const Input = styled('input')({
-    display: 'none',
-  });
-
   const [category, setCategory] = React.useState('');
   const handleChange = (event) => {
     setCategory(event.target.value);
-  
   };
   const categories=[].concat(props.categories)
  
   return (
     <div className="NewRecipe">
-          <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">CREATE A NEW RECIPE</Typography>
+          <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">ADD A NEW RECIPE</Typography>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -128,26 +122,10 @@ const NewRecipeForm = (props) => {
         </AccordionDetails>
       </Accordion>
       <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography sx={{ fontSize: 20 }}>Upload an Image</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography align="center">
-            <Stack direction="row" alignItems="center" spacing={2}>
-              <label htmlFor="contained-button-file">
-                <Input accept="image/*" id="contained-button-file" multiple type="file"/>
-                <Button variant="contained"component="span">
-                  <CloudUploadIcon sx={{ fontSize: 40 }} name="image_url"/>
-                </Button>
-              </label>
-            </Stack>
-          </Typography>
-        </AccordionDetails>
+        <UploadImage />
       </Accordion>
+
+
       <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
         <Stack direction="row" spacing={10} >
           <Button variant="contained">Save your Recipe</Button>
@@ -156,7 +134,7 @@ const NewRecipeForm = (props) => {
           </Button>
         </Stack>
       </Box>
- 
+    
     </div>
   );
 }

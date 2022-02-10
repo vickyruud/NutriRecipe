@@ -21,7 +21,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link as Link1} from "react-router-dom";
 
 const ResponsiveAppBar = (props) => {
-  console.log(props.login_name)
   let name = '';
   let pages = [];
   let settings = [];
