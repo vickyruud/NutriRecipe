@@ -76,8 +76,8 @@ const App = (props) => {
       <h1>Welcome</h1>
       <Link to="/users">User</Link> ||
       <Link to="/recipes">Recipes</Link>
-      <Button  onClick={showSignup} id='signup-submit-button' type='submit' variant='contained' color='primary'>Sign up</Button>
-      <Button  onClick={showLogin} id='signup-submit-button' type='submit' variant='contained' color='primary'>Login</Button>
+      {!user &&<Button  onClick={showSignup} id='signup-submit-button' type='submit' variant='contained' color='primary'>Sign up</Button>}
+      {!user && <Button onClick={showLogin} id='signup-submit-button' type='submit' variant='contained' color='primary'>Login</Button>}
       {!user && renderForm()}
       {user && <div>{user.username} <Button onClick={logout} >Log Out </Button></div>}
       </div>
