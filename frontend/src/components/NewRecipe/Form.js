@@ -42,8 +42,18 @@ const NewRecipeForm = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-
-            <Box
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '103ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField required name="recipe_name" label="Enter a Name for your Recipe" variant="outlined" />
+            <TextField required name="description" label="Enter an Introduction for your Recipe" variant="outlined" />
+          </Box>
+          <Box
               component="form"
               sx={{
                 '& .MuiTextField-root': { m: 1, width: '30ch' },
@@ -51,14 +61,6 @@ const NewRecipeForm = (props) => {
               noValidate
               autoComplete="off"
             >
-        <div> 
-          <TextField
-            required
-            name="recipe_name"
-            label="Enter your recipe name here"
-            sx={{ m: 1, width: '90ch' }}
-          />
-        </div>
         <div> 
           <TextField
             required
