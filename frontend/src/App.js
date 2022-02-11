@@ -13,7 +13,7 @@ const App = (props) => {
 
 
   const [user, setUser] = useState({})
-  const [show, setShow] = useState("SignUp")
+  const [show, setShow] = useState("")
 
 
   useEffect(() => {
@@ -42,6 +42,7 @@ const App = (props) => {
   e.preventDefault();
   setUser('');
   localStorage.removeItem("token");
+    setShow('');
   }
   
   const showLogin = () => {
@@ -53,13 +54,22 @@ const App = (props) => {
     setShow("signUp")
   }
 
+  const removeSignUp = () => {
+    setShow("")
+  }
+
+
   const renderForm = () => {
     if (show === 'Login') {
-      return <Login handleLogin={handleLogin} />
+      return <Login handleLogin={handleLogin} cancel={removeSignUp} />
       
-    } else {
-      return <Signup handleLogin={handleLogin}/>
-
+    } else if (show === 'signUp') {
+      
+      return <Signup handleLogin={handleLogin} cancel={removeSignUp}/>
+    }
+    else {
+      
+        return null
     }
       
         
@@ -74,10 +84,8 @@ const App = (props) => {
 
       {/*<NavBar login_name = {'Registered User'} login_right={0} /> */}
       {/* <NavBar login_name = {''} /> {/* Unregistered User */}
-      <h1>Welcome</h1>
-      <Link to="/users">User</Link> ||
-      {user && <Recipes />}
       {!user && renderForm()}
+      <Recipes />
       </div>
     </div>
   );

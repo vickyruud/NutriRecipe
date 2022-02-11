@@ -68,8 +68,10 @@ const Signup = (props) => {
           <TextField onChange={handleEmailChange} style={textFieldStyle} variant='standard' fullWidth label='Email' placeholder='Enter your email'/>
           <TextField onChange={handlePasswordChange}style={textFieldStyle} variant='standard' fullWidth label='Password' type="password" placeholder='Enter a password' />
           <TextField style={textFieldStyle} variant='standard' fullWidth label='Confirm Password' type="password" placeholder='Confirm your password' />
+          <div className='signup-buttons'>
           <Button id='signup-submit-button' type='submit' variant='contained' color='primary'>Sign up</Button>
-          
+          <Button id='signup-submit-button' onClick={props.cancel} variant='contained' color='primary'>Cancel</Button>
+          </div>
         </form>
       </Paper>
     </Grid>

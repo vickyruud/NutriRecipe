@@ -22,16 +22,16 @@ export default function ResponsiveGrid(props) {
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        paddingTop: 5,
+        padding: 5,
       }}
     >
       <Grid
         container
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
+        spacing={{ sm: 2, md: 3 }}
+        columns={{ xs: 4, sm: 5, md: 20 }}
       >
         {props.recipes.map((recipe, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
+          <Grid item xs={4} sm={4} md={4} key={index}>
             <RecipeListItem
               setSelectRecipe={props.setSelectRecipe}
               recipe={recipe}

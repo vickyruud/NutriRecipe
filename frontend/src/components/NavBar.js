@@ -141,8 +141,8 @@ const ResponsiveAppBar = (props) => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} size={'small'}>
-                {name}
+              <IconButton style={{color: "#ffffff"} }onClick={handleOpenUserMenu} sx={{ p: 0 }} size={'small'}>
+                { name ? name : "Menu" }
                 <KeyboardArrowDownIcon />
               </IconButton>
             </Tooltip>
