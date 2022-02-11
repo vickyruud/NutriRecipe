@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from '../components/NewRecipe/Form'
 import NavBar from '../components/NavBar'
+import { useNavigate } from 'react-router';
 
 const NewRecipe = (props) => {
   const [categories, setCategories] = useState([]);
-
+  const navigate = useNavigate();
   const fetchCategories = () => {
     axios
     .get("/recipes/categories")
@@ -18,11 +19,12 @@ const NewRecipe = (props) => {
   }
 
   const saveRecipe = (recipe) => {
+
     axios
     .post("/recipe", recipe)
     .then(() => {
       console.log ('Recipe saved!');
-      
+      navigate('/');
     })
     .catch((err) => {
       console.log(err);
