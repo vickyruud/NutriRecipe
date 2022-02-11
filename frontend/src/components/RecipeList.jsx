@@ -42,4 +42,4 @@ export default function ResponsiveGrid(props) {
     </Box>
   );
 }
-// ,display:"flex", flexDirection:"row",justifyContent:"center"
+
