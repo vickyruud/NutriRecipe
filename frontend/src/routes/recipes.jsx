@@ -15,7 +15,6 @@ export default function Recipes() {
       .get("/recipes") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         // handle success
-        console.log(response.data[0].name); // The entire response from the Rails API
 
         // setMessage(response.data[0].name);
         setRecipes(response.data);
@@ -24,8 +23,6 @@ export default function Recipes() {
         console.log(err);
       });
   };
-  console.log("selectrecipe====>", selectRecipe);
-  console.log("recipes====>", recipes);
 
   useEffect(() => {
     fetchRecipes();

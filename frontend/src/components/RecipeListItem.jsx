@@ -28,7 +28,6 @@ export default function RecipeListItem(props) {
     
   }
   const [readMore, setReadMore] = useState(false);
-  console.log("recipes====>", props.recipe)
   return (
     <Card className="recipe-card" elevation={20} sx={{ maxWidth: "500", height: "auto" }}>
       <CardMedia component="img" alt="photo" height="250" image={image_url} />
