@@ -3,11 +3,10 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-// import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
 import Button from "./Button";
 import Rating from "./Rating";
-import '../App.css'
+import "../App.css";
 
 export default function RecipeListItem(props) {
   const {
@@ -22,19 +21,31 @@ export default function RecipeListItem(props) {
     image_url,
   } = props.recipe;
 
-  const ingredientObj = eval(ingredients);
-  const viewRecipe=()=>{
-    props.setSelectRecipe({...props.recipe})
-    
-  }
+  const viewRecipe = () => {
+    props.setSelectRecipe({ ...props.recipe });
+  };
   const [readMore, setReadMore] = useState(false);
+<<<<<<< HEAD
+=======
+  console.log("recipes====>", props.recipe);
+>>>>>>> main
   return (
-    <Card className="recipe-card" elevation={20} sx={{ maxWidth: "500", height: "auto" }}>
+    <Card
+      className="recipe-card"
+      elevation={20}
+      sx={{ maxWidth: "500", height: "auto" }}
+    >
       <CardMedia component="img" alt="photo" height="250" image={image_url} />
-      <CardContent style={{display: "flex", flexDirection:"column", alignItems:"flex-start"}}>
+      <CardContent
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+        }}
+      >
         <Typography gutterBottom variant="h8" component="div">
-        {name}
-        <Rating></Rating>
+          {name}
+          <Rating></Rating>
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {readMore ? description : `${description.substring(0, 70)}...`}
@@ -46,12 +57,10 @@ export default function RecipeListItem(props) {
           </button>
         </Typography>
       </CardContent>
-      <CardActions className="view-recipe-button"  >
-        <Button size="small" onClick={viewRecipe} style={{marginBottom: -50}} >View Recipe</Button>
-        {/* <Button size="small">Serving Size</Button> */}
-
-        {/* <Button size="small">Nutri Facts</Button> */}
-        
+      <CardActions className="view-recipe-button">
+        <Button size="small" onClick={viewRecipe} style={{ marginBottom: -50 }}>
+          View Recipe
+        </Button>
       </CardActions>
     </Card>
   );

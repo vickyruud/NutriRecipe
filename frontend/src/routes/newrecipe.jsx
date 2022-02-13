@@ -3,8 +3,9 @@ import axios from "axios";
 import Form from '../components/NewRecipe/Form'
 import NavBar from '../components/NavBar'
 
-const NewRecipe = () => {
+const NewRecipe = (props) => {
   const [categories, setCategories] = useState([]);
+
   const fetchCategories = () => {
     axios
     .get("/recipes/categories")
@@ -15,15 +16,27 @@ const NewRecipe = () => {
       console.log(err);
     });
   }
+
+  const saveRecipe = (recipe) => {
+    axios
+    .post("/recipe", recipe)
+    .then(() => {
+      console.log ('Recipe saved!');
+      
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   useEffect (()=>{
     fetchCategories()
   },[])
 
-
   return (
     <main>
       <NavBar />
-      <Form categories={categories}/>
+      <Form saveRecipe ={saveRecipe} cates={categories} recipe={props.recipe || {}}/>
     </main>
   );
 }

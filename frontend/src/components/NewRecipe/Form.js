@@ -17,12 +17,40 @@ import TextEditor from './TextEditor'
 import IngredientList from "./IngredientList"
 
 const NewRecipeForm = (props) => {
-  const [category, setCategory] = React.useState('');
-  const handleChange = (event) => {
-    setCategory(event.target.value);
+  const [recipe, setRecipe] = useState(props.recipe || {});
+  let load = false;
+
+  const [ingredients, setIngredients] = React.useState([{name:"",unit:"",quantity:0}]);
+  const addIngredient=()=>{
+    setIngredients([...ingredients,{name:"",unit:"",quantity:0}]);
   };
-  const categories=[].concat(props.categories)
- 
+  const deleteIngredient=(i)=>{
+    let newIngredients = [...ingredients];
+    newIngredients.splice(i,1);
+    setIngredients(newIngredients);
+  }
+  let handleIngredients = (event, i) => {
+    let newIngredients = [...ingredients];
+    let newIngredient = {...newIngredients[i],[event.target.name]:event.target.value};
+    newIngredients[i] = newIngredient;
+    setIngredients(newIngredients);
+    let newRecipe = {...recipe,ingredients};
+    setRecipe(newRecipe);
+  }
+
+  const handleSave = () => {
+    recipe.user_id = 1; //hard-coded
+    console.log(recipe);
+    props.saveRecipe(recipe);
+  }
+  
+  const handleChange = (event) => {
+    let newRecipe = {...recipe,[event.target.name]:event.target.value};
+    setRecipe(newRecipe);
+  }
+
+  const categories=[].concat(props.cates)
+
   return (
     <div className="NewRecipe">
           <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">ADD A NEW RECIPE</Typography>
@@ -44,8 +72,8 @@ const NewRecipeForm = (props) => {
             noValidate
             autoComplete="off"
           >
-            <TextField required name="recipe_name" label="Enter a Name for your Recipe" variant="outlined" />
-            <TextField required name="description" label="Enter an Introduction for your Recipe" variant="outlined" />
+            <TextField required name="name" label="Enter a Name for your Recipe" variant="outlined" onChange={handleChange}/>
+            <TextField required name="description" label="Enter an Introduction for your Recipe" variant="outlined" onChange={handleChange}/>
           </Box>
           <Box
               component="form"
@@ -60,18 +88,20 @@ const NewRecipeForm = (props) => {
             required
             name="estimated_time"
             label="Time estimated (mins)"
+            onChange={handleChange}
           />
           <TextField
             required
             name="serving_size"
             label="Serving size (people)"
+            onChange={handleChange}
           />
           <FormControl required variant="standard" sx={{ m: 1, minWidth: 350 }}>
             <InputLabel sx={{ fontSize: 18 }}>Category</InputLabel>
             <Select
               required
-              name="category"
-              value={category}
+              name="category_id"
+              //value={category}
               onChange={handleChange}
               label="Set a Category"
             >
@@ -95,7 +125,7 @@ const NewRecipeForm = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <IngredientList />
+            <IngredientList recipe={recipe}ingredients={ingredients} addIngredient={addIngredient} deleteIngredient={deleteIngredient} handleChange={handleIngredients}/>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -111,24 +141,23 @@ const NewRecipeForm = (props) => {
         <AccordionDetails>
           <Box>
             <TextEditor
-              name="steps"
               multiline
               maxRows={100}
-              onChange={handleChange}
               variant="standard"
+              recipe={recipe}
             />
           </Box>
        
         </AccordionDetails>
       </Accordion>
       <Accordion>
-        <UploadImage />
+        <UploadImage recipe={recipe}/>
       </Accordion>
 
 
       <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
         <Stack direction="row" spacing={10} >
-          <Button variant="contained">Save your Recipe</Button>
+          <Button variant="contained" onClick={handleSave}>Save your Recipe</Button>
           <Button variant="outlined" href="#outlined-buttons">
             View Nutrition Info
           </Button>
