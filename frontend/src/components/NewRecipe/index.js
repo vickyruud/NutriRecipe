@@ -3,7 +3,7 @@ import axios from "axios";
 import Form from './Form'
 //import Show from './Show'; // Recipe detail page
 import Show from '../RecipePage'; // Recipe detail page
-import Empty from './Empty'; // Main page
+import Empty from '../RecipeList'; // Main page
 import Status from './Status';
 import Confirm from './Confirm';
 import Error from './Error';

@@ -1,5 +1,6 @@
 import React from "react";
 import RecipeIngredients from './RecipeIngredients'
+import NutritionTable from './NutritionFacts'
 
 export default function Recipes(props) {
   
@@ -13,7 +14,7 @@ export default function Recipes(props) {
       <div style={{ flex: "1 1 50%" }}>
         <h1> {props.selectRecipe.name} </h1>
         <ul>
-          <li>{ingredientsNames}</li>
+          {/* <li>{ingredientsNames}</li> */}
           <RecipeIngredients list={props.selectRecipe}/>
           {console.log("props",props)}
           <li>{props.selectRecipe.steps}</li>
