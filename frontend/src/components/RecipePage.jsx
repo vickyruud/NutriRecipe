@@ -15,7 +15,7 @@ export default function Recipes(props) {
         <h1> {props.selectRecipe.name} </h1>
         <ul>
           <li>{ingredientsNames}</li>
-          {/* <RecipeIngredients list={props.selectRecipe}/> */}
+          <RecipeIngredients list={props.selectRecipe}/>
           {console.log("props",props)}
           <li>{props.selectRecipe.steps}</li>
     
