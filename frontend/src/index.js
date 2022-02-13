@@ -23,10 +23,8 @@ render(
       <Route path="newrecipe" element={<NewRecipe />} />
       <Route path="myrecipes" element={<MyRecipes />} />
       <Route path="admin" element={<Admin />} />
-      {/* {token && <Route path="secret" element={<Secret />}/>} */}
+      {/* {token && <Route path="secret" element={<Secret />}/>} */ }
     </Routes>
   </BrowserRouter>,
   rootElement
 );
-
-

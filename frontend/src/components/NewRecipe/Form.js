@@ -16,9 +16,8 @@ import UploadImage from "./UploadImage";
 import TextEditor from './TextEditor'
 import IngredientList from "./IngredientList"
 
-const NewRecipeForm = (props) => {
+const Form = (props) => {
   const [recipe, setRecipe] = useState(props.recipe || {});
-  let load = false;
 
   const [ingredients, setIngredients] = React.useState([{name:"",unit:"",quantity:0}]);
   const addIngredient=()=>{
@@ -34,19 +33,19 @@ const NewRecipeForm = (props) => {
     let newIngredient = {...newIngredients[i],[event.target.name]:event.target.value};
     newIngredients[i] = newIngredient;
     setIngredients(newIngredients);
+    console.log(ingredients);
     let newRecipe = {...recipe,ingredients};
     setRecipe(newRecipe);
-  }
-
-  const handleSave = () => {
-    recipe.user_id = 1; //hard-coded
     console.log(recipe);
-    props.saveRecipe(recipe);
+    let json_ingredients = JSON.stringify(recipe.ingredients);
+      console.log(json_ingredients)
+      console.log(recipe.ingredients)
   }
   
   const handleChange = (event) => {
     let newRecipe = {...recipe,[event.target.name]:event.target.value};
     setRecipe(newRecipe);
+    console.log(recipe);
   }
 
   const categories=[].concat(props.cates)
@@ -60,7 +59,7 @@ const NewRecipeForm = (props) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography sx={{ fontSize: 20 }}>General Information</Typography>
+          <Typography sx={{ fontSize: 20 }}>General Information*</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -121,11 +120,17 @@ const NewRecipeForm = (props) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography sx={{ fontSize: 20 }}>Ingredient List</Typography>
+          <Typography sx={{ fontSize: 20 }}>Ingredient List*</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <IngredientList recipe={recipe}ingredients={ingredients} addIngredient={addIngredient} deleteIngredient={deleteIngredient} handleChange={handleIngredients}/>
+            <IngredientList 
+              recipe = {recipe}
+              ingredients = {ingredients}
+              addIngredient={addIngredient}
+              deleteIngredient={deleteIngredient}
+              handleChange={handleIngredients}
+            />
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -136,7 +141,7 @@ const NewRecipeForm = (props) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography sx={{ fontSize: 20 }}>Steps to Make</Typography>
+          <Typography sx={{ fontSize: 20 }}>Steps to Make*</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Box>
@@ -157,7 +162,7 @@ const NewRecipeForm = (props) => {
 
       <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
         <Stack direction="row" spacing={10} >
-          <Button variant="contained" onClick={handleSave}>Save your Recipe</Button>
+          <Button variant="contained" onClick={()=>props.onSave(recipe)}>Save your Recipe</Button>
           <Button variant="outlined" href="#outlined-buttons">
             View Nutrition Info
           </Button>
@@ -167,4 +172,4 @@ const NewRecipeForm = (props) => {
     </div>
   );
 }
-export default NewRecipeForm
+export default Form

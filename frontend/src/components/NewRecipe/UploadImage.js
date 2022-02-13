@@ -48,7 +48,7 @@ const Upload = (props) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-        <Typography sx={{ fontSize: 20 }}>Upload an Image</Typography>
+        <Typography sx={{ fontSize: 20 }}>Upload an Image*</Typography>
         </AccordionSummary>
         <AccordionDetails >
           <TextField

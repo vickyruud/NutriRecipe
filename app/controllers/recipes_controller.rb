@@ -13,9 +13,9 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     puts "new recipe page loaded"
-    @categories=Category.all
-    puts @categories
-    render :json => @categories
+    # @categories=Category.all
+    # puts @categories
+    # render :json => @categories
   end
 
   def create

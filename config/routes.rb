@@ -4,14 +4,23 @@ Rails.application.routes.draw do
   get '/users', to: 'users#index'
   
   resource :users, only: [:create]
+  resources :recipes
+  resources :categories
+
   post "/login", to: "auth#login"
   get "/auto_login", to: "auth#auto_login"
   get "/user_is_authed", to: "auth#user_is_authed"
 
 
-  get '/recipes', to: 'recipes#index'
+  # get '/recipes', to: 'recipes#index'
   get '/recipes/categories', to: 'recipes#new'
-  post '/recipe', to:'recipes#create'
+  #post '/recipe', to:'recipes#create'
   # get '/recipes/new', to: 'recipes#new'
   # get '/recipes/show', to: 'recipes#show'
 end
+
+# class CategoriesController < ApplicationController
+# def index
+#   @categories = Category.all
+#   render :json => @categories
+# end

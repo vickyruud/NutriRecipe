@@ -24,7 +24,7 @@ const NewIngredientList = (props) => {
           return (
             <IngredientItem 
               ingredient = {ingredient} 
-              onDelete={(index)=>props.deleteIngredient(index)} 
+              onDelete={()=>props.deleteIngredient(index)} 
               onChange={(e)=>props.handleChange(e,index)}
             />      
           )
