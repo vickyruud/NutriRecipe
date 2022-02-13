@@ -5,12 +5,6 @@ import RecipeSteps from './RecipeSteps';
 
 export default function Recipes(props) {
   
-  // const ingredientObj = eval(props.selectRecipe.ingredients);
-  // console.log(ingredientObj);
-  // const ingredientsNames = ingredientObj.map(item => {
-  //   return item.name;
-    
-  // })
   return (
     
     <div style={{ display: "flex" }}>

@@ -17,9 +17,11 @@ export default function RecipeSteps(props) {
         },
       }}
     >
-      <Paper style={{ height: 'auto', width: "100%",elevation:20}}variant="outlined" >
+      <Paper style={{ height: 'auto', width: "100%",elevation:20}}variant="elevation" >
         <ol style = {{textAlign:'left'}}>
+          <div>
           Steps:
+          </div>
     {recipeSteps.map(step=>{
       return <li>{`${step}.`}</li>
     })
