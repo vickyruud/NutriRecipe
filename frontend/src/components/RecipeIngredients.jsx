@@ -53,7 +53,7 @@ const rows2 = ingredientObj.map((item)=>{
         },
       }}
     >
-      <DataGrid rows={rows2} columns={columns} />
+        {/* <DataGrid rows={ingredientObj} columns={columns} /> */}
     </Box>
     </div>
   );
