@@ -1,4 +1,5 @@
 import React from "react";
+import NutriContent from "./NutriContent";
 import RecipeIngredients from './RecipeIngredients'
 
 export default function Recipes(props) {
@@ -26,6 +27,7 @@ export default function Recipes(props) {
         <img src={props.selectRecipe.image_url} alt="" />
       </div>
       {/* <NutritionTable/> */}
+      <NutriContent list = {props.selectRecipe}/>
     </div>
   );
 }

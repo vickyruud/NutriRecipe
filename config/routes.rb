@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get "/auto_login", to: "auth#auto_login"
   get "/user_is_authed", to: "auth#user_is_authed"
 
-
+  get '/recipes/nutrifacts', to:'recipes#nutri_facts'
   get '/recipes', to: 'recipes#index'
   get '/recipes/categories', to: 'recipes#new'
   post '/recipe', to:'recipes#create'
