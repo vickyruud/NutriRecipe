@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import RecipeList from "../components/RecipeList";
 import "../App.css";
-import RecipePage from "../components/RecipePage";
+import RecipePage1 from "../components/RecipePage1";
 
 export default function Recipes() {
   const [recipes, setRecipes] = useState([]);
@@ -13,7 +13,6 @@ export default function Recipes() {
       .get("/recipes") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         // handle success
-        console.log(response.data[0].name); // The entire response from the Rails API
 
         setRecipes(response.data);
       })
@@ -21,8 +20,7 @@ export default function Recipes() {
         console.log(err);
       });
   };
-  // console.log("selectrecipe====>", selectRecipe);
-  // console.log("recipes====>", recipes);
+  
 
   useEffect(() => {
     fetchRecipes();
@@ -31,7 +29,7 @@ export default function Recipes() {
     <main>
       <div style={{ display: "flex", flexDirection: "row" }}></div>
       {selectRecipe ? (
-        <RecipePage selectRecipe={selectRecipe} />
+        <RecipePage1 selectRecipe={selectRecipe} />
       ) : (
         <RecipeList setSelectRecipe={setSelectRecipe} recipes={recipes} />
       )}

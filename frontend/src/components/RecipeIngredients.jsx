@@ -47,6 +47,7 @@ const rows = [
 // -once the unique id exists in the ingrdientobj that is what we want to achieve 
 export default function StylingHeaderGrid(props) {
   const ingredientObj = eval(props.list.ingredients);
+  
   return (
     <div>
     {ingredientObj.map(ingredient=> 
@@ -66,7 +67,7 @@ export default function StylingHeaderGrid(props) {
         },
       }}
     >
-      <DataGrid rows={ingredientObj} columns={columns} />
+        {/* <DataGrid rows={ingredientObj} columns={columns} /> */}
     </Box>
     </div>
   );
