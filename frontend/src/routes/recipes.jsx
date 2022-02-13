@@ -20,11 +20,6 @@ export default function Recipes() {
         console.log(err);
       });
   };
-<<<<<<< HEAD
-=======
-  // console.log("selectrecipe====>", selectRecipe);
-  // console.log("recipes====>", recipes);
->>>>>>> main
 
   useEffect(() => {
     fetchRecipes();

@@ -66,7 +66,7 @@ export default function StylingHeaderGrid(props) {
         },
       }}
     >
-      <DataGrid rows={ingredientObj} columns={columns} />
+        {/* <DataGrid rows={ingredientObj} columns={columns} /> */}
     </Box>
     </div>
   );

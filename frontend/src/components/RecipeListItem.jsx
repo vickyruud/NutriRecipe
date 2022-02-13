@@ -25,10 +25,6 @@ export default function RecipeListItem(props) {
     props.setSelectRecipe({ ...props.recipe });
   };
   const [readMore, setReadMore] = useState(false);
-<<<<<<< HEAD
-=======
-  console.log("recipes====>", props.recipe);
->>>>>>> main
   return (
     <Card
       className="recipe-card"

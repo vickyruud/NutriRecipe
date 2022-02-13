@@ -25,7 +25,7 @@ export default function Recipes(props) {
         <h1>Image </h1>
         <img src={props.selectRecipe.image_url} alt="" />
       </div>
-      <NutritionTable/>
+      {/* <NutritionTable/> */}
     </div>
   );
 }
