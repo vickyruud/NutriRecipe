@@ -3,7 +3,7 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import RecipeListItem from "../RecipeListItem";
-
+import Button from '@mui/material/Button';
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   ...theme.typography.body2,
@@ -60,6 +60,8 @@ export default function Empty (props) {
               setSelectRecipe={props.setSelectRecipe}
               recipe={recipe}
             />
+          <Button variant="contained" onClick={()=>props.onEdit(recipe)}>Edit your Recipe</Button>
+          <Button variant="contained" onClick={()=>props.onDelete(recipe)}>Delete your Recipe</Button>
           </Grid>
         ))}
       </Grid>

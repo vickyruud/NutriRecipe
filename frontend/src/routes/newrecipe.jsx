@@ -10,7 +10,7 @@ const NewRecipe = (props) => {
   return (
     <main>
       <NavBar />
-      <Recipe />
+      <Recipe mode={"CREATE"}/>
       {/*<Form saveRecipe ={saveRecipe} cates={categories} recipe={props.recipe || {}}/>*/}
     </main>
   );

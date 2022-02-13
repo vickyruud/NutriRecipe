@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from './Form'
-import Show from './Show'; // Recipe detail page
+//import Show from './Show'; // Recipe detail page
+import Show from '../RecipePage'; // Recipe detail page
 import Empty from './Empty'; // Main page
 import Status from './Status';
 import Confirm from './Confirm';
@@ -28,12 +29,14 @@ export default function Recipe(props) {
   const ERROR_SAVE_VALIDATION = "ERROR_SAVE_VALIDATION";
 
   const [categories, setCategories] = useState([]);
+  const [recipe, setRecipe] = useState({});
 
   const fetchCategories = () => {
     axios
-    .get("/recipes/categories")
+    .get("/categories")
     .then((response) => {
       setCategories(response.data);
+      console.log(response.data);
     })
     .catch((err) => {
       console.log(err);
@@ -42,12 +45,9 @@ export default function Recipe(props) {
 
   const fetchRecipe = (id) => {
     axios
-      .get("/recipes/id") // You can simply make your requests to "/api/whatever you want"
+      .get(`/recipes/${id}`)
       .then((response) => {
-        // handle success
         console.log(response.data[0].name); // The entire response from the Rails API
-
-        // setMessage(response.data[0].name);
         props.setRecipe(response.data);
       })
       .catch((err) => {
@@ -55,7 +55,7 @@ export default function Recipe(props) {
       });
   };
 
-  const saveRecipe = (recipe) => {/*
+  const saveRecipe = (inputrecipe) => {/*
    if (recipe.name === '' 
     || recipe.ingredients === null 
     || recipe.category_id === ''
@@ -67,30 +67,33 @@ export default function Recipe(props) {
     ) {
       transition(ERROR_SAVE_VALIDATION);
     } else {*/
-      transition(SAVING);
+      let recipe = {...inputrecipe};
       recipe.user_id = 1 //hard-coded
+      transition(SAVING);
       let json_ingredients = JSON.stringify(recipe.ingredients);
       recipe.ingredients = json_ingredients;
       axios
-      .post("/recipe", recipe)
+      .post("/recipes", recipe)
       .then((response) => {
-        let recipe = {...response.data}; 
-        // axios
-        // .get(`recipe/${recipe.id}`)
+        console.log(response);
+        recipe = {...response.data};
         console.log(recipe);
         console.log ('Recipe saved!');
-        transition(SHOW);
+        setRecipe(recipe);
+        transition(SHOW)
+        console.log('POST mode', mode)
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(error => {
+        console.log('error', error);
         transition(ERROR_SAVE, true);
-      });
+      })
     /*}*/
   }
 
   const { mode, transition, back } = useVisualMode(
-    props.recipe ? SHOW  : CREATE
+    Object.keys(recipe).length > 0 ? SHOW  : CREATE
   );
+
 
   function destroy(recipe) {
     transition(DELETING, true);
@@ -108,23 +111,33 @@ export default function Recipe(props) {
   useEffect (()=>{
     fetchCategories()
   },[])
-
+  console.log('recipe', recipe)
+  console.log('mode === SHOW ', mode === SHOW )
+  console.log(mode);
   return (
   
     <div>
      
-      {mode === EMPTY && <Empty onAdd={()=>transition(CREATE)} />}
+      {mode === EMPTY && <Empty onAdd={()=>transition(CREATE)} onEdit={()=>{transition(EDIT)}} onDelete={destroy}/>}
       {mode === SHOW && (
        
         <Show
-          selectRecipe = {props.recipe}
+          // selectRecipe={props.recipe}
+          selectRecipe={recipe}
+          user={props.user}
+          onDelete={()=>transition(CONFIRM)}
+          onEdit={()=>{
+            console.log('view = Edit')
+            // console.log(props.recipe);
+            transition(EDIT)
+          }}
         />
       )}
-      {mode === CREATE && <Form cates={categories} onCancel={back} onSave={saveRecipe} onDelete={destroy}/>}
+      {mode === CREATE && <Form cates={categories} onCancel={back} onSave={saveRecipe} onDelete={destroy} setRecipe={setRecipe} recipe={recipe} mode={mode}/>}
       {mode === SAVING && <Status message = {'Saving...'} />}
       {mode === DELETING && <Status message = {'Deleting...'} />}
       {mode === CONFIRM && <Confirm message = {'Delete? ... Really?'} onCancel={back} onConfirm={(recipe) => destroy(recipe)}/>}
-      {mode === EDIT && <Form cates={categories} recipe={props.recipe} onCancel={back} onSave={saveRecipe} onDelete={destroy}/>}
+      {mode === EDIT && <Form cates={categories} recipe={recipe} onCancel={back} onSave={saveRecipe} onDelete={destroy} mode={mode} setRecipe={setRecipe} recipe={recipe}/>}
       {mode === ERROR_SAVE && <Error message={'Error saving encountered. Sorry!'} onClose={back} />}
       {mode === ERROR_DELETE && <Error message={'Error deleting encountered. Sorry!'} onClose={back} />}
       {mode === ERROR_SAVE_VALIDATION && <Error message={'Please fill data in all required fields (*)'} onClose={back} />}

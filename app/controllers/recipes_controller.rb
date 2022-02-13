@@ -4,18 +4,13 @@ class RecipesController < ApplicationController
     render :json => @recipes
   end
 
-  def show #my recipes for the user_id = 1 for now
-    @recipes = Recipe.find_by(user_id:1)
-    puts @recipes
-    render :json => @recipes
+  def show
+    @recipe = Recipe.find params[:id]
+    render :json => @recipe
   end
 
   def new
     @recipe = Recipe.new
-    puts "new recipe page loaded"
-    # @categories=Category.all
-    # puts @categories
-    # render :json => @categories
   end
 
   def create

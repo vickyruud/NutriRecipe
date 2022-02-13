@@ -17,7 +17,8 @@ import TextEditor from './TextEditor'
 import IngredientList from "./IngredientList"
 
 const Form = (props) => {
-  const [recipe, setRecipe] = useState(props.recipe || {});
+  const { recipe, setRecipe } = props;
+  // const [recipe, setRecipe] = useState(props.recipe || {});
 
   const [ingredients, setIngredients] = React.useState([{name:"",unit:"",quantity:0}]);
   const addIngredient=()=>{
@@ -49,10 +50,12 @@ const Form = (props) => {
   }
 
   const categories=[].concat(props.cates)
+  console.log(recipe);
 
+  const mode = props.mode;
   return (
     <div className="NewRecipe">
-          <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">ADD A NEW RECIPE</Typography>
+          <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">{mode === "EDIT" ? "EDIT RECIPE" : "ADD A NEW RECIPE"}</Typography>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -71,8 +74,8 @@ const Form = (props) => {
             noValidate
             autoComplete="off"
           >
-            <TextField required name="name" label="Enter a Name for your Recipe" variant="outlined" onChange={handleChange}/>
-            <TextField required name="description" label="Enter an Introduction for your Recipe" variant="outlined" onChange={handleChange}/>
+            <TextField required name="name" label='Recipe name' variant="outlined" onChange={handleChange} defaultValue={recipe.name}/>
+            <TextField required name="description" label="Recipe Description" variant="outlined" onChange={handleChange} defaultValue={recipe.description}/>
           </Box>
           <Box
               component="form"
@@ -88,12 +91,14 @@ const Form = (props) => {
             name="estimated_time"
             label="Time estimated (mins)"
             onChange={handleChange}
+            defaultValue={recipe.estimated_time}
           />
           <TextField
             required
             name="serving_size"
             label="Serving size (people)"
             onChange={handleChange}
+            defaultValue={recipe.serving_size}
           />
           <FormControl required variant="standard" sx={{ m: 1, minWidth: 350 }}>
             <InputLabel sx={{ fontSize: 18 }}>Category</InputLabel>
@@ -103,10 +108,12 @@ const Form = (props) => {
               //value={category}
               onChange={handleChange}
               label="Set a Category"
+              defaultValue={categories[recipe.category_id]}
             >
               {categories.map(category =>
                 <MenuItem value={category.id}>{category.name}</MenuItem>
               )}
+             
             </Select>
           </FormControl>
         </div>
@@ -130,6 +137,7 @@ const Form = (props) => {
               addIngredient={addIngredient}
               deleteIngredient={deleteIngredient}
               handleChange={handleIngredients}
+             /* defaultValue={recipe.ingredients} */
             />
           </Typography>
         </AccordionDetails>
@@ -150,6 +158,7 @@ const Form = (props) => {
               maxRows={100}
               variant="standard"
               recipe={recipe}
+              defaultValue={recipe.steps}
             />
           </Box>
        

@@ -34,12 +34,12 @@ const TextEditor = (props) => {
   const onEditorChange = event => {
     const plainText = event.getCurrentContent().getPlainText() // for plain text
     const rteContent = convertToRaw(event.getCurrentContent()) // for rte content with text formating
-   //convertFromRaw(rawState: RawDraftContentState): ContentState
-   //convertToRaw(contentState: ContentState): RawDraftContentState
+    //convertFromRaw(rawState: RawDraftContentState): ContentState
+   // convertToRaw(contentState: ContentState): RawDraftContentState
 
     rteContent && setValue(JSON.stringify(rteContent)) // store your rteContent to state
     //props.recipe.steps=rteContent;
-    props.recipe.steps=plainText;
+    props.recipe.steps=rteContent;
   }
 
   return (
