@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Recipes(props) {
   return (
     <Box sx={{ width: '100%'}} >
-      <Grid style={{outline:'none',border: 0}}container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid style={{outline:'none',border: 0}}container rowSpacing={-2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={6}>
         <h1> {props.selectRecipe.name} </h1>
           <Item><IngredientTable list={props.selectRecipe} /> 
@@ -31,10 +31,10 @@ export default function Recipes(props) {
           <Item><RecipeSteps list={props.selectRecipe}/></Item>
         </Grid>
         <Grid item xs={6}>
-          <Item>4</Item>
+          <Item><NutriContent list = {props.selectRecipe}/></Item>
         </Grid>
       </Grid>
-      <NutriContent list = {props.selectRecipe}/>
+      {/* <NutriContent list = {props.selectRecipe}/> */}
 
     </Box>
   );
