@@ -165,24 +165,25 @@ export default function IngredientTable1(props) {
   
   return (
     
-    <Paper style={{ height: 400, width: "100%" }}>
+    <Paper elevation={10} style={{ height: 400, width: "auto" }}>
       <VirtualizedTable
         rowCount={ingredientObj.length}
         rowGetter={({ index }) => ingredientObj[index]}
+        
         columns={[
           {
-            width: 200,
+            width: 300,
             label: "Name",
             dataKey: "name",
           },
           {
-            width: 120,
+            width: 200,
             label: "quantity",
             dataKey: "quantity",
             numeric: true,
           },
           {
-            width: 120,
+            width: 200,
             label: "unit",
             dataKey: "unit",
             numeric: true,
