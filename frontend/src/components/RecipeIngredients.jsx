@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-//import RecipeIngredientsNames from './RecipeIngredientsNames'
+// import RecipeIngredientsNames from './RecipeIngredientsNames'
 
 const columns = [
   {
@@ -50,13 +50,13 @@ export default function StylingHeaderGrid(props) {
   
   return (
     <div>
-    {/*{ingredientObj.map(ingredient=> 
+    {/* {ingredientObj.map(ingredient=> 
       
     
             <RecipeIngredientsNames {...ingredient} />
  
       
-      )}*/}
+      )} */}
       {console.log("OBJ====>",ingredientObj)}
     <Box
       sx={{

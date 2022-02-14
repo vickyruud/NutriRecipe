@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from './Form'
-//import Show from './Show'; // Recipe detail page
+// import Show from './Show'; // Recipe detail page
 import Show from '../RecipePage'; // Recipe detail page
 import Empty from '../RecipeList'; // Main page
 import Status from './Status';
@@ -78,6 +78,9 @@ export default function Recipe(props) {
         console.log(response);
         recipe = {...response.data};
         console.log(recipe);
+        let string_ingredients = JSON.parse(recipe.ingredients);
+        console.log(string_ingredients);
+        console.log(string_ingredients.class);
         console.log ('Recipe saved!');
         setRecipe(recipe);
         transition(SHOW)

@@ -39,7 +39,7 @@ const TextEditor = (props) => {
 
     rteContent && setValue(JSON.stringify(rteContent)) // store your rteContent to state
     //props.recipe.steps=rteContent;
-    props.recipe.steps=rteContent;
+    props.recipe.steps=plainText;
   }
 
   return (
