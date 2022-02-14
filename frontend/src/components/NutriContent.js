@@ -45,6 +45,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function NutriContent(props) {
 
   const [nutritionContent, setNutritionContent] = useState([]);
+  const [graphData, setGraphData] = useState([])
   const rows = eval(props.list.ingredients);
 
 
@@ -69,30 +70,51 @@ export default function NutriContent(props) {
         // })
         setNutritionContent(resp.data.items)
         console.log(resp.data.items);
+        generateGraphData(resp.data.items)
+        
+        
         
       })
     }
   }
 
+  const generateGraphData = (information) => {
+    let carb = 0;
+    let fat = 0;
+    let fiber = 0;
+    let sugar = 0;
+    let protein = 0;
+
+    information.forEach(element => {
+      carb += element.carbohydrates_total_g;
+      fat += element.fat_total_g;
+      fiber += element.fiber_g;
+      sugar += element.sugar_g
+      protein += element.protein_g;
+
+    });
+
+    let arrayOfData = [carb, fat, fiber, sugar, protein]
+    console.log(arrayOfData);
+
+    setGraphData(arrayOfData);
+
+    
+  }
+
   useEffect(() => {
 
-    nutriInfo(ingredients1);
+    nutriInfo(ingredients1)
+    
 
   }, [])
 
   
-  const data = {
-    labels: ["Carbohydrate", "Protein", "Sugar", "Fat", "Fiber"],
-    datasets: [{
-      label: "Nutrients", 
-      data: [105, 25, 69, 65, 20],
-      backgroundColor: ["purple", "skyblue", "pink","grey", "lightgreen"]
-    }]
-  }
+  
   
   return (
     <div>
-      {/* <DoughnutChart data={ }/> */}
+      <DoughnutChart data={graphData}/>
     </div>
   );
 }

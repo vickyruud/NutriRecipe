@@ -10,7 +10,7 @@ export default function DoughnutChart(props) {
     labels: ["Carbohydrate", "Protein", "Sugar", "Fat", "Fiber"],
     datasets: [{
       label: "Nutrients", 
-      data: [105, 25, 69, 65, 20],
+      data: props.data,
       backgroundColor: ["purple", "skyblue", "pink","grey", "lightgreen"]
     }]
   }
