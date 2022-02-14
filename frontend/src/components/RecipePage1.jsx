@@ -22,18 +22,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Recipes(props) {
   return (
-
-    
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: "row", padding: 10 }}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid style={{width: "auto", padding: 5}} item xs={2}>
-          <h1> {props.selectRecipe.name} </h1>
-          <Item style={{padding: 5}}><img src={props.selectRecipe.image_url} alt="" width={300} height={300} mode='fit'top padding={5}/> </Item>
-        </Grid>
-        <Grid style={{padding: 5}} item xs={4}>
-            <h3>Ingredients:</h3>
-          <Item>
-          <IngredientTable list={props.selectRecipe} /> 
+    <Box sx={{ width: '100%'}} >
+      <Grid style={{outline:'none',border: 0}}container rowSpacing={-2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid item xs={6}>
+        <h1> {props.selectRecipe.name} </h1>
+          <Item><IngredientTable list={props.selectRecipe} /> 
           </Item>
         </Grid>
         <Grid item xs={6}>
@@ -43,7 +36,12 @@ export default function Recipes(props) {
         <Grid style={{padding: 5}} item xs={6}>
           <Item><RecipeSteps list={props.selectRecipe}/></Item>
         </Grid>
+        <Grid item xs={6}>
+          <Item><NutriContent list = {props.selectRecipe}/></Item>
+        </Grid>
       </Grid>
+      {/* <NutriContent list = {props.selectRecipe}/> */}
+
     </Box>
   );
 }
