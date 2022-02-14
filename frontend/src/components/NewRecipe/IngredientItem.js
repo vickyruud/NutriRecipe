@@ -22,6 +22,7 @@ const NewIngredientItem = (props) => {
             label="Ingredient"
             onChange={props.onChange}
             value={props.ingredient.name}
+            defaultValue={props.ingredient.name}
           />
           <TextField
             required
@@ -29,6 +30,7 @@ const NewIngredientItem = (props) => {
             label="Unit"
             onChange={props.onChange}
             value={props.ingredient.unit}
+            defaultValue={props.ingredient.unit}
           />
           <TextField
             required
@@ -36,6 +38,7 @@ const NewIngredientItem = (props) => {
             label="Quantity"
             onChange={props.onChange}
             value={props.ingredient.quantity}
+            defaultValue={props.ingredient.quantity}
           />
           <Fab color="primary" aria-label="Delete">
             <DeleteIcon onClick={props.onDelete}/>

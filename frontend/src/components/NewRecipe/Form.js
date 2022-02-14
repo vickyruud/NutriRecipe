@@ -53,6 +53,9 @@ const Form = (props) => {
   console.log(recipe);
 
   const mode = props.mode;
+  console.log(recipe.category_id)
+  console.log(categories[recipe.category_id - 1]);
+
   return (
     <div className="NewRecipe">
           <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">{mode === "EDIT" ? "EDIT RECIPE" : "ADD A NEW RECIPE"}</Typography>
@@ -108,7 +111,7 @@ const Form = (props) => {
               //value={category}
               onChange={handleChange}
               label="Set a Category"
-              defaultValue={categories[recipe.category_id]}
+              value={categories[recipe.category_id]}
             >
               {categories.map(category =>
                 <MenuItem value={category.id}>{category.name}</MenuItem>
@@ -164,8 +167,26 @@ const Form = (props) => {
        
         </AccordionDetails>
       </Accordion>
+      { recipe.image_url &&
       <Accordion>
-        <UploadImage recipe={recipe}/>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography sx={{ fontSize: 20 }}>Current Image</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Box > {/*}style={{ flex: "1 1 50%" }} */}
+            <img src={recipe.image_url} alt="" width={500} height={300} mode='fit'/>
+          </Box>
+        </AccordionDetails>
+      </Accordion>
+      }
+      <Accordion>
+        <UploadImage 
+          recipe={recipe}
+        />
       </Accordion>
 
 
