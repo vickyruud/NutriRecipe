@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import RecipeIngredientsNames from './RecipeIngredientsNames'
+//import RecipeIngredientsNames from './RecipeIngredientsNames'
 
 const columns = [
   {
@@ -47,15 +47,16 @@ const rows = [
 // -once the unique id exists in the ingrdientobj that is what we want to achieve 
 export default function StylingHeaderGrid(props) {
   const ingredientObj = eval(props.list.ingredients);
+  
   return (
     <div>
-    {ingredientObj.map(ingredient=> 
+    {/*{ingredientObj.map(ingredient=> 
       
     
             <RecipeIngredientsNames {...ingredient} />
  
       
-      )}
+      )}*/}
       {console.log("OBJ====>",ingredientObj)}
     <Box
       sx={{
@@ -66,7 +67,7 @@ export default function StylingHeaderGrid(props) {
         },
       }}
     >
-      <DataGrid rows={ingredientObj} columns={columns} />
+        {/* <DataGrid rows={ingredientObj} columns={columns} /> */}
     </Box>
     </div>
   );
