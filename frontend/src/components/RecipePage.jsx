@@ -4,13 +4,13 @@ import IngredientTable from "./IngredientTable"
 import RecipeSteps from './RecipeSteps';
 import NutriContent from "./NutriContent";
 import RecipeIngredients from './RecipeIngredients'
-import NutritionTable from './NutritionFacts'
+import DoughnutChart from "../charts/Doughnut";
 
 export default function Recipes(props) {
   
   return (
     
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex"}}>
       <div style={{ flex: "1 1 50%" }}>
         <h1> {props.selectRecipe.name} </h1>
         <ul>
@@ -30,8 +30,9 @@ export default function Recipes(props) {
         <h1>Image </h1>
         <img src={props.selectRecipe.image_url} alt="" width={500} height={300} mode='fit'/>
       </div>
-      {/* <NutritionTable/> */}
-      <NutriContent list = {props.selectRecipe}/>
+      {/* <NutriContent list = {props.selectRecipe}/> */}
+      <DoughnutChart />
+
     </div>
   );
 }
