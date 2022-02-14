@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import DeleteIcon from '@mui/icons-material/Delete';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import { MenuItem } from "@mui/material";
 
-const NewIngredientItem = (props) => {  
+const NewIngredientItem = (props) => {
   return (
     <div className="NewIngredientItem">
       <Box
@@ -24,14 +28,31 @@ const NewIngredientItem = (props) => {
             value={props.ingredient.name}
             defaultValue={props.ingredient.name}
           />
-          <TextField
+          {/* <TextField
             required
             name="unit"
             label="Unit"
             onChange={props.onChange}
             value={props.ingredient.unit}
             defaultValue={props.ingredient.unit}
-          />
+          /> */}
+          <FormControl required variant="standard" sx={{ m: 1, minWidth: 350 }}>
+            <InputLabel >Unit</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+              required
+              name="unit"
+              onChange={props.onChange}
+              value={props.ingredient.unit}
+            >
+              <MenuItem value={"grams"}>grams</MenuItem>
+              <MenuItem value={"milligrams"}>milligrams</MenuItem>
+              <MenuItem value={"ounces"}>ounces</MenuItem>
+              <MenuItem value={"tablespoons"}>tablespoons</MenuItem>
+              <MenuItem value={"teaspoons"}>teaspoons</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             required
             name="quantity"

@@ -124,7 +124,7 @@ const Form = (props) => {
               //value={category}
               onChange={handleChange}
               label="Set a Category"
-              value={categories[recipe.category_id]}
+              value={categories[recipe.category_id]||undefined}
             >
               {categories.map(category =>
                 <MenuItem value={category.id}>{category.name}</MenuItem>
