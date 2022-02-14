@@ -40,7 +40,7 @@ export default function Recipes(props) {
           <Item><NutriContent list = {props.selectRecipe}/></Item>
         </Grid>
       </Grid>
-      {/* <NutriContent list = {props.selectRecipe}/> */}
+      <NutriContent list = {props.selectRecipe}/>
 
     </Box>
   );
