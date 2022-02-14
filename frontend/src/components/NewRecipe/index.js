@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from './Form'
 // import Show from './Show'; // Recipe detail page
-import Show from '../RecipePage'; // Recipe detail page
+import Show from '../RecipePage1'; // Recipe detail page
 import Empty from '../RecipeList'; // Main page
 import Status from './Status';
 import Confirm from './Confirm';
