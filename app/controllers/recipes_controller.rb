@@ -13,6 +13,23 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
   end
 
+  def destroy
+    @recipe = Recipe.find params[:id]
+    @recipe.destroy
+    @recipes = Recipe.all
+    render :json => @recipes
+  end
+
+  def edit
+    @recipe = Recipe.find params[:id]
+    @recipe = recipe_params
+    if @recipe.save
+      render :json => @recipe
+    else
+      notice 'error saving!'
+    end
+  end
+
   def create
     @recipe = Recipe.new(recipe_params)
 

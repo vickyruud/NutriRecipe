@@ -12,11 +12,10 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 const Upload = (props) => {
   let image_url="";
-  const [imageSelected, setImageSelected] = useState("")
   const uploadImage = (files) => {
-    if (imageSelected !=="") {
+    if (props.imageSelected !=="") {
       const formData = new FormData();
-      formData.append("file",imageSelected);
+      formData.append("file",props.imageSelected);
       formData.append("upload_preset", "ish6rtjw")
       console.log(files);
       axios.post(
@@ -27,14 +26,14 @@ const Upload = (props) => {
         image_url=response.data.url;
         props.recipe.image_url=image_url;
         setLoading(false);
-        setImageSelected("")
+        props.setImageSelected("")
       });
     }
   }
  
   const [loading, setLoading] = React.useState(false);
   function handleLoading() {
-    if (imageSelected!=="") {
+    if (props.imageSelected!=="") {
       setLoading(true);
       uploadImage();
     }
@@ -43,19 +42,18 @@ const Upload = (props) => {
   return (
     <div className="upload">
       <Accordion>
-        <AccordionSummary
+        {/* <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-        <Typography sx={{ fontSize: 20 }}>Upload an Image*</Typography>
-        </AccordionSummary>
+        </AccordionSummary> */}
         <AccordionDetails >
           <TextField
             sx={{ m: 1, width: 1000 }}
             type="file"
             onChange={(event)=>{
-              setImageSelected(event.target.files[0]);
+              props.setImageSelected(event.target.files[0]);
             }}
           />
           <LoadingButton

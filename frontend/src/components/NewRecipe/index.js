@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from './Form'
-import Show from './Show'; // Recipe detail page
-// import Show from '../RecipePage'; // Recipe detail page
+// import Show from './Show'; // Recipe detail page
+import Show from '../RecipePage1'; // Recipe detail page
 import Empty from '../RecipeList'; // Main page
 import Status from './Status';
 import Confirm from './Confirm';
@@ -27,9 +27,11 @@ export default function Recipe(props) {
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
   const ERROR_SAVE_VALIDATION = "ERROR_SAVE_VALIDATION";
+  const ERROR_LOAD = "ERROR_LOAD";
 
   const [categories, setCategories] = useState([]);
   const [recipe, setRecipe] = useState({});
+  const [recipes, setRecipes] = useState([]);
 
   const fetchCategories = () => {
     axios
@@ -42,6 +44,18 @@ export default function Recipe(props) {
       console.log(err);
     });
   }
+
+  const fetchRecipes = () => {
+    axios
+      .get("/recipes") // You can simply make your requests to "/api/whatever you want"
+      .then((response) => {
+        // handle success
+        setRecipes(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const fetchRecipe = (id) => {
     axios
@@ -72,24 +86,46 @@ export default function Recipe(props) {
       transition(SAVING);
       let json_ingredients = JSON.stringify(recipe.ingredients);
       recipe.ingredients = json_ingredients;
-      axios
-      .post("/recipes", recipe)
-      .then((response) => {
-        console.log(response);
-        recipe = {...response.data};
-        console.log(recipe);
-        let string_ingredients = JSON.parse(recipe.ingredients);
-        console.log(string_ingredients);
-        console.log(string_ingredients.class);
-        console.log ('Recipe saved!');
-        setRecipe(recipe);
-        transition(SHOW)
-        console.log('POST mode', mode)
-      })
-      .catch(error => {
-        console.log('error', error);
-        transition(ERROR_SAVE, true);
-      })
+      if (!recipe.id) {
+        axios
+        .post("/recipes", recipe)
+        .then((response) => {
+          console.log(response);
+          recipe = {...response.data};
+          console.log(recipe);
+          let string_ingredients = JSON.parse(recipe.ingredients);
+          console.log(string_ingredients);
+          console.log(string_ingredients.class);
+          console.log ('Create mode - Recipe saved!');
+          setRecipe(recipe);
+          transition(SHOW)
+          console.log('POST mode', mode)
+        })
+        .catch(error => {
+          console.log('error', error);
+          transition(ERROR_SAVE, true);
+        })
+      } else {
+        axios
+        .put(`/recipes/:${recipe.id}`, recipe)
+        .then((response) => {
+          console.log(response);
+          recipe = {...response.data};
+          console.log(recipe);
+          let string_ingredients = JSON.parse(recipe.ingredients);
+          console.log(string_ingredients);
+          console.log(string_ingredients.class);
+          console.log ('Edit mode - Recipe saved!');
+          setRecipe(recipe);
+          transition(SHOW)
+          console.log('POST mode', mode)
+        })
+        .catch(error => {
+          console.log('error', error);
+          transition(ERROR_SAVE, true);
+        })
+      }
+      
     /*}*/
   }
 
@@ -100,10 +136,19 @@ export default function Recipe(props) {
 
   function destroy(recipe) {
     transition(DELETING, true);
+    console.log(`Deleting recipe id = ${recipe.id}`);
     axios
-    .post("/recipe/delete", recipe)
+    .delete(`/recipes/:${recipe.id}`, recipe)
     .then(
-      transition(EMPTY)
+      fetchRecipes()
+      .then(response => {
+        setRecipes(response.data)
+        transition(EMPTY)
+      })
+      .catch (e => {
+        console.log(e);
+        transition(ERROR_LOAD)
+      })
     )
     .catch(error => {
       console.log(error);
@@ -144,6 +189,7 @@ export default function Recipe(props) {
       {mode === ERROR_SAVE && <Error message={'Error saving encountered. Sorry!'} onClose={back} />}
       {mode === ERROR_DELETE && <Error message={'Error deleting encountered. Sorry!'} onClose={back} />}
       {mode === ERROR_SAVE_VALIDATION && <Error message={'Please fill data in all required fields (*)'} onClose={back} />}
+      {mode === ERROR_LOAD && <Error message={'Error loading data encountered. Sorry!'} onClose={back} />}
     </div>
   )
 }

@@ -49,7 +49,10 @@ const Form = (props) => {
     console.log(recipe);
   }
 
-  const categories=[].concat(props.cates)
+  const categories=[].concat(props.cates);
+
+  const [imageSelected, setImageSelected] = useState(recipe.image_url)
+
   console.log(recipe);
 
   const mode = props.mode;
@@ -78,6 +81,16 @@ const Form = (props) => {
             autoComplete="off"
           >
             <TextField required name="name" label='Recipe name' variant="outlined" onChange={handleChange} defaultValue={recipe.name}/>
+     
+          </Box>
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '103ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
             <TextField required name="description" label="Recipe Description" variant="outlined" onChange={handleChange} defaultValue={recipe.description}/>
           </Box>
           <Box
@@ -164,11 +177,10 @@ const Form = (props) => {
               defaultValue={recipe.steps}
             />
           </Box>
-       
         </AccordionDetails>
       </Accordion>
       { recipe.image_url &&
-      <Accordion>
+      <Accordion expanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -176,19 +188,35 @@ const Form = (props) => {
         >
           <Typography sx={{ fontSize: 20 }}>Current Image</Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails >
           <Box > {/*}style={{ flex: "1 1 50%" }} */}
             <img src={recipe.image_url} alt="" width={500} height={300} mode='fit'/>
           </Box>
         </AccordionDetails>
       </Accordion>
       }
-      <Accordion>
-        <UploadImage 
-          recipe={recipe}
-        />
-      </Accordion>
-
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+          {!recipe.image_url &&
+          <Typography sx={{ fontSize: 20 }}>Upload an Image*</Typography>
+          }
+          { recipe.image_url &&
+          <Typography sx={{ fontSize: 20 }}>Replace the current Image*</Typography>
+          }
+            </AccordionSummary>
+          <AccordionDetails>
+            <UploadImage 
+              recipe={recipe}
+              imageSelected={imageSelected}
+              setImageSelected={setImageSelected}
+            />
+          </AccordionDetails>
+          </Accordion>
+    
 
       <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
         <Stack direction="row" spacing={10} >
