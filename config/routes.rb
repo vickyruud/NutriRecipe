@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resource :users, only: [:create]
   resources :recipes
   resources :categories
+  resources :comments
 
   post "/login", to: "auth#login"
   get "/auto_login", to: "auth#auto_login"
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
   # post `/recipe/edit/#{:id}`, to:'recipes#edit'
   # post `/recipe/delete/#{:id}`, to:'recipes#delete'
   get '/recipes/nutrifacts', to:'recipes#nutri_facts'
+  #post '/recipe', to:'recipes#create'
+  # get '/recipes/nutrifacts', to:'recipes#nutri_facts'
   # get '/recipes', to: 'recipes#index'
   # get '/recipes/categories', to: 'recipes#new'
   # post '/recipe', to:'recipes#create'

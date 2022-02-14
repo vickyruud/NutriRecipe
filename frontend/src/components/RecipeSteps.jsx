@@ -6,18 +6,8 @@ export default function RecipeSteps(props) {
   const recipeSteps = props.list.steps.split('.')
   recipeSteps.pop()
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        '& > :not(style)': {
-          m: 1,
-          width: '100%',
-          maxWidth: 700,
-          height: 'auto',
-        },
-      }}
-    >
-      <Paper style={{ height: 'auto', width: "100%",elevation:20}}variant="elevation" >
+   
+      <Paper elevation={10} style={{ height: 'auto', width: "100%", padding: 10, border: "none"}}variant="elevation" >
         <ol style = {{textAlign:'left'}}>
           <div>
           Steps:
@@ -28,6 +18,6 @@ export default function RecipeSteps(props) {
   }
         </ol>
       </Paper>
-    </Box>
+    
   );
 }
