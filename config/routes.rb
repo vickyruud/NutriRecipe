@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resource :users, only: [:create]
   resources :recipes
   resources :categories
+  resources :comments
 
   post "/login", to: "auth#login"
   get "/auto_login", to: "auth#auto_login"
