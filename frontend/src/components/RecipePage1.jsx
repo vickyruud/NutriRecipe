@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 import IngredientTable from "./IngredientTable"
 import RecipeSteps from './RecipeSteps';
 import NutriContent from './NutriContent';
+import DoughnutChart from "../charts/Doughnut";
+
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -31,10 +33,12 @@ export default function Recipes(props) {
           <Item><RecipeSteps list={props.selectRecipe}/></Item>
         </Grid>
         <Grid item xs={6}>
-          <Item>4</Item>
+          <Item><DoughnutChart /></Item>
         </Grid>
       </Grid>
-      <NutriContent list = {props.selectRecipe}/>
+      {/* <NutriContent list={props.selectRecipe} /> */}
+      
+      
 
     </Box>
   );
