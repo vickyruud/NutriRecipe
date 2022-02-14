@@ -85,7 +85,7 @@ const App = (props) => {
       {/*<NavBar login_name = {'Registered User'} login_right={0} /> */}
       {/* <NavBar login_name = {''} /> {/* Unregistered User */}
       {!user && renderForm()}
-      <Recipes />
+      <Recipes/>
       </div>
     </div>
   );

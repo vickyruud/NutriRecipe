@@ -30,12 +30,12 @@ const ResponsiveAppBar = (props) => {
     pages.push('My Recipes', 'Add New Recipe');
     settings.push('Logout');
     name = props.login_name
-    if (props.login_right === 1) {
-      pages.push('Admin')
-    }
-  } else {
+    // if (props.login_right === 1) {
+    //    pages.push('Admin')
+    //  }
+   } else {
       settings.push('Login', 'Sign Up');
-  }
+   }
   
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
