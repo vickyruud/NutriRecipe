@@ -1,6 +1,7 @@
 import React from "react";
 import NutriContent from "./NutriContent";
 import RecipeIngredients from './RecipeIngredients'
+import DoughnutChart from "../charts/Doughnut";
 
 export default function Recipes(props) {
   
@@ -10,7 +11,7 @@ export default function Recipes(props) {
   })
   return (
     
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex"}}>
       <div style={{ flex: "1 1 50%" }}>
         <h1> {props.selectRecipe.name} </h1>
         <ul>
@@ -26,8 +27,9 @@ export default function Recipes(props) {
         <h1>Image </h1>
         <img src={props.selectRecipe.image_url} alt="" />
       </div>
-      {/* <NutritionTable/> */}
-      <NutriContent list = {props.selectRecipe}/>
+      {/* <NutriContent list = {props.selectRecipe}/> */}
+      <DoughnutChart />
+
     </div>
   );
 }

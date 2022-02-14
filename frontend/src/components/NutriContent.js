@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
+import DoughnutChart from '../charts/Doughnut';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,18 +44,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function NutriContent(props) {
 
-  const [ingredients, setIngredients] = useState([]);
+  const [nutritionContent, setNutritionContent] = useState([]);
   const rows = eval(props.list.ingredients);
 
 
   const ingredients1 = rows.map(ingredient => {
-    return ingredient.name + " "
+    return `${ingredient.quantity} ${ingredient.unit} ${ingredient.name} `
   });
 
   
 
   const nutriInfo = (ingredients) => {
-
+    console.log("Ingredients: " +  ingredients)
     if (ingredients !== null) {
       axios.get(`https://api.calorieninjas.com/v1/nutrition?query=${ingredients}`, {
         headers: {
@@ -62,8 +63,13 @@ export default function NutriContent(props) {
         },
         contentType: 'application/json'
       }).then((resp) => {  
-        setIngredients(resp.data.items);
+        // const convertedResponse = resp.data.items.map(item => {
+          // 
+          // 
+        // })
+        setNutritionContent(resp.data.items)
         console.log(resp.data.items);
+        
       })
     }
   }
@@ -71,46 +77,22 @@ export default function NutriContent(props) {
   useEffect(() => {
 
     nutriInfo(ingredients1);
-    console.log(ingredients)
 
   }, [])
+
   
-  
+  const data = {
+    labels: ["Carbohydrate", "Protein", "Sugar", "Fat", "Fiber"],
+    datasets: [{
+      label: "Nutrients", 
+      data: [105, 25, 69, 65, 20],
+      backgroundColor: ["purple", "skyblue", "pink","grey", "lightgreen"]
+    }]
+  }
   
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Ingredient(100 g)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Fiber&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Sugar&nbsp;(g)</StyledTableCell>
-
-
-          </TableRow> 
-        </TableHead>
-        <TableBody>
-          {ingredients.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat_total_g}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbohydrates_total_g}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein_g}</StyledTableCell>
-              <StyledTableCell align="right">{row.fiber_g}</StyledTableCell>
-              <StyledTableCell align="right">{row.sugar_g}</StyledTableCell>
-
-
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      {/* <DoughnutChart data={ }/> */}
+    </div>
   );
 }
