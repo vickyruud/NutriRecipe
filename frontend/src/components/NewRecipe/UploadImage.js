@@ -33,9 +33,11 @@ const Upload = (props) => {
  
   const [loading, setLoading] = React.useState(false);
   function handleLoading() {
-    if (props.imageSelected!=="") {
+    if (props.imageSelected!==null) {
       setLoading(true);
       uploadImage();
+    } else {
+      setLoading(false);
     }
   }
  
@@ -50,7 +52,7 @@ const Upload = (props) => {
         </AccordionSummary> */}
         <AccordionDetails >
           <TextField
-            sx={{ m: 1, width: 1000 }}
+            sx={{ m: 1, width: 500 }}
             type="file"
             onChange={(event)=>{
               props.setImageSelected(event.target.files[0]);

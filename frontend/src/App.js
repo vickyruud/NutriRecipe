@@ -6,7 +6,6 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Button  from "./components/Button";
 import Recipes from "./routes/recipes";
-import Empty from "./components/NewRecipe/Empty"
 
 
 const App = (props) => {
@@ -86,7 +85,7 @@ const App = (props) => {
       {/*<NavBar login_name = {'Registered User'} login_right={0} /> */}
       {/* <NavBar login_name = {''} /> {/* Unregistered User */}
       {!user && renderForm()}
-      <Recipes/>
+      <Recipes />
       </div>
     </div>
   );

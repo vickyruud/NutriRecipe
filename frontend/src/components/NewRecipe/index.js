@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from './Form'
 import Show from './Show'; // Recipe detail page
-import Show from '../RecipePage1'; // Recipe detail page
-// import Empty from '../RecipeList'; // Main page
+// import Show from '../RecipePage1'; // Recipe detail page
+import Empty from '../RecipeList'; // Main page
 import Status from './Status';
 import Confirm from './Confirm';
 import Error from './Error';
@@ -69,56 +69,69 @@ export default function Recipe(props) {
       });
   };
 
-  const saveRecipe = (inputrecipe) => {/*
-   if (recipe.name === '' 
+  const convertRecipeToSaveDB = (recipeUI) => {
+    let json_ingredients = JSON.stringify(recipeUI.ingredients);
+    console.log('Ingredients before saving to DB (json_ingredients):', json_ingredients);
+    let recipeDB = {...recipeUI, "ingredients": json_ingredients};
+    return recipeDB;
+  }
+  const converRecipeToShowUI = (recipeDB) => {
+    let string_ingredients = JSON.parse(recipeDB.ingredients);
+    console.log('Ingredients converted to object after taken from DB:', string_ingredients)
+    let recipeUI = {...recipeDB, "ingredients": string_ingredients};
+    return recipeUI;
+  }
+
+  const saveRecipe = (inputRecipe) => {
+   if (recipe.name === null
     || recipe.ingredients === null 
-    || recipe.category_id === ''
-    || recipe.estimated_time
-    || recipe.description ===''
-    || recipe.serving_size === ''
-    || recipe.steps === ''
-    || recipe.image_url === ''
+    || recipe.category_id === null
+    || recipe.estimated_time === null
+    || recipe.description === null
+    || recipe.serving_size === null
+    || recipe.steps === null
+    || recipe.image_url === null
     ) {
-      transition(ERROR_SAVE_VALIDATION);
-    } else {*/
-      let recipe = {...inputrecipe};
-      recipe.user_id = 1 //hard-coded
+      transition(ERROR_SAVE_VALIDATION, true);
+    } else {
+      inputRecipe.user_id = 1 //hard-coded
+      setRecipe(()=>convertRecipeToSaveDB(inputRecipe))
       transition(SAVING);
-      let json_ingredients = JSON.stringify(recipe.ingredients);
-      recipe.ingredients = json_ingredients;
+      console.log('recipe before saving to DB:', recipe);
       if (!recipe.id) {
         axios
         .post("/recipes", recipe)
         .then((response) => {
           console.log(response);
-          recipe = {...response.data};
-          console.log(recipe);
-          let string_ingredients = JSON.parse(recipe.ingredients);
-          console.log(string_ingredients);
-          console.log(string_ingredients.class);
+          let tempRecipe = {...response.data};
+          console.log(tempRecipe);
+          setRecipe(()=>converRecipeToShowUI(tempRecipe))
           console.log ('Create mode - Recipe saved!');
-          setRecipe(recipe);
           transition(SHOW)
-          console.log('POST mode', mode)
         })
         .catch(error => {
           console.log('error', error);
           transition(ERROR_SAVE, true);
         })
       } else {
+        console.log('Edit mode, recipe id = ', recipe.id);
         axios
-        .put(`/recipes/:${recipe.id}`, recipe)
+        .put(`/recipes/${recipe.id}`,recipe)
         .then((response) => {
           console.log(response);
-          recipe = {...response.data};
-          console.log(recipe);
-          let string_ingredients = JSON.parse(recipe.ingredients);
-          console.log(string_ingredients);
-          console.log(string_ingredients.class);
+          let tempRecipe = {...response.data};
+          console.log(tempRecipe);
+          setRecipe(()=>converRecipeToShowUI(tempRecipe));
           console.log ('Edit mode - Recipe saved!');
-          setRecipe(recipe);
+
+          // recipe = {...response.data};
+          // console.log(recipe);
+          // let string_ingredients = JSON.parse(recipe.ingredients);
+          // console.log(string_ingredients);
+          // console.log(string_ingredients.class);
+          // console.log ('Edit mode - Recipe saved!');
+          // setRecipe(recipe);
           transition(SHOW)
-          console.log('POST mode', mode)
         })
         .catch(error => {
           console.log('error', error);
@@ -126,30 +139,27 @@ export default function Recipe(props) {
         })
       }
       
-    /*}*/
+    }
   }
 
   const { mode, transition, back } = useVisualMode(
     Object.keys(recipe).length > 0 ? SHOW  : CREATE
   );
 
-
   function destroy(recipe) {
     transition(DELETING, true);
     console.log(`Deleting recipe id = ${recipe.id}`);
     axios
-    .delete(`/recipes/:${recipe.id}`, recipe)
-    .then(
-      fetchRecipes()
-      .then(response => {
-        setRecipes(response.data)
-        transition(EMPTY)
+    .delete(`/recipes/${recipe.id}`, recipe)
+    .then((response)=>{
+      console.log('response data after deletion:', response.data)
+      let tempRecipes = response.data;
+      tempRecipes.map(recipe => {
+        converRecipeToShowUI(recipe)
       })
-      .catch (e => {
-        console.log(e);
-        transition(ERROR_LOAD)
-      })
-    )
+      setRecipes(tempRecipes);
+      transition(EMPTY);
+    })
     .catch(error => {
       console.log(error);
       transition(ERROR_DELETE);
@@ -159,9 +169,7 @@ export default function Recipe(props) {
   useEffect (()=>{
     fetchCategories()
   },[])
-  console.log('recipe', recipe)
-  console.log('mode === SHOW ', mode === SHOW )
-  console.log(mode);
+
   return (
   
     <div>
@@ -184,7 +192,7 @@ export default function Recipe(props) {
       {mode === CREATE && <Form cates={categories} onCancel={back} onSave={saveRecipe} onDelete={destroy} setRecipe={setRecipe} recipe={recipe} mode={mode}/>}
       {mode === SAVING && <Status message = {'Saving...'} />}
       {mode === DELETING && <Status message = {'Deleting...'} />}
-      {mode === CONFIRM && <Confirm message = {'Delete? ... Really?'} onCancel={back} onConfirm={(recipe) => destroy(recipe)}/>}
+      {mode === CONFIRM && <Confirm message = {'Delete? ... Really?'} onCancel={back} onConfirm={() => destroy(recipe)}/>}
       {mode === EDIT && <Form cates={categories} recipe={recipe} onCancel={back} onSave={saveRecipe} onDelete={destroy} mode={mode} setRecipe={setRecipe} recipe={recipe}/>}
       {mode === ERROR_SAVE && <Error message={'Error saving encountered. Sorry!'} onClose={back} />}
       {mode === ERROR_DELETE && <Error message={'Error deleting encountered. Sorry!'} onClose={back} />}

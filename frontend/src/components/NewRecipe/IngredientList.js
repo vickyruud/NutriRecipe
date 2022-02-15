@@ -6,7 +6,6 @@ import IngredientItem from './IngredientItem';
 
 
 const NewIngredientList = (props) => {
-
   return (
     <div className="NewIngredientList">
       <Box

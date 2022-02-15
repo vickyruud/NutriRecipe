@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -21,6 +21,7 @@ const Form = (props) => {
   // const [recipe, setRecipe] = useState(props.recipe || {});
 
   const [ingredients, setIngredients] = React.useState([{name:"",unit:"",quantity:0}]);
+
   const addIngredient=()=>{
     setIngredients([...ingredients,{name:"",unit:"",quantity:0}]);
   };
@@ -32,32 +33,41 @@ const Form = (props) => {
   let handleIngredients = (event, i) => {
     let newIngredients = [...ingredients];
     let newIngredient = {...newIngredients[i],[event.target.name]:event.target.value};
+
     newIngredients[i] = newIngredient;
-    setIngredients(newIngredients);
-    console.log(ingredients);
+    console.log('New ingredients:', newIngredients);
+    setIngredients(newIngredients); //issue 
+    console.log('Form:', ingredients);
     let newRecipe = {...recipe,ingredients};
-    setRecipe(newRecipe);
-    console.log(recipe);
+    setRecipe(newRecipe)
+    console.log("recipe:",recipe);
     let json_ingredients = JSON.stringify(recipe.ingredients);
-      console.log(json_ingredients)
-      console.log(recipe.ingredients)
+    console.log(json_ingredients)
+    console.log(recipe.ingredients);
+
   }
+
+  useEffect(()=>{
+    let newRecipe = {...recipe,ingredients};
+    setRecipe(newRecipe)
+  },[ingredients]);
   
   const handleChange = (event) => {
     let newRecipe = {...recipe,[event.target.name]:event.target.value};
-    setRecipe(newRecipe);
+    setRecipe(newRecipe, ()=>console.log(recipe));
     console.log(recipe);
   }
 
   const categories=[].concat(props.cates);
 
   const [imageSelected, setImageSelected] = useState(recipe.image_url)
+  const [category, setCategory] = React.useState(recipe.category_id);
 
   console.log(recipe);
 
   const mode = props.mode;
-  console.log(recipe.category_id)
-  console.log(categories[recipe.category_id - 1]);
+  console.log(mode);
+  console.log('Recipe to be displayed:', recipe)
 
   return (
     <div className="NewRecipe">
@@ -121,10 +131,9 @@ const Form = (props) => {
             <Select
               required
               name="category_id"
-              //value={category}
+              value={category}
               onChange={handleChange}
               label="Set a Category"
-              value={categories[recipe.category_id]||undefined}
             >
               {categories.map(category =>
                 <MenuItem value={category.id}>{category.name}</MenuItem>
@@ -174,7 +183,7 @@ const Form = (props) => {
               maxRows={100}
               variant="standard"
               recipe={recipe}
-              defaultValue={recipe.steps}
+              value={recipe.steps}
             />
           </Box>
         </AccordionDetails>
@@ -205,7 +214,7 @@ const Form = (props) => {
           <Typography sx={{ fontSize: 20 }}>Upload an Image*</Typography>
           }
           { recipe.image_url &&
-          <Typography sx={{ fontSize: 20 }}>Replace the current Image*</Typography>
+          <Typography sx={{ fontSize: 20 }}>Replace the Current Image*</Typography>
           }
             </AccordionSummary>
           <AccordionDetails>

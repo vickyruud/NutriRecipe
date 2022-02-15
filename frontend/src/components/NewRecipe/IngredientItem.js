@@ -25,7 +25,7 @@ const NewIngredientItem = (props) => {
             name="name"
             label="Ingredient"
             onChange={props.onChange}
-            value={props.ingredient.name}
+            value={props.name}
             defaultValue={props.ingredient.name}
           />
           {/* <TextField
@@ -44,7 +44,7 @@ const NewIngredientItem = (props) => {
               required
               name="unit"
               onChange={props.onChange}
-              value={props.ingredient.unit}
+              value={props.unit}
             >
               <MenuItem value={"grams"}>grams</MenuItem>
               <MenuItem value={"milligrams"}>milligrams</MenuItem>
@@ -58,7 +58,7 @@ const NewIngredientItem = (props) => {
             name="quantity"
             label="Quantity"
             onChange={props.onChange}
-            value={props.ingredient.quantity}
+            value={props.quantity}
             defaultValue={props.ingredient.quantity}
           />
           <Fab color="primary" aria-label="Delete">

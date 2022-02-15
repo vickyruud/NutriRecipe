@@ -20,13 +20,13 @@ class RecipesController < ApplicationController
     render :json => @recipes
   end
 
-  def edit
+  def update
     @recipe = Recipe.find params[:id]
-    @recipe = recipe_params
+    @recipe.update_all(recipe_params)
     if @recipe.save
       render :json => @recipe
     else
-      notice 'error saving!'
+      puts 'error saving!'
     end
   end
 
@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       render :json => @recipe
     else
-      notice 'error saving!'
+      puts 'error saving!'
     end
   end
 
