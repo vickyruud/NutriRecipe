@@ -38,27 +38,15 @@ export default function Recipes(props) {
         </Grid>
         <Grid item xs={6}>
           <h3>Nutrition Content</h3>
-          <Item>
-            <DoughnutChart />
-          </Item>
-        </Grid>
-        <Grid style={{ padding: 5 }} item xs={6}>
-          <Item>
-            <RecipeSteps list={props.selectRecipe} />
-          </Item>
+          <Item><NutriContent list = {props.selectRecipe}/></Item>
         </Grid>
         <Grid item xs={6}>
           <Item>
             <NutriContent list={props.selectRecipe} />
           </Item>
         </Grid>
-        <Grid item xs={6}>
-          <Item>
-            <Comments comments={props.comments} />
-          </Item>
-        </Grid>
       </Grid>
-      {/* <NutriContent list = {props.selectRecipe}/> */}
+
     </Box>
   );
 }

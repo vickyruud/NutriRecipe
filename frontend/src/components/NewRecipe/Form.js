@@ -49,10 +49,16 @@ const Form = (props) => {
     console.log(recipe);
   }
 
-  const categories=[].concat(props.cates)
+  const categories=[].concat(props.cates);
+
+  const [imageSelected, setImageSelected] = useState(recipe.image_url)
+
   console.log(recipe);
 
   const mode = props.mode;
+  console.log(recipe.category_id)
+  console.log(categories[recipe.category_id - 1]);
+
   return (
     <div className="NewRecipe">
           <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">{mode === "EDIT" ? "EDIT RECIPE" : "ADD A NEW RECIPE"}</Typography>
@@ -75,6 +81,16 @@ const Form = (props) => {
             autoComplete="off"
           >
             <TextField required name="name" label='Recipe name' variant="outlined" onChange={handleChange} defaultValue={recipe.name}/>
+     
+          </Box>
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '103ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
             <TextField required name="description" label="Recipe Description" variant="outlined" onChange={handleChange} defaultValue={recipe.description}/>
           </Box>
           <Box
@@ -108,7 +124,7 @@ const Form = (props) => {
               //value={category}
               onChange={handleChange}
               label="Set a Category"
-              defaultValue={categories[recipe.category_id]}
+              value={categories[recipe.category_id]||undefined}
             >
               {categories.map(category =>
                 <MenuItem value={category.id}>{category.name}</MenuItem>
@@ -161,13 +177,46 @@ const Form = (props) => {
               defaultValue={recipe.steps}
             />
           </Box>
-       
         </AccordionDetails>
       </Accordion>
-      <Accordion>
-        <UploadImage recipe={recipe}/>
+      { recipe.image_url &&
+      <Accordion expanded={true}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography sx={{ fontSize: 20 }}>Current Image</Typography>
+        </AccordionSummary>
+        <AccordionDetails >
+          <Box > {/*}style={{ flex: "1 1 50%" }} */}
+            <img src={recipe.image_url} alt="" width={500} height={300} mode='fit'/>
+          </Box>
+        </AccordionDetails>
       </Accordion>
-
+      }
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+          {!recipe.image_url &&
+          <Typography sx={{ fontSize: 20 }}>Upload an Image*</Typography>
+          }
+          { recipe.image_url &&
+          <Typography sx={{ fontSize: 20 }}>Replace the current Image*</Typography>
+          }
+            </AccordionSummary>
+          <AccordionDetails>
+            <UploadImage 
+              recipe={recipe}
+              imageSelected={imageSelected}
+              setImageSelected={setImageSelected}
+            />
+          </AccordionDetails>
+          </Accordion>
+    
 
       <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
         <Stack direction="row" spacing={10} >

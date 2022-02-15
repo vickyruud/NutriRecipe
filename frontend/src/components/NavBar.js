@@ -167,8 +167,8 @@ const ResponsiveAppBar = (props) => {
               {settings.map((setting) => (
                 <MenuItem  key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                  {setting === 'Sign Up' && <Typography onClick={props.signUp}>Sign Up</Typography>}
-                  {setting === 'Login' && <Typography onClick={props.login}>Login</Typography>}
+                  {setting === 'Sign Up' && <Typography onClick={props.handleSignInOpen}>Sign Up</Typography>}
+                  {setting === 'Login' && <Typography onClick={props.handleLoginOpen}>Login</Typography>}
                   {setting === 'Logout' && <Typography onClick={props.logout}>Logout</Typography>}
                   
                   </Typography>
