@@ -94,7 +94,7 @@ export default function NutriContent(props) {
 
     });
 
-    let arrayOfData = [carb, fat, fiber, sugar, protein]
+    let arrayOfData = [carb, protein, sugar, fat, fiber]
     console.log(arrayOfData);
 
     setGraphData(arrayOfData);
