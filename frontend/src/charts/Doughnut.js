@@ -12,16 +12,16 @@ export default function DoughnutChart(props) {
     datasets: [{
       label: "Nutrients", 
       data: props.data,
-      backgroundColor: ["purple", "skyblue", "pink","grey", "lightgreen"]
+      backgroundColor: ["#003f5c", "#58508d", "#bc5090","#ff6361", "#ffa600"]
     }]
   }
 
   const options = {
     plugins: {
       datalabels: {
+        color: 'white',
         display: true,
         align: 'bottom',
-        backgroundColor: '#ccc',
         borderRadius: 3,
         font: {
           size: 18,

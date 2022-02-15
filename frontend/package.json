@@ -19,6 +19,7 @@
     "@rpldy/uploady": "^0.17.3",
     "axios": "^0.18.0",
     "chart.js": "^3.7.1",
+    "chartjs-plugin-colorschemes": "^0.4.0",
     "chartjs-plugin-datalabels": "^2.0.0",
     "chartjs-plugin-labels": "^1.1.0",
     "esm": "^3.2.25",
