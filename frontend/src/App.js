@@ -8,6 +8,7 @@ import Button  from "./components/Button";
 import Recipes from "./routes/recipes";
 import Empty from "./components/NewRecipe/Empty"
 import { Modal } from "@mui/material";
+import { TextField } from "@mui/material";
 
 
 const App = (props) => {
@@ -23,7 +24,8 @@ const App = (props) => {
 
   const [signInOpen, setSignInOpen] = useState(false);
   const handleSignInOpen = () => setSignInOpen(true);
-  const handleSignInClose = () => setSignInOpen(false);
+  const handleSignInClose = () => setSignInOpen(false); 
+
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -87,16 +89,12 @@ const App = (props) => {
 
   return (
     <div className="App">
-      {user && <NavBar logout={logout}  login_name={user.username} login_right={1} logout={logout} />}
-      {!user && <NavBar login_name={""} signUp={showSignup} handleLoginOpen={handleLoginOpen} handleSignInOpen={handleSignInOpen} login={showLogin} login_right={1}  />}
+      {user && <NavBar logout={logout}   login_name={user.username} login_right={1} logout={logout} />}
+      {!user && <NavBar login_name={""}  signUp={showSignup} handleLoginOpen={handleLoginOpen} handleSignInOpen={handleSignInOpen} login={showLogin} login_right={1}  />}
       <div className="main">
-
         
-        <Modal
-          open={loginOpen}          
-        >
+      <Modal open={loginOpen}>
           <Login handleLogin={handleLogin} cancel={handleLoginClose}></Login>
-
         </Modal>  
          <Modal
           open={signInOpen}          
@@ -105,10 +103,10 @@ const App = (props) => {
 
         </Modal>  
         
-      <Recipes/>
+        <Recipes />
+        
       </div>
     </div>
   );
 };
-
 export default App;
