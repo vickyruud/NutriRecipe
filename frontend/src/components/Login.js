@@ -44,6 +44,7 @@ const Login = (props) => {
         })
       setUsername("")
       setPassword("")
+      props.cancel()
     }
     
   

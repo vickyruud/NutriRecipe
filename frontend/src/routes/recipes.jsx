@@ -8,28 +8,42 @@ import RecipePage1 from "../components/RecipePage1";
 export default function Recipes() {
   const [recipes, setRecipes] = useState([]);
   const [selectRecipe, setSelectRecipe] = useState(null);
+  const [comments,setComments] = useState([])
   const fetchRecipes = () => {
     axios
       .get("/recipes") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         // handle success
-
+        // console.log("response----->",response.data)
         setRecipes(response.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  
+  const fetchComments = ()=> {
+    axios
+      .get("/comments")
+      .then((response) =>{
+        // console.log("comments---->",response.data);
+        setComments(response.data);
+      })
+      .catch((err) =>{
+        console.log(err);
+      })
 
+  }
   useEffect(() => {
     fetchRecipes();
+    fetchComments();
   }, []);
   return (
     <main>
       <div style={{ display: "flex", flexDirection: "row" }}></div>
+      {/* {console.log("COMMENTS__>",comments)} */}
       {selectRecipe ? (
-        <RecipePage1 selectRecipe={selectRecipe} />
+        <RecipePage1 selectRecipe={selectRecipe} comments={comments}/>
+        
       ) : (
         <RecipeList setSelectRecipe={setSelectRecipe} recipes={recipes} />
       )}

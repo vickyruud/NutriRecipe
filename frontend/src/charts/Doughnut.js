@@ -1,6 +1,7 @@
 import React from "react";
-import { Doughnut } from 'react-chartjs-2'
-import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
@@ -10,15 +11,29 @@ export default function DoughnutChart(props) {
     labels: ["Carbohydrate", "Protein", "Sugar", "Fat", "Fiber"],
     datasets: [{
       label: "Nutrients", 
-      data: [105, 25, 69, 65, 20],
-      backgroundColor: ["purple", "skyblue", "pink","grey", "lightgreen"]
+      data: props.data,
+      backgroundColor: ["#003f5c", "#58508d", "#bc5090","#ff6361", "#ffa600"]
     }]
+  }
+
+  const options = {
+    plugins: {
+      datalabels: {
+        color: 'white',
+        display: true,
+        align: 'bottom',
+        borderRadius: 3,
+        font: {
+          size: 18,
+        }
+      },
+    }
   }
 
   return (
     <div >
       <div style={{height: "500px", width:"500px", margin: "0 auto"}}>
-      <Doughnut data={data} />
+      <Doughnut data={data} plugins={[ChartDataLabels]} options={options} />
       </div>
     </div>
   )

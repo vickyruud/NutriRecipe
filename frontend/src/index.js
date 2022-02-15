@@ -13,6 +13,7 @@ import NewRecipe from "./routes/newrecipe";
 import MyRecipes from "./routes/myrecipes";
 import Admin from "./routes/admin";
 
+
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
@@ -20,6 +21,7 @@ render(
       <Route path="/" element={<App />} />
       <Route path="users" element={<Users />} />
       <Route path="recipes" element={<Recipes />} />
+      
       <Route path="newrecipe" element={<NewRecipe />} />
       <Route path="myrecipes" element={<MyRecipes />} />
       <Route path="admin" element={<Admin />} />

@@ -50,6 +50,7 @@ const Signup = (props) => {
       setUsername("")
       setPassword("")
       setEmail("")
+      props.cancel()
     }
    
 
