@@ -46,7 +46,7 @@ export default function Recipes(props) {
         </Grid>
         <Grid item xs={6}>
           <Item>
-            <Comments comments={props.comments} />
+            <Comments comments={props.comments} list={props.selectRecipe} />
           </Item>
         </Grid>
       </Grid>

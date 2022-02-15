@@ -2,6 +2,7 @@ import * as React from "react";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import { elementAcceptingRef } from "@mui/utils";
 import Paper from "@mui/material/Paper";
+import { listClasses } from "@mui/material";
 
 export default function Components(props) {
   // console.log("comments++++", props.comments);
@@ -15,8 +16,9 @@ export default function Components(props) {
   //   return myString
   // }
   const comments = props.comments.map((comment, i) => {
-    console.log("$$$", comment);
+    //console.log("$$$", comment);
     let myString = '';
+     if(props.list.id === comment.id){
     return (
       myString+= comment.value
       
@@ -30,6 +32,7 @@ export default function Components(props) {
       //   style={{ width: 400 }}
       // />
     );
+    }
   });
   
    return <Paper elevation={3}>
