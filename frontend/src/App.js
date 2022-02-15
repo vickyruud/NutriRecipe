@@ -91,9 +91,6 @@ const App = (props) => {
       {!user && <NavBar login_name={""} signUp={showSignup} handleLoginOpen={handleLoginOpen} handleSignInOpen={handleSignInOpen} login={showLogin} login_right={1}  />}
       <div className="main">
 
-      {/*<NavBar login_name = {'Registered User'} login_right={0} /> */}
-      {/* <NavBar login_name = {''} /> {/* Unregistered User */}
-        {!user && renderForm()}
         
         <Modal
           open={loginOpen}          
