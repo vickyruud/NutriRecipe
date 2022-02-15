@@ -15,14 +15,23 @@ export default function Components(props) {
   //   })
   //   return myString
   // }
-  const comments = props.comments.map((comment, i) => {
-    //console.log("$$$", comment);
-    let myString = '';
-     if(props.list.id === comment.id){
-    return (
-      myString+= comment.value
+  let userName = "";
+  let myString = "";
+  const comments = props.comments.comments.map((comment, i) => {
+    // console.log("comment--***",comment);
+     if(props.list.id === comment.recipe_id){
+    // return (
+       userName = props.comments.users.map(user=>{
+        if(user.id === comment.user_id){
+        return user.name
+        }
+      })
       
-     
+      myString+=comment.value;
+      console.log(myString)
+      console.log(userName)
+      
+      
       // <TextareaAutosize
       //   maxRows={4}
       //   aria-label="maximum height"
@@ -31,11 +40,12 @@ export default function Components(props) {
       //   defaultValue={comment.value}
       //   style={{ width: 400 }}
       // />
-    );
+    ;
     }
   });
-  
    return <Paper elevation={3}>
-     {comments}
+     {myString}
+     {userName}
+     
    </Paper>
 }

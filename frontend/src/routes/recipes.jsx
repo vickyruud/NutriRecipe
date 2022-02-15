@@ -26,6 +26,7 @@ export default function Recipes() {
       .get("/comments")
       .then((response) =>{
         // console.log("comments---->",response.data);
+        console.log("comments*****>",response.data)
         setComments(response.data);
       })
       .catch((err) =>{
