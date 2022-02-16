@@ -39,8 +39,8 @@ const Login = (props) => {
         })
         .then(resp => resp.json())
         .then(data => {
-            localStorage.setItem("token", data.jwt)
-            props.handleLogin(data.user)
+          localStorage.setItem("token", data.jwt)
+          props.handleLogin(data.user)
         })
       setUsername("")
       setPassword("")

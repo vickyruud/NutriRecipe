@@ -1,7 +1,10 @@
 class CommentsController < ApplicationController
   def index
     @comments = Comment.all
-    render :json => @comments
+    puts @comments
+    @users    = User.all
+    render json: { comments: @comments, users: @users}
+
   end
 
   def show

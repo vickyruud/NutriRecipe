@@ -161,6 +161,7 @@ const VirtualizedTable = withStyles(styles, { defaultTheme })(
 
 
 export default function IngredientTable1(props) {
+  console.log("prosfrmIngrdientTable",props)
   const ingredientObj = eval(props.list.ingredients);
   
   return (
