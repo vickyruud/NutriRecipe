@@ -1,6 +1,6 @@
 import React from 'react'
 import OneComment from './OneComment';
-import { Box } from '@mui/system';
+import { Container } from '@mui/material';
 
 const DisplayComments = (props) => {
   console.log(props.comments.comments);
@@ -12,10 +12,10 @@ const DisplayComments = (props) => {
     }
   })
   return (
-    <Box >
+    <Container >
       <h1>Comments</h1>
       {arrayOfComments}
-    </Box>
+    </Container>
     
   )
 }

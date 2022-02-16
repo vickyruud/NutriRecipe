@@ -4,11 +4,11 @@ import NavBar from "./components/NavBar";
 import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Button  from "./components/Button";
 import Recipes from "./routes/recipes";
 import Empty from "./components/NewRecipe/Empty"
-import { Modal } from "@mui/material";
-import { TextField } from "@mui/material";
+import { Modal, TextField } from "@mui/material";
+import SearchIcon from "@material-ui/icons/Search"
+import Search from "./components/Search";
 
 
 const App = (props) => {
@@ -25,6 +25,8 @@ const App = (props) => {
   const [signInOpen, setSignInOpen] = useState(false);
   const handleSignInOpen = () => setSignInOpen(true);
   const handleSignInClose = () => setSignInOpen(false); 
+
+
 
 
   useEffect(() => {
@@ -92,8 +94,8 @@ const App = (props) => {
       {user && <NavBar logout={logout}   login_name={user.username} login_right={1} logout={logout} />}
       {!user && <NavBar login_name={""}  signUp={showSignup} handleLoginOpen={handleLoginOpen} handleSignInOpen={handleSignInOpen} login={showLogin} login_right={1}  />}
       <div className="main">
-        
-      <Modal open={loginOpen}>
+        <Search />
+       <Modal open={loginOpen}>
           <Login handleLogin={handleLogin} cancel={handleLoginClose}></Login>
         </Modal>  
          <Modal
