@@ -25,17 +25,9 @@ const NewIngredientItem = (props) => {
             name="name"
             label="Ingredient"
             onChange={props.onChange}
-            value={props.name}
+            value={props.ingredient.name}
             defaultValue={props.ingredient.name}
           />
-          {/* <TextField
-            required
-            name="unit"
-            label="Unit"
-            onChange={props.onChange}
-            value={props.ingredient.unit}
-            defaultValue={props.ingredient.unit}
-          /> */}
           <FormControl required variant="standard" sx={{ m: 1, minWidth: 350 }}>
             <InputLabel >Unit</InputLabel>
             <Select
@@ -44,7 +36,7 @@ const NewIngredientItem = (props) => {
               required
               name="unit"
               onChange={props.onChange}
-              value={props.unit}
+              value={props.ingredient.unit}
             >
               <MenuItem value={"grams"}>grams</MenuItem>
               <MenuItem value={"milligrams"}>milligrams</MenuItem>
@@ -58,8 +50,8 @@ const NewIngredientItem = (props) => {
             name="quantity"
             label="Quantity"
             onChange={props.onChange}
-            value={props.quantity}
-            defaultValue={props.ingredient.quantity}
+            value={props.ingredient.quantity}
+            
           />
           <Fab color="primary" aria-label="Delete">
             <DeleteIcon onClick={props.onDelete}/>

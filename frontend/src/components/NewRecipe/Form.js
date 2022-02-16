@@ -18,9 +18,8 @@ import IngredientList from "./IngredientList"
 
 const Form = (props) => {
   const { recipe, setRecipe } = props;
-  // const [recipe, setRecipe] = useState(props.recipe || {});
-
   const [ingredients, setIngredients] = React.useState([{name:"",unit:"",quantity:0}]);
+  const [steps, setSteps] = React.useState(props.recipe.steps || "");
 
   const addIngredient=()=>{
     setIngredients([...ingredients,{name:"",unit:"",quantity:0}]);
@@ -35,39 +34,35 @@ const Form = (props) => {
     let newIngredient = {...newIngredients[i],[event.target.name]:event.target.value};
 
     newIngredients[i] = newIngredient;
-    console.log('New ingredients:', newIngredients);
     setIngredients(newIngredients); //issue 
-    console.log('Form:', ingredients);
     let newRecipe = {...recipe,ingredients};
     setRecipe(newRecipe)
-    console.log("recipe:",recipe);
     let json_ingredients = JSON.stringify(recipe.ingredients);
-    console.log(json_ingredients)
-    console.log(recipe.ingredients);
-
   }
-
-  useEffect(()=>{
-    let newRecipe = {...recipe,ingredients};
-    setRecipe(newRecipe)
-  },[ingredients]);
   
   const handleChange = (event) => {
     let newRecipe = {...recipe,[event.target.name]:event.target.value};
     setRecipe(newRecipe, ()=>console.log(recipe));
-    console.log(recipe);
   }
 
   const categories=[].concat(props.cates);
 
   const [imageSelected, setImageSelected] = useState(recipe.image_url)
-  const [category, setCategory] = React.useState(recipe.category_id);
+  // const [category, setCategory] = React.useState(recipe.category_id);
 
-  console.log(recipe);
+  
+
+  useEffect(()=>{
+    let newRecipe = {...recipe,ingredients};
+    setRecipe(newRecipe)
+  },[ingredients]);
+
+  useEffect(()=>{
+    let newRecipe = {...recipe,steps};
+    setRecipe(newRecipe);
+  },steps);
 
   const mode = props.mode;
-  console.log(mode);
-  console.log('Recipe to be displayed:', recipe)
 
   return (
     <div className="NewRecipe">
@@ -131,7 +126,8 @@ const Form = (props) => {
             <Select
               required
               name="category_id"
-              value={category}
+              // value={category}
+              value={recipe.category_id}
               onChange={handleChange}
               label="Set a Category"
             >
@@ -183,7 +179,9 @@ const Form = (props) => {
               maxRows={100}
               variant="standard"
               recipe={recipe}
-              value={recipe.steps}
+              steps={steps}
+              setSteps={setSteps}
+              name="steps"
             />
           </Box>
         </AccordionDetails>

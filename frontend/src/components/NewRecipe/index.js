@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from './Form'
-// import Show from './Show'; // Recipe detail page
-import Show from '../RecipePage1'; // Recipe detail page
+import Show from './Show'; // Recipe detail page
+// import Show from '../RecipePage1'; // Recipe detail page
 import Empty from '../RecipeList'; // Main page
 import Status from './Status';
 import Confirm from './Confirm';
@@ -38,7 +38,6 @@ export default function Recipe(props) {
     .get("/categories")
     .then((response) => {
       setCategories(response.data);
-      console.log(response.data);
     })
     .catch((err) => {
       console.log(err);
@@ -71,13 +70,11 @@ export default function Recipe(props) {
 
   const convertRecipeToSaveDB = (recipeUI) => {
     let json_ingredients = JSON.stringify(recipeUI.ingredients);
-    console.log('Ingredients before saving to DB (json_ingredients):', json_ingredients);
     let recipeDB = {...recipeUI, "ingredients": json_ingredients};
     return recipeDB;
   }
-  const converRecipeToShowUI = (recipeDB) => {
-    let string_ingredients = JSON.parse(recipeDB.ingredients);
-    console.log('Ingredients converted to object after taken from DB:', string_ingredients)
+  const convertRecipeToShowUI = (recipeDB) => {
+    let string_ingredients = eval(recipeDB.ingredients);
     let recipeUI = {...recipeDB, "ingredients": string_ingredients};
     return recipeUI;
   }
@@ -94,19 +91,16 @@ export default function Recipe(props) {
     ) {
       transition(ERROR_SAVE_VALIDATION, true);
     } else {
-      inputRecipe.user_id = 1 //hard-coded
-      setRecipe(()=>convertRecipeToSaveDB(inputRecipe))
       transition(SAVING);
-      console.log('recipe before saving to DB:', recipe);
+      inputRecipe={...recipe};
+      inputRecipe.user_id = 1 //hard-coded
+      let recipeDB = convertRecipeToSaveDB(inputRecipe);
       if (!recipe.id) {
         axios
-        .post("/recipes", recipe)
+        .post("/recipes", recipeDB)
         .then((response) => {
-          console.log(response);
           let tempRecipe = {...response.data};
-          console.log(tempRecipe);
-          setRecipe(()=>converRecipeToShowUI(tempRecipe))
-          console.log ('Create mode - Recipe saved!');
+          setRecipe(()=>convertRecipeToShowUI(tempRecipe))
           transition(SHOW)
         })
         .catch(error => {
@@ -114,23 +108,11 @@ export default function Recipe(props) {
           transition(ERROR_SAVE, true);
         })
       } else {
-        console.log('Edit mode, recipe id = ', recipe.id);
         axios
         .put(`/recipes/${recipe.id}`,recipe)
         .then((response) => {
-          console.log(response);
           let tempRecipe = {...response.data};
-          console.log(tempRecipe);
-          setRecipe(()=>converRecipeToShowUI(tempRecipe));
-          console.log ('Edit mode - Recipe saved!');
-
-          // recipe = {...response.data};
-          // console.log(recipe);
-          // let string_ingredients = JSON.parse(recipe.ingredients);
-          // console.log(string_ingredients);
-          // console.log(string_ingredients.class);
-          // console.log ('Edit mode - Recipe saved!');
-          // setRecipe(recipe);
+          setRecipe(()=>convertRecipeToShowUI(tempRecipe));
           transition(SHOW)
         })
         .catch(error => {
@@ -152,13 +134,14 @@ export default function Recipe(props) {
     axios
     .delete(`/recipes/${recipe.id}`, recipe)
     .then((response)=>{
-      console.log('response data after deletion:', response.data)
-      let tempRecipes = response.data;
-      tempRecipes.map(recipe => {
-        converRecipeToShowUI(recipe)
-      })
-      setRecipes(tempRecipes);
+      let tempRecipes = response.data.map(recipe => {
+        let temp_recipe = convertRecipeToShowUI(recipe);
+        return temp_recipe;
+      });
+      setRecipes(tempRecipes)
       transition(EMPTY);
+
+
     })
     .catch(error => {
       console.log(error);
@@ -174,13 +157,13 @@ export default function Recipe(props) {
   
     <div>
      
-      {mode === EMPTY && <Empty onAdd={()=>transition(CREATE)} onEdit={()=>{transition(EDIT)}} onDelete={destroy}/>}
+      {mode === EMPTY && <Empty onView={()=>transition(SHOW)}onAdd={()=>transition(CREATE)} onEdit={()=>{transition(EDIT)}} onDelete={destroy} setSelectRecipe={setRecipe} recipes={recipes}/>}
       {mode === SHOW && (
        
         <Show
           // selectRecipe={props.recipe}
           selectRecipe={recipe}
-          user={props.user}
+          //user={props.user}
           onDelete={()=>transition(CONFIRM)}
           onEdit={()=>{
             console.log('view = Edit')

@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find params[:id]
-    @recipe.update_all(recipe_params)
+    @recipe.update(recipe_params)
     if @recipe.save
       render :json => @recipe
     else
