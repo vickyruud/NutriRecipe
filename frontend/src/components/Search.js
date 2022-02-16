@@ -23,16 +23,16 @@ const Search = (props) => {
   }, [searchValue])
 
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <SearchIcon sx={{ marginRight: '10px' }} />
-          <TextField
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <TextField
             id="standard-basic"
-            label="Standard"
+            label="Search Recipe"
             variant="standard"
           placeholder="Search for a recipe"
           onChange={newValue => handleChange(newValue)}
           
         />
+        <SearchIcon sx={{ marginRight: '10px' }} />
         </Box>
     )
 }

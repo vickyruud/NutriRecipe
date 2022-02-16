@@ -21,6 +21,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link as Link1} from "react-router-dom";
 import useVisualMode from './NewRecipe/hooks/useVisualMode';
 import Recipe from './NewRecipe/index';
+import Search from "@mui/icons-material/Search";
 
 const ResponsiveAppBar = (props) => {
   let name = '';
