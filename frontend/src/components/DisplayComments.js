@@ -10,9 +10,7 @@ const DisplayComments = (props) => {
     }
   })
   return (
-    <Box sx={{
-      borderStyle: 'solid',  
-    }}>
+    <Box >
       <h1>Comments</h1>
       {arrayOfComments}
     </Box>
