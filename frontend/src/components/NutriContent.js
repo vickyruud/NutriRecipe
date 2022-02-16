@@ -114,8 +114,9 @@ export default function NutriContent(props) {
   
   
   return (
-    <div>
+    <>
+      
       <DoughnutChart data={graphData}/>
-    </div>
+    </>
   );
 }
