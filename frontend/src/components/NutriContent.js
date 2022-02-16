@@ -91,6 +91,7 @@ export default function NutriContent(props) {
       fiber += element.fiber_g;
       sugar += element.sugar_g
       protein += element.protein_g;
+      console.log(element.fat_total_g);
 
     });
 

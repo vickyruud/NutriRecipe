@@ -8,7 +8,6 @@ import {
   Route
 } from "react-router-dom";
 import Recipes from "./routes/recipes";
-import Users from "./routes/users";
 import NewRecipe from "./routes/newrecipe";
 import MyRecipes from "./routes/myrecipes";
 import Admin from "./routes/admin";
@@ -19,7 +18,6 @@ render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="users" element={<Users />} />
       <Route path="recipes" element={<Recipes />} />
       
       <Route path="newrecipe" element={<NewRecipe />} />

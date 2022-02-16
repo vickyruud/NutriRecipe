@@ -5,44 +5,27 @@ import Paper from "@mui/material/Paper";
 import { listClasses } from "@mui/material";
 
 export default function Components(props) {
-  // console.log("comments++++", props.comments);
-  // const createMyString=() => {
-  //   let myString = "";
-  //   props.comments.forEach(element =>
-
-  //   { console.log("Value", element.value)
-  //   myString+=element.value
-  //   })
-  //   return myString
-  // }
+  
   let userName = "";
   let myString = "";
-  const comments = props.comments.comments.map((comment, i) => {
-    // console.log("comment--***",comment);
-     if(props.list.id === comment.recipe_id){
-    // return (
-       userName = props.comments.users.map(user=>{
-        if(user.id === comment.user_id){
-        return user.name
-        }
-      })
-      
-      myString+=comment.value;
-      console.log(myString)
-      console.log(userName)
-      
-      
-      // <TextareaAutosize
-      //   maxRows={4}
-      //   aria-label="maximum height"
-      //   placeholder="Maximum 4 rows"
-      //   key={i}
-      //   defaultValue={comment.value}
-      //   style={{ width: 400 }}
-      // />
-    ;
-    }
+  let users = props.comments.users;
+
+
+  const findUser = (comment) => { 
+    users.forEach(user => {
+      if (user.id === comment.user_id) {
+        console.log(`user id is: ${user.id} and comment.user_id is: ${comment.user_id}`);
+      }
+    })
+  }
+
+
+  const commentsqq = props.comments.comments.map((comment) => {
+    
+   
   });
+
+  
    return <Paper elevation={3}>
      {myString}
      {userName}

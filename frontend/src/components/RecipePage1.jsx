@@ -10,6 +10,7 @@ import DoughnutChart from "../charts/Doughnut";
 import { Card } from '@mui/material';
 import './recipePage.css'
 import Comments from './Comments'
+import DisplayComments from './DisplayComments';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -46,7 +47,8 @@ export default function Recipes(props) {
         </Grid>
         <Grid item xs={6}>
           <Item>
-            <Comments comments={props.comments} list={props.selectRecipe} />
+            {/* <Comments comments={props.comments} list={props.selectRecipe} /> */}
+            <DisplayComments comments={props.comments} list={props.selectRecipe} />
           </Item>
         </Grid>
       </Grid>
