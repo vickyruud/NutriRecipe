@@ -25,11 +25,11 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Recipes(props) {
   return (
 
+        
     
     <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: "row", padding: 10 }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid style={{width: "auto", padding: 5}} item xs={2}>
-          <h1> {props.selectRecipe.name} </h1>
           <Item style={{padding: 5}}><img src={props.selectRecipe.image_url} alt="" width={300} height={300} mode='fit'top padding={5}/> </Item>
         </Grid>
         <Grid style={{padding: 5}} item xs={4}>
