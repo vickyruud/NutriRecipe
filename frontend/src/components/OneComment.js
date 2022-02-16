@@ -8,7 +8,7 @@ const imgLink = 'https://www.looper.com/img/gallery/the-mythology-in-god-of-war-
 const OneComment = (props) => {
 
   const userName = props.users.map(user => {
-    if (props.comment.id === user.id) {
+    if (props.comment.user_id === user.id) {
       return user.username
     }
   })
