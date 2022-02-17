@@ -6,7 +6,7 @@ import "../App.css";
 import RecipePage1 from "../components/RecipePage1";
 
 export default function Recipes(props) {
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState(props.recipes||[]);
   const [selectRecipe, setSelectRecipe] = useState(props.selectRecipe || null);
   const [comments,setComments] = useState(props.comments || [])
   const fetchRecipes = () => {
@@ -33,9 +33,13 @@ export default function Recipes(props) {
 
   }
   useEffect(() => {
-    fetchRecipes();
     fetchComments();
+    if (!props.recipes) {
+      fetchRecipes();
+    }
   }, []);
+
+
   console.log(props.selectRecipe);
   return (
     <main>
@@ -45,7 +49,7 @@ export default function Recipes(props) {
         <RecipePage1 selectRecipe={selectRecipe} comments={comments} user={props.user}/>
         
       ) : (
-        <RecipeList setSelectRecipe={setSelectRecipe} recipes={recipes} />
+        <RecipeList setSelectRecipe={setSelectRecipe} recipes={recipes} viewRecipe={props.viewRecipe}/>
       )}
     </main>
   );

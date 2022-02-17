@@ -35,6 +35,9 @@ export default function ResponsiveGrid(props) {
             <RecipeListItem
               setSelectRecipe={props.setSelectRecipe}
               recipe={recipe}
+              viewRecipe={props.viewRecipe}
+              onDelete={props.onDelete}
+              onEdit={props.onEdit}
             />
           </Grid>
         ))}

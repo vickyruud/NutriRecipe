@@ -150,6 +150,7 @@ export default function Recipe(props) {
         let temp_recipe = convertRecipeToShowUI(recipe);
         return temp_recipe;
       });
+      console.log(tempRecipes);
       setRecipes(tempRecipes)
       transition(EMPTY);
 
@@ -171,30 +172,28 @@ export default function Recipe(props) {
   return (
   
     <div>
-     
-      {mode === EMPTY && <Empty onView={()=>transition(SHOW)}onAdd={()=>transition(CREATE)} onEdit={()=>{transition(EDIT)}} onDelete={destroy} setSelectRecipe={setRecipe} recipes={recipes}/>}
+      {mode === EMPTY && <Empty viewRecipe={()=>transition(SHOW)}onEdit={()=>{transition(EDIT)}} onDelete={destroy} setSelectRecipe={setRecipe} recipes={recipes}/>}
       {mode === SHOW &&
-        <div>
-   
-        {/* <Show
+        <Show
           // selectRecipe={props.recipe}
           selectRecipe={recipe}
-          //user={props.user}
+          user={props.user}
           onDelete={()=>transition(CONFIRM)}
           onEdit={()=>{
             console.log('view = Edit')
             // console.log(props.recipe);
             transition(EDIT)
           }}
-        /> */}
-            <Recipes 
-              selectRecipe={recipe}
-              onDelete={()=>transition(CONFIRM)}
-              onEdit={()=>{transition(EDIT)}}
-              user={props.user}
-              comments={comments}
-            />
-            </div>}
+          comments = {comments}
+        />}
+        { /*   <Recipes 
+        //     selectRecipe={recipe}
+        //     onDelete={()=>transition(CONFIRM)}
+        //     onEdit={()=>{transition(EDIT)}}
+        //     user={props.user}
+        //     comments={comments}
+        //   />
+        // </div>} */ }
       {mode === CREATE && <Form cates={categories} onCancel={back} onSave={saveRecipe} onDelete={destroy} setRecipe={setRecipe} recipe={recipe} mode={mode}/>}
       {mode === SAVING && <Status message = {'Saving...'} />}
       {mode === DELETING && <Status message = {'Deleting...'} />}
