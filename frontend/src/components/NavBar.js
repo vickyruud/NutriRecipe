@@ -28,7 +28,7 @@ const ResponsiveAppBar = (props) => {
   let pages = [];
   let settings = [];
   if (props.login_name !=='') {
-    pages.push('My Recipes', 'Add New Recipe', 'Recipes');
+    pages.push('My Recipes', 'Add New Recipe');
     settings.push('Logout');
     name = props.login_name
     // if (props.login_right === 1) {
@@ -136,7 +136,6 @@ const ResponsiveAppBar = (props) => {
                 {/*page*/}
                 {page==='Add New Recipe' && <Link1  to="/newrecipe">Add a new Recipe</Link1>}
                 {page==='My Recipes' && <Link1  to="/myrecipes">My Recipes</Link1>}
-                {page==='Recipes' && <Link1  to="/recipes">Recipes</Link1>}
 
               </Button>
             ))}
