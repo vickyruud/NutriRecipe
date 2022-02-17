@@ -112,12 +112,11 @@ const App = (props) => {
       <div className="main">
         {/* <Search />         */}
         {/* <Recipes /> */}
-           <Routes>
-      <Route path="/" element={<Recipes />} >
+      <Routes>
+        <Route path="/" element={<Recipes />} />
         <Route path="recipes" element={<Recipes />} />      
         <Route path="newrecipe" element={<NewRecipe />} />
         <Route path="myrecipes" element={<MyRecipes />} />
-      </Route>
       {/* {token && <Route path="secret" element={<Secret />}/>} */ }
     </Routes>
         <Outlet/>
