@@ -103,7 +103,7 @@ const App = (props) => {
 
         </Modal>
       <div className="main">
-        {/* <Search /> */}        
+        <Search />        
         {/* <Recipes /> */}
         <Outlet/>
       </div>

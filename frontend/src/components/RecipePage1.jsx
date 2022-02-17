@@ -23,7 +23,7 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: "none"
 }));
 
-export default function Recipes(props) {
+export default function Recipe(props) {
   return (
 
         
