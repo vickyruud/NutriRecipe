@@ -36,7 +36,6 @@ export default function Recipes(props) {
     fetchRecipes();
     fetchComments();
   }, []);
-  console.log(props.selectRecipe);
   return (
     <main>
       <div style={{ display: "flex", flexDirection: "row" }}></div>

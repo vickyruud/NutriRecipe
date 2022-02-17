@@ -48,7 +48,6 @@ const App = (props) => {
       .then(resp => resp.json())
       .then(data => {
         setUser(data)
-        console.log(data)
       })
     } else {
       setUser('');

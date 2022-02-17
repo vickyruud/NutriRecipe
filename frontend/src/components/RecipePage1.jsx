@@ -25,7 +25,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Recipe(props) {
-  console.log(props.user);
 
   return (
     
