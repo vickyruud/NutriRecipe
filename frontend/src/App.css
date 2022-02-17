@@ -2,6 +2,13 @@
   text-align: center;
 }
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.display-comments {
+  font-family: sans-serif;
 }
 
 .App-logo {

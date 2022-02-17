@@ -161,11 +161,12 @@ const VirtualizedTable = withStyles(styles, { defaultTheme })(
 
 
 export default function IngredientTable1(props) {
+  console.log("prosfrmIngrdientTable",props)
   const ingredientObj = eval(props.list.ingredients);
   
   return (
     
-    <Paper elevation={10} style={{ height: 400, width: "auto" }}>
+    <Paper style={{ height: 420, width: "auto" }}>
       <VirtualizedTable
         rowCount={ingredientObj.length}
         rowGetter={({ index }) => ingredientObj[index]}
@@ -173,7 +174,7 @@ export default function IngredientTable1(props) {
         columns={[
           {
             width: 300,
-            label: "Name",
+            label: "Ingredient",
             dataKey: "name",
           },
           {
@@ -187,19 +188,7 @@ export default function IngredientTable1(props) {
             label: "unit",
             dataKey: "unit",
             numeric: true,
-          },
-          // {
-          //   width: 120,
-          //   label: 'Carbs\u00A0(g)',
-          //   dataKey: 'carbs',
-          //   numeric: true,
-          // },
-          // {
-          //   width: 120,
-          //   label: 'Protein\u00A0(g)',
-          //   dataKey: 'protein',
-          //   numeric: true,
-          // },
+          }, 
         ]}
       />
     </Paper>

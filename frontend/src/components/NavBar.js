@@ -21,6 +21,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link as Link1} from "react-router-dom";
 import useVisualMode from './NewRecipe/hooks/useVisualMode';
 import Recipe from './NewRecipe/index';
+import Search from "@mui/icons-material/Search";
 
 const ResponsiveAppBar = (props) => {
   let name = '';
@@ -135,7 +136,6 @@ const ResponsiveAppBar = (props) => {
                 {/*page*/}
                 {page==='Add New Recipe' && <Link1  to="/newrecipe">Add a new Recipe</Link1>}
                 {page==='My Recipes' && <Link1  to="/myrecipes">My Recipes</Link1>}
-                {page==='Admin' && <Link1  to="/admin">Admin</Link1>}
 
               </Button>
             ))}

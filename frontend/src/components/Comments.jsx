@@ -1,30 +1,34 @@
-import * as React from "react";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import { elementAcceptingRef } from "@mui/utils";
+// import * as React from "react";
+// import TextareaAutosize from "@mui/material/TextareaAutosize";
+// import { elementAcceptingRef } from "@mui/utils";
+// import Paper from "@mui/material/Paper";
+// import { listClasses } from "@mui/material";
 
-export default function Components(props) {
-  // console.log("comments++++", props.comments);
-  // const createMyString=() => {
-  //   let myString = "";
-  //   props.comments.forEach(element =>
+// export default function Components(props) {
+  
+//   let userName = "";
+//   let myString = "";
+//   let users = props.comments.users;
 
-  //   { console.log("Value", element.value)
-  //   myString+=element.value
-  //   })
-  //   return myString
-  // }
-  const comments = props.comments.map((comment, i) => {
-    console.log("$$$", comment);
-    return (
-      <TextareaAutosize
-        maxRows={4}
-        aria-label="maximum height"
-        placeholder="Maximum 4 rows"
-        key={i}
-        defaultValue={comment.value}
-        style={{ width: 400 }}
-      />
-    );
-  });
-   return <>{comments}</>;
-}
+
+//   const findUser = (comment) => { 
+//     users.forEach(user => {
+//       if (user.id === comment.user_id) {
+//         console.log(`user id is: ${user.id} and comment.user_id is: ${comment.user_id}`);
+//       }
+//     })
+//   }
+
+
+//   const commentsqq = props.comments.comments.map((comment) => {
+    
+   
+//   });
+
+  
+//    return <Paper elevation={3}>
+//      {myString}
+//      {userName}
+     
+//    </Paper>
+// }

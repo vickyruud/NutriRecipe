@@ -91,13 +91,19 @@ export default function NutriContent(props) {
       fiber += element.fiber_g;
       sugar += element.sugar_g
       protein += element.protein_g;
+      console.log(element.fat_total_g);
 
     });
 
     let arrayOfData = [carb, protein, sugar, fat, fiber]
-    console.log(arrayOfData);
 
-    setGraphData(arrayOfData);
+    let roundedData = arrayOfData.map(data => {
+
+      return Math.round(data * 100) / 100
+
+    })
+
+    setGraphData(roundedData);
 
     
   }
@@ -113,8 +119,9 @@ export default function NutriContent(props) {
   
   
   return (
-    <div>
+    <>
+      
       <DoughnutChart data={graphData}/>
-    </div>
+    </>
   );
 }

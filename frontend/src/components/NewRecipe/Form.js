@@ -228,9 +228,6 @@ const Form = (props) => {
       <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
         <Stack direction="row" spacing={10} >
           <Button variant="contained" onClick={()=>props.onSave(recipe)}>Save your Recipe</Button>
-          <Button variant="outlined" href="#outlined-buttons">
-            View Nutrition Info
-          </Button>
         </Stack>
       </Box>
     

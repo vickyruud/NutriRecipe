@@ -1,13 +1,21 @@
 import React, { Component, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Button  from "./components/Button";
 import Recipes from "./routes/recipes";
 import Empty from "./components/NewRecipe/Empty"
-import { Modal } from "@mui/material";
+import { Modal, TextField } from "@mui/material";
+import SearchIcon from "@material-ui/icons/Search"
+import Search from "./components/Search";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import NewRecipe from "./routes/newrecipe";
+import MyRecipes from "./routes/myrecipes";
 
 
 const App = (props) => {
@@ -23,7 +31,10 @@ const App = (props) => {
 
   const [signInOpen, setSignInOpen] = useState(false);
   const handleSignInOpen = () => setSignInOpen(true);
-  const handleSignInClose = () => setSignInOpen(false);
+  const handleSignInClose = () => setSignInOpen(false); 
+
+
+
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -87,28 +98,30 @@ const App = (props) => {
 
   return (
     <div className="App">
-      {user && <NavBar logout={logout}  login_name={user.username} login_right={1} logout={logout} />}
-      {!user && <NavBar login_name={""} signUp={showSignup} handleLoginOpen={handleLoginOpen} handleSignInOpen={handleSignInOpen} login={showLogin} login_right={1}  />}
-      <div className="main">
-
-        
-        <Modal
-          open={loginOpen}          
-        >
+      {user && <NavBar logout={logout}   login_name={user.username} login_right={1} logout={logout} />}
+      {!user && <NavBar login_name={""}  signUp={showSignup} handleLoginOpen={handleLoginOpen} handleSignInOpen={handleSignInOpen} login={showLogin} login_right={1}  />}
+       <Modal open={loginOpen}>
           <Login handleLogin={handleLogin} cancel={handleLoginClose}></Login>
-
         </Modal>  
          <Modal
           open={signInOpen}          
         >
           <Signup handleLogin={handleLogin} cancel={handleSignInClose}></Signup>
 
-        </Modal>  
-        
-      <Recipes/>
+        </Modal>
+      <div className="main">
+        {/* <Search />         */}
+        {/* <Recipes /> */}
+      <Routes>
+        <Route path="/" element={<Recipes user={user}/>} />
+        <Route path="recipes" element={<Recipes user={user}/>} />      
+        <Route path="newrecipe" element={<NewRecipe user={user}/>} />
+        <Route path="myrecipes" element={<MyRecipes user={user}/>} />
+      {/* {token && <Route path="secret" element={<Secret />}/>} */ }
+    </Routes>
+        <Outlet/>
       </div>
     </div>
   );
 };
-
 export default App;
