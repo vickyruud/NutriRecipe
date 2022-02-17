@@ -72,6 +72,8 @@ export default function MyRecipes(props) {
   useEffect(() => {
     fetchComments();
   }, []);
+
+  console.log(comments);
   
   return (
     <main>

@@ -8,7 +8,7 @@ import RecipePage1 from "../components/RecipePage1";
 export default function Recipes(props) {
   const [recipes, setRecipes] = useState([]);
   const [selectRecipe, setSelectRecipe] = useState(props.selectRecipe || null);
-  const [comments,setComments] = useState([])
+  const [comments,setComments] = useState(props.comments || [])
   const fetchRecipes = () => {
     axios
       .get("/recipes") // You can simply make your requests to "/api/whatever you want"

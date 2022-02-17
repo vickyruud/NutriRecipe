@@ -32,6 +32,7 @@ export default function Recipe(props) {
   const [categories, setCategories] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [recipes, setRecipes] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const fetchCategories = () => {
     axios
@@ -42,6 +43,17 @@ export default function Recipe(props) {
     .catch((err) => {
       console.log(err);
     });
+  }
+
+  const fetchComments = ()=> {
+    axios
+      .get("/comments")
+      .then((response) =>{
+        setComments(response.data);
+      })
+      .catch((err) =>{
+        console.log(err);
+      })
   }
 
   const fetchRecipes = () => {
@@ -150,8 +162,11 @@ export default function Recipe(props) {
   }
 
   useEffect (()=>{
-    fetchCategories()
-  },[])
+    fetchCategories();
+    fetchComments();
+  },[]);
+
+  console.log(comments);
 
   return (
   
@@ -177,6 +192,7 @@ export default function Recipe(props) {
               onDelete={()=>transition(CONFIRM)}
               onEdit={()=>{transition(EDIT)}}
               user={props.user}
+              comments={comments}
             />
             </div>}
       {mode === CREATE && <Form cates={categories} onCancel={back} onSave={saveRecipe} onDelete={destroy} setRecipe={setRecipe} recipe={recipe} mode={mode}/>}
