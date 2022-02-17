@@ -49,7 +49,7 @@ export default function Recipes(props) {
         <RecipePage1 selectRecipe={selectRecipe} comments={comments} user={props.user}/>
         
       ) : (
-        <RecipeList setSelectRecipe={setSelectRecipe} recipes={recipes} viewRecipe={props.viewRecipe}/>
+        <RecipeList setSelectRecipe={setSelectRecipe} recipes={recipes} user={props.user} viewRecipe={props.viewRecipe}/>
       )}
     </main>
   );
