@@ -17,12 +17,11 @@ const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="recipes" element={<Recipes />} />
-      
-      <Route path="newrecipe" element={<NewRecipe />} />
-      <Route path="myrecipes" element={<MyRecipes />} />
-      <Route path="admin" element={<Admin />} />
+      <Route path="/" element={<App />} >
+        <Route path="recipes" element={<Recipes />} />      
+        <Route path="newrecipe" element={<NewRecipe />} />
+        <Route path="myrecipes" element={<MyRecipes />} />
+        </Route>
       {/* {token && <Route path="secret" element={<Secret />}/>} */ }
     </Routes>
   </BrowserRouter>,

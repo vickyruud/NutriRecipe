@@ -17,6 +17,13 @@ export default function DoughnutChart(props) {
   }
 
   const options = {
+    legend: {
+            display: true,
+            labels: {
+              fontColor: 'rgb(255, 99, 132)',
+              fontSize: 10
+            }
+    },
     plugins: {
       datalabels: {
         color: 'white',
@@ -24,17 +31,16 @@ export default function DoughnutChart(props) {
         align: 'bottom',
         borderRadius: 3,
         font: {
-          size: 18,
+          size: 12,
         }
       },
-    }
+    },
   }
 
   return (
-    <div >
-      <div style={{height: "500px", width:"500px", margin: "0 auto"}}>
-      <Doughnut data={data} plugins={[ChartDataLabels]} options={options} />
-      </div>
+    <div style={{ width: "350px", margin: "0 auto" }}>
+      <h5>Nutrition Content</h5>
+      <Doughnut data={data} plugins={[ChartDataLabels]} options={options} height={"3%"} />
     </div>
   )
 }

@@ -6,7 +6,6 @@ export default function MyRecipes() {
 
   return (
     <main>
-      <NavBar login_name = {'Final Project'} login_right={1} />
       This is My Recipes page
 
     </main>

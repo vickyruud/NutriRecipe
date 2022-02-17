@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import "./App.css";
 import Login from "./components/Login";
@@ -93,8 +93,6 @@ const App = (props) => {
     <div className="App">
       {user && <NavBar logout={logout}   login_name={user.username} login_right={1} logout={logout} />}
       {!user && <NavBar login_name={""}  signUp={showSignup} handleLoginOpen={handleLoginOpen} handleSignInOpen={handleSignInOpen} login={showLogin} login_right={1}  />}
-      <div className="main">
-        <Search />
        <Modal open={loginOpen}>
           <Login handleLogin={handleLogin} cancel={handleLoginClose}></Login>
         </Modal>  
@@ -103,10 +101,11 @@ const App = (props) => {
         >
           <Signup handleLogin={handleLogin} cancel={handleSignInClose}></Signup>
 
-        </Modal>  
-        
-        <Recipes />
-        
+        </Modal>
+      <div className="main">
+        <Search />        
+        {/* <Recipes /> */}
+        <Outlet/>
       </div>
     </div>
   );
