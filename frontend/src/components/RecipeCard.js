@@ -3,7 +3,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, Rating } from '@mui/material';
+import CustomizedRating from './Rating';
 
 export default function RecipeCard(props) {
   return (
@@ -14,10 +15,11 @@ export default function RecipeCard(props) {
           image={props.selectRecipe.image_url}
           alt="recipe-image"
         />
-        <CardContent>
+      <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {props.selectRecipe.name}
           </Typography>
+          <CustomizedRating/>       
           <Typography variant="body2" color="text.secondary">
             {props.selectRecipe.description}
           </Typography>

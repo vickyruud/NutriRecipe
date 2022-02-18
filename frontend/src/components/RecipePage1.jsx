@@ -65,8 +65,6 @@ export default function Recipe(props) {
       <Grid container spacing={0.5}>
         <Grid  item xs={4}>
           <Item>
-          <Rating></Rating>
-        
             <RecipeCard selectRecipe={props.selectRecipe} />
           </Item>
         </Grid>
