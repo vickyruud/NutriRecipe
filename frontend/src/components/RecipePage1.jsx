@@ -40,7 +40,7 @@ export default function Recipe(props) {
       return (
         <AddComment fetchComments={props.fetchComments} hideComment={closeNewComment} list={props.selectRecipe} user={ props.user }/>
       );
-    } else {
+    } else  if (props.user){
       return (
         <Button
           onClick={openNewComment}
@@ -51,6 +51,8 @@ export default function Recipe(props) {
           Add Comment
         </Button>
       );
+    } else {
+      return null
     }
   };
 
