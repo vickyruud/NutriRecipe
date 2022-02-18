@@ -80,12 +80,12 @@ export default function Recipe(props) {
         <Grid item xs={8}>
           <Item><RecipeSteps list={props.selectRecipe}/></Item  >
           </Grid> 
-          <Grid item xs={4}>
+        <Grid item xs={4}>
           {renderNewComment()}
-          </Grid>
-        <Grid xs={4}>
+        </Grid>
+        <Grid xs={6}>
           <DisplayComments hideComments={closeComments} comments={props.comments} list={props.selectRecipe} />
-          </Grid>  
+        </Grid>       
           
         <Grid item xs={8}>
           {props.selectRecipe.user_id===props.user.id && <Button onClick={props.onEdit}> Edit </Button>}
