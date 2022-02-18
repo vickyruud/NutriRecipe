@@ -9,7 +9,6 @@ import Rating from "./Rating";
 import "../App.css";
 
 export default function RecipeListItem(props) {
-  console.log(props.ratings.ratings)
   const {
     id,
     name,

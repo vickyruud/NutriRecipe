@@ -16,7 +16,9 @@ import Recipes from "./recipes";
 export default function MyRecipes(props) {
   const [myRecipes, setMyRecipes] = useState([]);
   const [selectRecipe, setSelectRecipe] = useState(null);
-  const [comments,setComments] = useState([]);
+  const [comments, setComments] = useState([]);
+  
+  console.log("my Recipes", myRecipes)
 
   const fetchMyRecipes = (user) => {
     axios

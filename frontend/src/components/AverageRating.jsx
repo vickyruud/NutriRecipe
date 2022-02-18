@@ -5,7 +5,6 @@ const AverageRating = (props) => {
   let avg = 0;
   let val = 0;
   const calculateAvgRatings = (ratings, recipes) => {
-    console.log(ratings);
     ratings.forEach(element => {
       if (recipes.id === element.recipe_id) {
       console.log(recipes.id);
@@ -21,7 +20,10 @@ const AverageRating = (props) => {
     return Math.round(avg);
   }
 
-  calculateAvgRatings(props.ratings.ratings, props.list);
+  if (props.ratings) {
+    calculateAvgRatings(props.ratings.ratings, props.list);
+
+  }
  
   return <div>Average rating: {Math.round(avg)}</div>;
 };
