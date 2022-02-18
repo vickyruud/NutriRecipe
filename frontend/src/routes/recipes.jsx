@@ -39,17 +39,30 @@ export default function Recipes(props) {
     }
   }, []);
 
-
   console.log(props.selectRecipe);
+  
   return (
     <main>
       <div style={{ display: "flex", flexDirection: "row" }}></div>
       {/* {console.log("COMMENTS__>",comments)} */}
       {selectRecipe ? (
-        <RecipePage1 selectRecipe={selectRecipe} comments={comments} user={props.user}/>
-        
+        <RecipePage1 
+          selectRecipe={selectRecipe}
+          comments={comments}
+          user={props.user}
+          viewRecipe={props.viewRecipe}
+          onEdit={props.onEdit}
+          onDelete={props.onDelete}
+        />
       ) : (
-        <RecipeList setSelectRecipe={setSelectRecipe} recipes={recipes} user={props.user} viewRecipe={props.viewRecipe}/>
+        <RecipeList 
+          setSelectRecipe={setSelectRecipe}
+          recipes={recipes}
+          user={props.user}
+          viewRecipe={props.viewRecipe}
+          onEdit={props.onEdit}
+          onDelete={props.onDelete}
+        />
       )}
     </main>
   );

@@ -83,11 +83,15 @@ export default function Recipe(props) {
   const convertRecipeToSaveDB = (recipeUI) => {
     let json_ingredients = JSON.stringify(recipeUI.ingredients);
     let recipeDB = {...recipeUI, "ingredients": json_ingredients};
+    // let string_steps = String(recipeUI.steps);
+    // recipeDB = {...recipeUI, "steps": string_steps};
     return recipeDB;
   }
   const convertRecipeToShowUI = (recipeDB) => {
     let string_ingredients = eval(recipeDB.ingredients);
     let recipeUI = {...recipeDB, "ingredients": string_ingredients};
+  //  // let string_steps=String(recipeDB.steps);
+  //   recipeUI = {...recipeDB, "steps": string_steps};
     return recipeUI;
   }
 
@@ -113,6 +117,7 @@ export default function Recipe(props) {
         .then((response) => {
           let tempRecipe = {...response.data};
           setRecipe(()=>convertRecipeToShowUI(tempRecipe))
+          console.log('recipe to show on UI after converted to string:',recipe)
           transition(SHOW)
         })
         .catch(error => {
@@ -167,12 +172,17 @@ export default function Recipe(props) {
     fetchComments();
   },[]);
 
-  console.log(comments);
-
   return (
   
     <div>
-      {mode === EMPTY && <Empty viewRecipe={()=>transition(SHOW)}onEdit={()=>{transition(EDIT)}} onDelete={destroy} setSelectRecipe={setRecipe} recipes={recipes}/>}
+      {mode === EMPTY && <Empty 
+        viewRecipe={()=>transition(SHOW)}
+        onEdit={()=>{transition(EDIT)}}
+        onDelete={destroy}
+        setSelectRecipe={setRecipe}
+        recipes={recipes}
+        user={props.user}
+      />}
       {mode === SHOW &&
         <Show
           // selectRecipe={props.recipe}
@@ -194,11 +204,11 @@ export default function Recipe(props) {
         //     comments={comments}
         //   />
         // </div>} */ }
-      {mode === CREATE && <Form cates={categories} onCancel={back} onSave={saveRecipe} onDelete={destroy} setRecipe={setRecipe} recipe={recipe} mode={mode}/>}
+      {mode === CREATE && <Form cates={categories} onCancel={back} onSave={saveRecipe} onDelete={destroy} setRecipe={setRecipe} recipe={recipe}/>}
       {mode === SAVING && <Status message = {'Saving...'} />}
       {mode === DELETING && <Status message = {'Deleting...'} />}
       {mode === CONFIRM && <Confirm message = {'Delete? ... Really?'} onCancel={back} onConfirm={() => destroy(recipe)}/>}
-      {mode === EDIT && <Form cates={categories} recipe={recipe} onCancel={back} onSave={saveRecipe} onDelete={destroy} mode={mode} setRecipe={setRecipe} recipe={recipe}/>}
+      {mode === EDIT && <Form cates={categories} recipe={recipe} onCancel={back} onSave={saveRecipe} onDelete={destroy} setRecipe={setRecipe} mode="EDIT"/>}
       {mode === ERROR_SAVE && <Error message={'Error saving encountered. Sorry!'} onClose={back} />}
       {mode === ERROR_DELETE && <Error message={'Error deleting encountered. Sorry!'} onClose={back} />}
       {mode === ERROR_SAVE_VALIDATION && <Error message={'Please fill data in all required fields (*)'} onClose={back} />}

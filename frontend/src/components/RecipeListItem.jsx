@@ -54,11 +54,9 @@ export default function RecipeListItem(props) {
         </Typography>
       </CardContent>
       <CardActions className="view-recipe-button">
-        <Button size="small" onClick={viewRecipe} style={{ marginBottom: -50 }}>
+        <Button size="small" onClick={viewRecipe || props.viewRecipe} style={{ marginBottom: -50 }}>
           View Recipe
         </Button>
-        {props.user.id === props.recipe.user_id && <Button onClick={props.onEdit}> Edit </Button>}
-        {props.user.id === props.recipe.user_id && <Button onClick={props.onDelete}> Delete </Button>}
 
       </CardActions>
     </Card>
