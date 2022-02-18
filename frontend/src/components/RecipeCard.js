@@ -7,7 +7,7 @@ import { CardActionArea } from '@mui/material';
 
 export default function RecipeCard(props) {
   return (
-    <Card sx={{ height: "auto" }}>
+    <Card elevation={10}   sx={{ height: "auto" }}>
         <CardMedia
           component="img"
           height="290"
