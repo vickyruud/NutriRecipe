@@ -15,6 +15,7 @@ import RecipeCard from './RecipeCard';
 import Button from '@mui/material/Button';
 import Rating from './Rating';
 import Typography from "@mui/material/Typography";
+import AverageRating from './AverageRating';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -35,7 +36,7 @@ export default function Recipe(props) {
         <Grid  item xs={4}>
           <Item>
           <Rating></Rating>
-        
+        <AverageRating list={props.selectRecipe}ratings={props.ratings}/>
             <RecipeCard selectRecipe={props.selectRecipe} />
           </Item>
         </Grid>
