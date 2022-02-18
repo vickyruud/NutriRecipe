@@ -6,6 +6,12 @@ import "../App.css";
 import RecipePage1 from "../components/RecipePage1";
 import Alert from '../components/My Recipes/SimpleAlert'
 import ConfirmAlert from "../components/My Recipes/ConfirmAlert";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import Recipes from "./recipes";
 
 export default function MyRecipes(props) {
   const [myRecipes, setMyRecipes] = useState([]);
@@ -95,6 +101,10 @@ export default function MyRecipes(props) {
       />}
       {!selectRecipe && myRecipes.length > 0 && 
         <RecipeList setSelectRecipe={setSelectRecipe} recipes={myRecipes} user={props.user} />
+        // <Routes>
+        //   <Route path="/" element={<Recipes user={props.user} recipes={myRecipes}/>} />
+        // </Routes>
+       
       }
     </main>
   );

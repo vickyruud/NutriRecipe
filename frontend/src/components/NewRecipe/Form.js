@@ -18,8 +18,13 @@ import IngredientList from "./IngredientList"
 
 const Form = (props) => {
   const { recipe, setRecipe } = props;
-  const [ingredients, setIngredients] = React.useState([{name:"",unit:"",quantity:0}]);
-  const [steps, setSteps] = React.useState(props.recipe.steps || "");
+  const [ingredients, setIngredients] = React.useState(props.recipe.ingredients || [{name:"",unit:"",quantity:0}]);
+  
+  //const [steps, setSteps] = React.useState(props.recipe.steps ||'');
+
+  const setSteps=(steps)=>{
+    setRecipe({...recipe,steps})
+  }
 
   const addIngredient=()=>{
     setIngredients([...ingredients,{name:"",unit:"",quantity:0}]);
@@ -57,16 +62,11 @@ const Form = (props) => {
     setRecipe(newRecipe)
   },[ingredients]);
 
-  useEffect(()=>{
-    let newRecipe = {...recipe,steps};
-    setRecipe(newRecipe);
-  },steps);
-
   const mode = props.mode;
 
   return (
     <div className="NewRecipe">
-          <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">{mode === "EDIT" ? "EDIT RECIPE" : "ADD A NEW RECIPE"}</Typography>
+          <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">{mode==="EDIT" ? "EDIT RECIPE" : "ADD A NEW RECIPE"}</Typography>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -178,8 +178,7 @@ const Form = (props) => {
               multiline
               maxRows={100}
               variant="standard"
-              recipe={recipe}
-              steps={steps}
+              steps={recipe.steps}
               setSteps={setSteps}
               name="steps"
             />
@@ -228,6 +227,7 @@ const Form = (props) => {
       <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
         <Stack direction="row" spacing={10} >
           <Button variant="contained" onClick={()=>props.onSave(recipe)}>Save your Recipe</Button>
+          <Button variant="contained" onClick={()=>props.onCancel}>Cancel</Button>
         </Stack>
       </Box>
     

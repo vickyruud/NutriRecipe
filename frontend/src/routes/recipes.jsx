@@ -6,7 +6,7 @@ import "../App.css";
 import RecipePage1 from "../components/RecipePage1";
 
 export default function Recipes(props) {
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState(props.recipes||[]);
   const [selectRecipe, setSelectRecipe] = useState(props.selectRecipe || null);
   const [comments,setComments] = useState(props.comments || [])
   const [ratings,setRatings] = useState([]);
@@ -47,19 +47,37 @@ export default function Recipes(props) {
 
   }
   useEffect(() => {
-    fetchRecipes();
     fetchComments();
     fetchRatings();
+    if (!props.recipes) {
+      fetchRecipes();
+    }
   }, []);
+
+  console.log(props.selectRecipe);
+  
   return (
     <main>
       <div style={{ display: "flex", flexDirection: "row" }}></div>
       {/* {console.log("COMMENTS__>",comments)} */}
       {selectRecipe ? (
-        <RecipePage1 selectRecipe={selectRecipe} comments={comments} user={props.user}/>
-        
+        <RecipePage1 
+          selectRecipe={selectRecipe}
+          comments={comments}
+          user={props.user}
+          viewRecipe={props.viewRecipe}
+          onEdit={props.onEdit}
+          onDelete={props.onDelete}
+        />
       ) : (
-        <RecipeList setSelectRecipe={setSelectRecipe} recipes={recipes} />
+        <RecipeList 
+          setSelectRecipe={setSelectRecipe}
+          recipes={recipes}
+          user={props.user}
+          viewRecipe={props.viewRecipe}
+          onEdit={props.onEdit}
+          onDelete={props.onDelete}
+        />
       )}
     </main>
   );

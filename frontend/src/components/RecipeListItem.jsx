@@ -54,9 +54,10 @@ export default function RecipeListItem(props) {
         </Typography>
       </CardContent>
       <CardActions className="view-recipe-button">
-        <Button size="small" onClick={viewRecipe} style={{ marginBottom: -50 }}>
+        <Button size="small" onClick={viewRecipe || props.viewRecipe} style={{ marginBottom: -50 }}>
           View Recipe
         </Button>
+
       </CardActions>
     </Card>
   );

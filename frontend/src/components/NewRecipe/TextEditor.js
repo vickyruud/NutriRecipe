@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MUIRichTextEditor from "mui-rte";
 import { convertToRaw, convertFromRaw } from 'draft-js'
 import Box from '@mui/material/Box';
+
 const save = (data) => {
   console.log(data);
 };
@@ -21,22 +22,23 @@ const myTheme = createTheme({
 const TextEditor = (props) => {
 
   const onEditorChange = event => {
-    const plainText = event.getCurrentContent().getPlainText() // for plain text
-    props.recipe.steps=plainText;
- 
+    const content = JSON.stringify(convertToRaw(event.getCurrentContent()))
+    props.setSteps(content);
   }
 
   return (
     <Box>
-      <ThemeProvider theme={myTheme}>
+       <ThemeProvider theme={myTheme}>
         <MUIRichTextEditor
           label="Share your great recipe here..."
           onSave={save}
           onChange={onEditorChange}
           inlineToolbar={true}
           height={30}
+          defaultValue={props.steps}
         />
       </ThemeProvider>
+
     </Box>
     
 

@@ -5,7 +5,6 @@ import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Recipes from "./routes/recipes";
-import Empty from "./components/NewRecipe/Empty"
 import { Modal, TextField } from "@mui/material";
 
 import {
