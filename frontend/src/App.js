@@ -7,8 +7,7 @@ import Signup from "./components/Signup";
 import Recipes from "./routes/recipes";
 import Empty from "./components/NewRecipe/Empty"
 import { Modal, TextField } from "@mui/material";
-import SearchIcon from "@material-ui/icons/Search"
-import Search from "./components/Search";
+
 import {
   BrowserRouter,
   Routes,

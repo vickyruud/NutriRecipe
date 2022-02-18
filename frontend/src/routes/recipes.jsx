@@ -9,6 +9,7 @@ export default function Recipes(props) {
   const [recipes, setRecipes] = useState([]);
   const [selectRecipe, setSelectRecipe] = useState(props.selectRecipe || null);
   const [comments,setComments] = useState(props.comments || [])
+  const [ratings,setRatings] = useState([]);
   const fetchRecipes = () => {
     axios
       .get("/recipes") // You can simply make your requests to "/api/whatever you want"
@@ -26,6 +27,19 @@ export default function Recipes(props) {
       .get("/comments")
       .then((response) =>{
         setComments(response.data);
+        console.log("COMMENTS****----->",response.data)
+      })
+      .catch((err) =>{
+        console.log(err);
+      })
+
+  }
+  const fetchRatings = ()=> {
+    axios
+      .get("/ratings")
+      .then((response) =>{
+        console.log("ratings----->",response.data)
+        setRatings(response.data);
       })
       .catch((err) =>{
         console.log(err);
@@ -35,6 +49,7 @@ export default function Recipes(props) {
   useEffect(() => {
     fetchRecipes();
     fetchComments();
+    fetchRatings();
   }, []);
   return (
     <main>
