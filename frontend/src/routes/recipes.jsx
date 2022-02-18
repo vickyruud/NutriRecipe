@@ -61,14 +61,8 @@ export default function Recipes(props) {
       <div style={{ display: "flex", flexDirection: "row" }}></div>
       {/* {console.log("COMMENTS__>",comments)} */}
       {selectRecipe ? (
-        <RecipePage1 
-          selectRecipe={selectRecipe}
-          comments={comments}
-          user={props.user}
-          viewRecipe={props.viewRecipe}
-          onEdit={props.onEdit}
-          onDelete={props.onDelete}
-        />
+        <RecipePage1 selectRecipe={selectRecipe} comments={comments} user={props.user}ratings={ratings}/>
+        
       ) : (
         <RecipeList 
           setSelectRecipe={setSelectRecipe}
