@@ -9,6 +9,7 @@ import Rating from "./Rating";
 import "../App.css";
 
 export default function RecipeListItem(props) {
+  console.log(props.ratings.ratings)
   const {
     id,
     name,
@@ -41,7 +42,7 @@ export default function RecipeListItem(props) {
       >
         <Typography gutterBottom variant="h8" component="div">
           {name}
-          <Rating></Rating>
+          <Rating ratings={props.ratings} recipes={props.recipes} ></Rating>
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {readMore ? description : `${description.substring(0, 70)}...`}

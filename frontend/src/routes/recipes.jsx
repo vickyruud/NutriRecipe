@@ -12,7 +12,7 @@ export default function Recipes(props) {
   const [ratings,setRatings] = useState([]);
   const fetchRecipes = () => {
     axios
-      .get("/recipes") // You can simply make your requests to "/api/whatever you want"
+      .get("/recipes") 
       .then((response) => {
         // handle success
         // console.log("response----->",response.data)
@@ -34,18 +34,23 @@ export default function Recipes(props) {
       })
 
   }
+
+  
   const fetchRatings = ()=> {
     axios
       .get("/ratings")
       .then((response) =>{
         console.log("ratings----->",response.data)
         setRatings(response.data);
+
       })
       .catch((err) =>{
         console.log(err);
       })
 
   }
+
+  
   useEffect(() => {
     fetchComments();
     fetchRatings();
@@ -61,7 +66,7 @@ export default function Recipes(props) {
       <div style={{ display: "flex", flexDirection: "row" }}></div>
       {/* {console.log("COMMENTS__>",comments)} */}
       {selectRecipe ? (
-        <RecipePage1 fetchComments={fetchComments} selectRecipe={selectRecipe} comments={comments} user={props.user}ratings={ratings}/>
+        <RecipePage1 fetchComments={fetchComments} selectRecipe={selectRecipe} comments={comments} user={props.user} ratings={ratings}/>
         
       ) : (
         <RecipeList 
@@ -71,6 +76,8 @@ export default function Recipes(props) {
           viewRecipe={props.viewRecipe}
           onEdit={props.onEdit}
           onDelete={props.onDelete}
+          ratings={ratings}
+            
         />
       )}
     </main>

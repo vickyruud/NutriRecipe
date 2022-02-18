@@ -70,10 +70,6 @@ export default function Recipe(props) {
         <Grid container spacing={0.5}>
           <Grid item xs={4}>
             <Item>
-              <AverageRating
-                list={props.selectRecipe}
-                ratings={props.ratings}
-              />
               <RecipeCard selectRecipe={props.selectRecipe} list={props.selectRecipe}
                 ratings={props.ratings}/>
             </Item>
@@ -89,7 +85,7 @@ export default function Recipe(props) {
               <NutriContent list={props.selectRecipe} />
             </Item>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Item>
               <RecipeSteps list={props.selectRecipe} />
             </Item>
@@ -97,7 +93,7 @@ export default function Recipe(props) {
           <Grid item xs={4}>
             {renderNewComment()}
           </Grid>
-          <Grid xs={6}>
+          <Grid xs={8}>
             <DisplayComments
               hideComments={closeComments}
               comments={props.comments}

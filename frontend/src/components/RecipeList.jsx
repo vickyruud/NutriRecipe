@@ -15,6 +15,7 @@ import NavBar from "./NavBar";
 // }));
 
 export default function ResponsiveGrid(props) {
+  console.log(props.ratings);
   return (
     <Box
       sx={{
@@ -39,6 +40,8 @@ export default function ResponsiveGrid(props) {
               onDelete={props.onDelete}
               onEdit={props.onEdit}
               user={props.user}
+              ratings={props.ratings}
+              recipes={props.recipes}
             />
           </Grid>
         ))}
