@@ -34,20 +34,11 @@ export default function Recipe(props) {
   const closeNewComment = () => setShowNewComment(false);
 
   const buttonStyle = { margin: "10px 0 0 0" };
-
-  // const renderComments = () => {
-  //   if (showComments === true) {
-  //     return <DisplayComments hideComments={closeComments} comments={props.comments} list={props.selectRecipe} />
-
-  //   } else {
-  //     return <Button onClick={openComments} style={buttonStyle} variant='contained' color='primary'>View Comments</Button>
-
-  //   }
-  // }
+  
   const renderNewComment = () => {
     if (showNewComment === true) {
       return (
-        <AddComment hideComment={closeNewComment} list={props.selectRecipe} />
+        <AddComment fetchComments={props.fetchComments} hideComment={closeNewComment} list={props.selectRecipe} user={ props.user }/>
       );
     } else {
       return (

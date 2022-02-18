@@ -20,7 +20,7 @@ const DisplayComments = (props) => {
     <Container >
       {/* <Button  onClick={props.hideComments} style={buttonStyle} variant='contained' color='primary'>Hide Comments</Button> */}
       <h1>Comments</h1>
-      {arrayOfComments}
+      {arrayOfComments.reverse()}
     </Container>
     
   )
