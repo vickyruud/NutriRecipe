@@ -90,10 +90,7 @@ export default function Recipe(props) {
         <Grid item xs={8}>
           {props.selectRecipe.user_id===props.user.id && <Button onClick={props.onEdit}> Edit </Button>}
           {props.selectRecipe.user_id===props.user.id && <Button onClick={props.onDelete}>Delete</Button>}
-          </Grid>
-          
-          
-
+          </Grid> 
         </Grid>
       </Box>
     </>
