@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Rating } from '@mui/material';
 import CustomizedRating from './Rating';
 import AverageRating from './AverageRating';
+import NewRatings from './NewRatings';
 
 export default function RecipeCard(props) {
   return (
@@ -19,8 +20,8 @@ export default function RecipeCard(props) {
       <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {props.selectRecipe.name}
-          </Typography>
-          <CustomizedRating/> 
+        </Typography>
+        <NewRatings/>
           <AverageRating list={props.selectRecipe}
                 ratings={props.ratings}/>      
           <Typography variant="body2" color="text.secondary">
