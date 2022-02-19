@@ -27,9 +27,8 @@ export default function MyRecipes(props) {
 
   const [categories, setCategories] = useState([]);
   const [recipe, setRecipe] = useState({});
-  const [recipes, setRecipes] = useState(props.myRecipes || []);
+  const [recipes, setRecipes] = useState([]);
   const [comments, setComments] = useState([]);
-  //const [myRecipes, setMyRecipes] = [props.myRecipes, props.setMyRecipes];
   const [ratings,setRatings] = useState([]);
   const user = props.user;
   let initial_recipe = recipe ? recipe : {} //for Edit mode
@@ -82,7 +81,7 @@ export default function MyRecipes(props) {
 
   const fetchRecipes = () => {
     axios
-      .get("/recipes") // You can simply make your requests to "/api/whatever you want"
+      .get("/recipes") 
       .then((response) => {
         setRecipes(response.data);
       })
@@ -279,7 +278,6 @@ export default function MyRecipes(props) {
         cates={categories}
         ratings={ratings}
         recipe={initial_recipe}
-        // setRecipe={setRecipe}
         onCancel={back}
         onSave={saveRecipe}
       />}
