@@ -23,7 +23,6 @@ const NewRatings = () => {
                 
             /> 
             <FaStar
-              icon="fa-solid fa-heart"
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}
               className='heart'
