@@ -20,8 +20,8 @@ const Form = (props) => {
 
   const [recipe, setRecipe] = useState({});
   const categories=[].concat(props.cates);
-  const [ingredients, setIngredients] = useState([{name:"",unit:"",quantity:0}] || props.recipe.ingredients);
-  const [imageSelected, setImageSelected]= useState(null);
+  const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : [{name:"",unit:"",quantity:0}]);
+  const [imageSelected, setImageSelected]= useState(props.recipe ? props.recipe.image_url : null);
   //const [steps, setSteps] = useState('');
  
   // if (props.recipe) {
@@ -31,6 +31,10 @@ const Form = (props) => {
   const setSteps=(steps)=>{
     setRecipe({...recipe,steps})
   }
+
+  // const setIngredients=(ingredients)=>{
+  //   setRecipe({...recipe,ingredients})
+  // }
 
   console.log('ingredients:',ingredients);
   console.log('type of ingredients: ', typeof ingredients);
@@ -57,7 +61,7 @@ const Form = (props) => {
 
   const handleChange = (event) => {
     let newRecipe = {...recipe,[event.target.name]:event.target.value};
-    setRecipe(newRecipe, ()=>console.log(recipe));
+    setRecipe(newRecipe);
   }  
 
   useEffect(()=>{
@@ -69,6 +73,9 @@ const Form = (props) => {
     let newRecipe = props.recipe;
     setRecipe(newRecipe);
   },[props.recipe]);
+
+  console.log('category name?:', props.recipe ? categories[props.recipe.category_id].name : "new mode");
+  console.log('categories array:', categories)
 
   return (
     <div className="NewRecipe">
@@ -91,7 +98,7 @@ const Form = (props) => {
             noValidate
             autoComplete="off"
           >
-            <TextField required name="name" label='Recipe name' variant="outlined" onChange={handleChange} defaultValue={recipe ? recipe.name : null}/>
+            <TextField required name="name" label='Recipe name' variant="outlined" onChange={handleChange} defaultValue={props.recipe ? props.recipe.name : null}/>
      
           </Box>
           <Box
@@ -102,7 +109,7 @@ const Form = (props) => {
             noValidate
             autoComplete="off"
           >
-            <TextField required name="description" label="Recipe Description" variant="outlined" onChange={handleChange} defaultValue={recipe ? recipe.description : null}/>
+            <TextField required name="description" label="Recipe Description" variant="outlined" onChange={handleChange} defaultValue={props.recipe ? props.recipe.description : null}/>
           </Box>
           <Box
               component="form"
@@ -118,14 +125,14 @@ const Form = (props) => {
             name="estimated_time"
             label="Time estimated (mins)"
             onChange={handleChange}
-            defaultValue={recipe ? recipe.estimated_time : null}
+            defaultValue={props.recipe ? props.recipe.estimated_time : null}
           />
           <TextField
             required
             name="serving_size"
             label="Serving size (people)"
             onChange={handleChange}
-            defaultValue={recipe ? recipe.serving_size : null}
+            defaultValue={props.recipe ? props.recipe.serving_size : null}
           />
           <FormControl required variant="standard" sx={{ m: 1, minWidth: 350 }}>
             <InputLabel sx={{ fontSize: 18 }}>Category</InputLabel>
@@ -133,12 +140,13 @@ const Form = (props) => {
               required
               name="category_id"
               // value={category}
-              value={recipe ? recipe.category_id : null}
+            
+              value={props.recipe ? categories[props.recipe.category_id].name : null}
               onChange={handleChange}
               label="Set a Category"
             >
               {categories.map(category =>
-                <MenuItem key={category.id} value={category.name}></MenuItem>
+                <MenuItem key={category.id} >{category.name}</MenuItem>
               )}
              
             </Select>
@@ -149,7 +157,7 @@ const Form = (props) => {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -165,12 +173,12 @@ const Form = (props) => {
               addIngredient={addIngredient}
               deleteIngredient={deleteIngredient}
               handleChange={handleIngredients}
-              defaultValue={recipe ? recipe.ingredients : {name:"",unit:"",quantity:0}}
+              defaultValue={props.recipe ? props.recipe.ingredients : [{name:"",unit:"",quantity:0}]}
             />
           </Typography>
         </AccordionDetails>
-      </Accordion>
-      
+      </Accordion> */}
+{/*       
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -185,12 +193,13 @@ const Form = (props) => {
               multiline
               maxRows={100}
               variant="standard"
-              steps={recipe ? recipe.steps : null}
               setSteps={setSteps}
+              name="steps"
+              defaultValue={props.recipe ? props.recipe.steps : null}
             />
           </Box>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       { recipe &&
       <Accordion expanded={true}>
@@ -226,6 +235,7 @@ const Form = (props) => {
               recipe={recipe}
               imageSelected={imageSelected}
               setImageSelected={setImageSelected}
+              setRecipe={setRecipe}
             />
           </AccordionDetails>
           </Accordion>

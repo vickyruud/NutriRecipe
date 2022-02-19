@@ -118,23 +118,25 @@ export default function MyRecipes(props) {
   }
 
   const saveRecipe = (inputRecipe) => {
-   if (recipe.name === null
-    || !recipe.ingredients
-    || recipe.ingredients.indexOf([{name:"",unit:"",quantity:0}]) >= 0
-    || recipe.category_id === null
-    || recipe.estimated_time === null
-    || recipe.description === null
-    || recipe.serving_size === null
-    || recipe.steps === null
-    || recipe.image_url === null
+   if (!inputRecipe
+    || inputRecipe.name === null
+    || !inputRecipe.ingredients
+    || inputRecipe.ingredients.indexOf([{name:"",unit:"",quantity:0}]) >= 0
+    || inputRecipe.category_id === null
+    || inputRecipe.estimated_time === null
+    || inputRecipe.description === null
+    || inputRecipe.serving_size === null
+    || inputRecipe.steps === null
+    || inputRecipe.image_url === null
     ) {
-      transition(ERROR_SAVE_VALIDATION, true);
+      setRecipe(inputRecipe);
+      transition(ERROR_SAVE_VALIDATION, false);
     } else {
       transition(SAVING);
-      inputRecipe={...recipe};
+      //inputRecipe={...recipe};
       inputRecipe.user_id = props.user.id
       let recipeDB = convertRecipeToSaveDB(inputRecipe);
-      if (!recipe.id) {
+      if (!recipe) {
         axios
         .post("/recipes", recipeDB)
         .then((response) => {
@@ -201,7 +203,7 @@ export default function MyRecipes(props) {
     transition(CONFIRM);
   }
 
-  const addRecipe = (recipe) => {
+  const addRecipe = () => {
     setRecipe(null);
     transition(CREATE);
   }
@@ -226,7 +228,7 @@ export default function MyRecipes(props) {
 
   console.log(mode);
   console.log(user);
-  
+
   return (
   
     <div>
@@ -265,8 +267,6 @@ export default function MyRecipes(props) {
           cates={categories}
           onCancel={back}
           onSave={saveRecipe}
-          setRecipe={setRecipe}
-          recipe={recipe}
           ratings={ratings}
         />
       }

@@ -92,31 +92,31 @@ const App = (props) => {
 
 
 ////////////////////////////////
-  const [recipes, setRecipes] = useState([]);
+  // const [recipes, setRecipes] = useState([]);
 
-  const fetchRecipes = () => {
-    axios
-      .get("/recipes") // You can simply make your requests to "/api/whatever you want"
-      .then((response) => {
-        setRecipes(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const fetchRecipes = () => {
+  //   axios
+  //     .get("/recipes") // You can simply make your requests to "/api/whatever you want"
+  //     .then((response) => {
+  //       setRecipes(response.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
-  useEffect (()=>{
-    fetchRecipes();
-  },[]);
-  let myRecipes = [];
-  if (user) {
-    let map = recipes.filter(recipe => {
-      if (recipe.user_id === user.id) {
-        return recipe;
-      }
-    })
-    myRecipes = [].concat(map);
-  }
+  // useEffect (()=>{
+  //   fetchRecipes();
+  // },[]);
+  // let myRecipes = [];
+  // if (user) {
+  //   let map = recipes.filter(recipe => {
+  //     if (recipe.user_id === user.id) {
+  //       return recipe;
+  //     }
+  //   })
+  //   myRecipes = [].concat(map);
+  // }
 
 //////////////////////////////////////////////
 
@@ -141,8 +141,8 @@ const App = (props) => {
       <Routes>
         <Route path="/" element={<Recipes user={user}/>} />
         <Route path="/recipes" element={<Recipes user={user}/>} />      
-        <Route path="/newrecipe" element={<MyRecipes user={user} mode="CREATE"/>} />
-        <Route path="/myrecipes" element={<MyRecipes user={user} myRecipes = {myRecipes} mode="EMPTY"/>} />
+        <Route path="/newrecipe" element={<MyRecipes user={user} mode={"CREATE"}/>}/>
+        <Route path="/myrecipes" element={<MyRecipes user={user} mode={"EMPTY"}/>}/> {/*myRecipes = {myRecipes} mode="EMPTY"*/}
         {/* <Route path="newrecipe" element={<h1>Hello!</h1>} />       */}
         {/* <Route path={`recipe/edit/${i}`} element={<MyRecipes user={user} mode="EMPTY" myRecipes = {myRecipes} edit={edit}/>} /> */}
       {/* {token && <Route path="secret" element={<Secret />}/>} */ }
