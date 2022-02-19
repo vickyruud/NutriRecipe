@@ -48,7 +48,7 @@ export default function Empty(props) {
         columns={{ xs: 4, sm: 5, md: 20 }}
       >
         {props.recipes.map((recipe, index) => (
-          <Grid item xs={8} sm={8} md={8} key={index}>
+          <Grid item xs={10} sm={10} md={20} key={index}>
             <RecipeListItem
               setSelectRecipe={props.setSelectRecipe}
               recipe={recipe}
