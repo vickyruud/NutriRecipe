@@ -112,7 +112,8 @@ export default function MyRecipes(props) {
 
   const saveRecipe = (inputRecipe) => {
    if (recipe.name === null
-    || recipe.ingredients === null 
+    || !recipe.ingredients
+    || recipe.ingredients.indexOf([{name:"",unit:"",quantity:0}]) >= 0
     || recipe.category_id === null
     || recipe.estimated_time === null
     || recipe.description === null
@@ -203,12 +204,12 @@ export default function MyRecipes(props) {
     fetchRatings();
   },[]);
 
-  let temp_mode = "EMPTY";
-  if (props.mode === "EMPTY" && recipes.length === 0) {
-    temp_mode = "NONE";
-  } else {
-    temp_mode = props.mode;
-  }
+  let temp_mode = recipes.length > 0 ? "EMPTY" : "NONE";
+  if (props.mode) {
+    if (props.mode !== "EMPTY" && props.mode !== "NONE") {
+      temp_mode = props.mode;
+  }}
+
   const { mode, transition, back } = useVisualMode(temp_mode);
 
   console.log(mode);
@@ -229,7 +230,7 @@ export default function MyRecipes(props) {
         viewRecipe={viewRecipe}
         onEdit={editRecipe}
         onDelete={confirmRecipe}
-        setSelectRecipe={setRecipe}
+        // setSelectRecipe={setRecipe}
         recipes={recipes}
         user={props.user}
         comments = {comments}
@@ -244,27 +245,29 @@ export default function MyRecipes(props) {
           onDelete={confirmRecipe}
           comments = {comments}
           ratings={ratings}
-        />}
+        />
+        }
       {mode === CREATE && 
         <Form 
           cates={categories}
           onCancel={back}
           onSave={saveRecipe}
-          setRecipe={setRecipe}
+          //setRecipe={setRecipe}
           recipe={recipe}
           ratings={ratings}
-        />}
+        />
+      }
       {mode === SAVING && <Status message = {'Saving...'} />}
       {mode === DELETING && <Status message = {'Deleting...'} />}
       {mode === CONFIRM && <Confirm message = {'Delete? ... Really?'} user={user} onCancel={back} onConfirm={() => destroy(recipe,user)}/>}
       {mode === EDIT && <Form 
         cates={categories}
+        ratings={ratings}
         recipe={recipe}
+       // setRecipe={setRecipe}
         onCancel={back}
         onSave={saveRecipe}
-        setRecipe={setRecipe}
-        ratings={ratings}
-        mode="EDIT"/>}
+      />}
       {mode === ERROR_SAVE && <Error message={'Error saving encountered. Sorry!'} onClose={back} />}
       {mode === ERROR_DELETE && <Error message={'Error deleting encountered. Sorry!'} onClose={back} />}
       {mode === ERROR_SAVE_VALIDATION && <Error message={'Please fill data in all required fields (*)'} onClose={back} />}
