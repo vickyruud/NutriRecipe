@@ -4,6 +4,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import PageviewSharpIcon from '@mui/icons-material/PageviewSharp';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import Button from "./Button";
 import Rating from "./Rating";
 import "../App.css";
@@ -20,6 +23,8 @@ export default function RecipeListItem(props) {
     rating,
     image_url,
   } = props.recipe;
+
+  let recipe = props.recipe;
 
   const viewRecipe = () => {
     props.setSelectRecipe({ ...props.recipe });
@@ -41,7 +46,7 @@ export default function RecipeListItem(props) {
       >
         <Typography gutterBottom variant="h8" component="div">
           {name}
-          <Rating ratings={props.ratings} recipes={props.recipes} ></Rating>
+          <Rating></Rating>
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {readMore ? description : `${description.substring(0, 70)}...`}
@@ -54,10 +59,29 @@ export default function RecipeListItem(props) {
         </Typography>
       </CardContent>
       <CardActions className="view-recipe-button">
-        <Button size="small" onClick={viewRecipe || props.viewRecipe} style={{ marginBottom: -50 }}>
+        {!props.viewRecipe && 
+          <Button size="small" onClick={viewRecipe} style={{ marginBottom: -50 }}>
           View Recipe
-        </Button>
-
+          </Button>
+        }
+        {props.viewRecipe &&
+          <div style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-end",
+          }}>
+            <Button size="small" onClick={()=>props.viewRecipe(recipe)} style={{ marginBottom: -50 }}>
+              <PageviewSharpIcon />
+            </Button>
+            <Button size="small" onClick={() => props.onEdit(recipe)} style={{ marginBottom: -50 }}>
+              <EditIcon/>
+            </Button>
+            <Button size="small" onClick={()=>props.onDelete(recipe)} style={{ marginBottom: -50 }}>
+              <DeleteForeverSharpIcon/>
+            </Button>
+          </div>
+        }
+        
       </CardActions>
     </Card>
   );

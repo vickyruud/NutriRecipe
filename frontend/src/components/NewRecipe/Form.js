@@ -18,8 +18,9 @@ import IngredientList from "./IngredientList"
 
 const Form = (props) => {
   const { recipe, setRecipe } = props;
-  const [ingredients, setIngredients] = React.useState(props.recipe.ingredients || [{name:"",unit:"",quantity:0}]);
-  
+  const [ingredients, setIngredients] = useState(props.recipe.ingredients || [{name:"",unit:"",quantity:0}]);
+  console.log('ingredients:',props.recipe.ingredients);
+  console.log('type of ingredients: ', typeof props.recipe.ingredients);
   //const [steps, setSteps] = React.useState(props.recipe.steps ||'');
 
   const setSteps=(steps)=>{
@@ -227,7 +228,7 @@ const Form = (props) => {
       <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
         <Stack direction="row" spacing={10} >
           <Button variant="contained" onClick={()=>props.onSave(recipe)}>Save your Recipe</Button>
-          <Button variant="contained" onClick={()=>props.onCancel}>Cancel</Button>
+          <Button variant="contained" onClick={props.onCancel}>Cancel</Button>
         </Stack>
       </Box>
     

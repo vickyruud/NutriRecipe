@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
+import axios from "axios";
 import { Link, Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import "./App.css";
@@ -19,7 +20,7 @@ import MyRecipes from "./routes/myrecipes";
 const App = (props) => {
   // Instantiation
 
-
+  
   const [user, setUser] = useState({})
   const [show, setShow] = useState("")
 
@@ -29,9 +30,7 @@ const App = (props) => {
 
   const [signInOpen, setSignInOpen] = useState(false);
   const handleSignInOpen = () => setSignInOpen(true);
-  const handleSignInClose = () => setSignInOpen(false); 
-
-
+  const handleSignInClose = () => setSignInOpen(false);
 
 
   useEffect(() => {
@@ -87,11 +86,58 @@ const App = (props) => {
     else {
       
         return null
-    }
-      
-        
-    
+    } 
   }
+
+
+////////////////////////////////
+const [recipes, setRecipes] = useState([]);
+  
+const convertRecipeToShowUI = (recipeDB) => {
+  let string_ingredients = eval(recipeDB.ingredients);
+  let recipeUI = {...recipeDB, "ingredients": string_ingredients};
+  return recipeUI;
+}
+
+const fetchRecipes = () => {
+  axios
+    .get("/recipes") // You can simply make your requests to "/api/whatever you want"
+    .then((response) => {
+      // handle success
+      console.log(response.data);
+      let map = response.data.map(recipe => {
+       
+          return recipe;
+          //return convertRecipeToShowUI(recipe);
+        
+      })
+      console.log(map);
+      setRecipes(map);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+useEffect (()=>{
+  fetchRecipes();
+},[]);
+
+let myRecipes = [];
+if (user) {
+  let map = recipes.filter(recipe => {
+    if (recipe.user_id === user.id) {
+      return recipe;
+    }
+  })
+  myRecipes = [].concat(map);
+}
+
+
+
+//////////////////////////////////////////////
+
+
 
   return (
     <div className="App">
@@ -112,8 +158,8 @@ const App = (props) => {
       <Routes>
         <Route path="/" element={<Recipes user={user}/>} />
         <Route path="recipes" element={<Recipes user={user}/>} />      
-        <Route path="newrecipe" element={<NewRecipe user={user}/>} />
-        <Route path="myrecipes" element={<MyRecipes user={user}/>} />
+        <Route path="newrecipe" element={<MyRecipes user={user} mode="CREATE"/>} />
+        <Route path="myrecipes" element={<MyRecipes user={user} mode="EMPTY" myRecipes = {myRecipes}/>} />
       {/* {token && <Route path="secret" element={<Secret />}/>} */ }
     </Routes>
         <Outlet/>
