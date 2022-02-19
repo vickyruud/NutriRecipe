@@ -31,11 +31,11 @@ const TextEditor = (props) => {
        <ThemeProvider theme={myTheme}>
         <MUIRichTextEditor
           label="Share your great recipe here..."
-          onSave={save}
           onChange={onEditorChange}
           inlineToolbar={true}
           height={30}
           defaultValue={props.steps}
+          name="steps"
         />
       </ThemeProvider>
 

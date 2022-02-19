@@ -3,7 +3,7 @@ import axios from "axios";
 import Form from '../components/NewRecipe/Form'
 // import Show from '../components/NewRecipe/Show'; // Recipe detail page
 import Show from '../components/RecipePage1'; // Recipe detail page
-import Empty from '../components/RecipeList'; // Main page
+import Empty from '../components/My Recipes/Empty'; // Main page
 import Status from '../components/NewRecipe/Status';
 import Confirm from '../components/NewRecipe/Confirm';
 import Error from '../components/NewRecipe/Error';
@@ -11,6 +11,7 @@ import useVisualMode from '../components/NewRecipe/hooks/useVisualMode';
 import None from '../components/My Recipes/SimpleAlert'
 
 export default function MyRecipes(props) {
+  console.log('props: ',props);
   const EMPTY = "EMPTY";
   const NONE = "NONE";
   const SHOW = "SHOW";
@@ -33,17 +34,23 @@ export default function MyRecipes(props) {
   const user = props.user;
 
   const fetchMyRecipes = (user) => {
+    if(!user.id) {
+      return
+    }
+    console.log('user line 37 fetch My Recipes: ', user);
     axios
       .get("/recipes") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         // handle success
-        console.log(response.data);
+        console.log('all recipes:', response.data);
+        console.log('user: ',user)
         let filtered = response.data.filter(recipe => {
           if (recipe.user_id === user.id) {
             return convertRecipeToShowUI(recipe);
           }
         })
-        console.log(filtered);
+        console.log('filtered:', filtered);
+        transition(EMPTY);
         setRecipes(filtered);
       })
       .catch((err) => {
@@ -194,12 +201,17 @@ export default function MyRecipes(props) {
     transition(CONFIRM);
   }
 
-  useEffect (()=>{
-    fetchCategories();
-  },[]);
+  const addRecipe = (recipe) => {
+    setRecipe(null);
+    transition(CREATE);
+  }
 
   useEffect (()=>{
     fetchMyRecipes(user);
+  },[user]);
+
+  useEffect (()=>{
+    fetchCategories();
     fetchComments();
     fetchRatings();
   },[]);
@@ -213,8 +225,8 @@ export default function MyRecipes(props) {
   const { mode, transition, back } = useVisualMode(temp_mode);
 
   console.log(mode);
-
-
+  console.log(user);
+  
   return (
   
     <div>
@@ -223,14 +235,15 @@ export default function MyRecipes(props) {
         title={"No Recipe Found!"}
         content={"You have no recipe."}
         emph={"Let's create one now!"}
-        url={"/newrecipe"}
-        onClick={()=>transition("CREATE")}
+        // url={"/newrecipe"}
+        onClick={addRecipe}
       />}
       {mode === EMPTY && <Empty 
         viewRecipe={viewRecipe}
         onEdit={editRecipe}
         onDelete={confirmRecipe}
-        // setSelectRecipe={setRecipe}
+        onAdd={addRecipe}
+        setSelectRecipe={setRecipe}
         recipes={recipes}
         user={props.user}
         comments = {comments}
@@ -252,7 +265,7 @@ export default function MyRecipes(props) {
           cates={categories}
           onCancel={back}
           onSave={saveRecipe}
-          //setRecipe={setRecipe}
+          setRecipe={setRecipe}
           recipe={recipe}
           ratings={ratings}
         />
@@ -264,7 +277,7 @@ export default function MyRecipes(props) {
         cates={categories}
         ratings={ratings}
         recipe={recipe}
-       // setRecipe={setRecipe}
+        // setRecipe={setRecipe}
         onCancel={back}
         onSave={saveRecipe}
       />}

@@ -18,16 +18,16 @@ import IngredientList from "./IngredientList"
 
 const Form = (props) => {
 
-  const [recipe, setRecipe] = useState({} || props.recipe);
+  const [recipe, setRecipe] = useState({});
   const categories=[].concat(props.cates);
-  const [ingredients, setIngredients] = useState([{name:"",unit:"",quantity:0}]);
+  const [ingredients, setIngredients] = useState([{name:"",unit:"",quantity:0}] || props.recipe.ingredients);
   const [imageSelected, setImageSelected]= useState(null);
   //const [steps, setSteps] = useState('');
  
-  if (props.recipe) {
-    setIngredients(props.recipe.ingredients);
-    setImageSelected(props.recipe.image_url);
-  }
+  // if (props.recipe) {
+  //   setIngredients(props.recipe.ingredients);
+  //   setImageSelected(props.recipe.image_url);
+  // }
   const setSteps=(steps)=>{
     setRecipe({...recipe,steps})
   }
@@ -64,6 +64,11 @@ const Form = (props) => {
     let newRecipe = {...recipe,ingredients};
     setRecipe(newRecipe)
   },[ingredients]);
+
+  useEffect(()=>{
+    let newRecipe = props.recipe;
+    setRecipe(newRecipe);
+  },[props.recipe]);
 
   return (
     <div className="NewRecipe">
@@ -133,7 +138,7 @@ const Form = (props) => {
               label="Set a Category"
             >
               {categories.map(category =>
-                <MenuItem value={category.id}>{category.name}</MenuItem>
+                <MenuItem key={category.id} value={category.name}></MenuItem>
               )}
              
             </Select>
@@ -143,6 +148,7 @@ const Form = (props) => {
           </Typography>
         </AccordionDetails>
       </Accordion>
+
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -159,7 +165,7 @@ const Form = (props) => {
               addIngredient={addIngredient}
               deleteIngredient={deleteIngredient}
               handleChange={handleIngredients}
-             /* defaultValue={recipe.ingredients} */
+              defaultValue={recipe ? recipe.ingredients : {name:"",unit:"",quantity:0}}
             />
           </Typography>
         </AccordionDetails>
@@ -181,11 +187,11 @@ const Form = (props) => {
               variant="standard"
               steps={recipe ? recipe.steps : null}
               setSteps={setSteps}
-              name="steps"
             />
           </Box>
         </AccordionDetails>
       </Accordion>
+
       { recipe &&
       <Accordion expanded={true}>
         <AccordionSummary
@@ -196,7 +202,7 @@ const Form = (props) => {
           <Typography sx={{ fontSize: 20 }}>Current Image</Typography>
         </AccordionSummary>
         <AccordionDetails >
-          <Box > {/*}style={{ flex: "1 1 50%" }} */}
+          <Box > 
             <img src={recipe.image_url} alt="" width={500} height={300} mode='fit'/>
           </Box>
         </AccordionDetails>
@@ -231,7 +237,7 @@ const Form = (props) => {
           <Button variant="contained" onClick={props.onCancel}>Cancel</Button>
         </Stack>
       </Box>
-    
+
     </div>
   );
 }
