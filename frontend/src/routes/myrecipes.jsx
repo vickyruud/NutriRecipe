@@ -8,7 +8,7 @@ import Status from '../components/NewRecipe/Status';
 import Confirm from '../components/NewRecipe/Confirm';
 import Error from '../components/NewRecipe/Error';
 import useVisualMode from '../components/NewRecipe/hooks/useVisualMode';
-import None from '../components/My Recipes/SimpleAlert'
+import None from '../components/My Recipes/SimpleAlert';
 
 export default function MyRecipes(props) {
   console.log('props: ',props);
@@ -273,7 +273,7 @@ export default function MyRecipes(props) {
       }
       {mode === SAVING && <Status message = {'Saving...'} />}
       {mode === DELETING && <Status message = {'Deleting...'} />}
-      {mode === CONFIRM && <Confirm message = {'Delete? ... Really?'} user={user} onCancel={back} onConfirm={() => destroy(recipe,user)}/>}
+      {mode === CONFIRM && <Confirm message = {'Delete?... Really?'} user={user} onCancel={back} onConfirm={() => destroy(recipe,user)}/>}
       {mode === EDIT && <Form 
         cates={categories}
         ratings={ratings}
