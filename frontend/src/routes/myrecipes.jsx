@@ -32,6 +32,7 @@ export default function MyRecipes(props) {
   //const [myRecipes, setMyRecipes] = [props.myRecipes, props.setMyRecipes];
   const [ratings,setRatings] = useState([]);
   const user = props.user;
+  let initial_recipe = recipe ? recipe : {} //for Edit mode
 
   const fetchMyRecipes = (user) => {
     if(!user.id) {
@@ -136,6 +137,7 @@ export default function MyRecipes(props) {
       //inputRecipe={...recipe};
       inputRecipe.user_id = props.user.id
       let recipeDB = convertRecipeToSaveDB(inputRecipe);
+      console.log("recipe before saving to DB:",recipeDB)
       if (!recipe) {
         axios
         .post("/recipes", recipeDB)
@@ -276,7 +278,7 @@ export default function MyRecipes(props) {
       {mode === EDIT && <Form 
         cates={categories}
         ratings={ratings}
-        recipe={recipe}
+        recipe={initial_recipe}
         // setRecipe={setRecipe}
         onCancel={back}
         onSave={saveRecipe}

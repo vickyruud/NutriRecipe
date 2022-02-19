@@ -18,7 +18,7 @@ import IngredientList from "./IngredientList"
 
 const Form = (props) => {
 
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState(props.recipe);
   const categories=[].concat(props.cates);
   const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : [{name:"",unit:"",quantity:0}]);
   const [imageSelected, setImageSelected]= useState(props.recipe ? props.recipe.image_url : null);
@@ -31,6 +31,7 @@ const Form = (props) => {
   const setSteps=(steps)=>{
     setRecipe({...recipe,steps})
   }
+  const defaultIngredients = recipe
 
   // const setIngredients=(ingredients)=>{
   //   setRecipe({...recipe,ingredients})
@@ -157,7 +158,7 @@ const Form = (props) => {
         </AccordionDetails>
       </Accordion>
 
-      {/* <Accordion>
+      <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -177,8 +178,8 @@ const Form = (props) => {
             />
           </Typography>
         </AccordionDetails>
-      </Accordion> */}
-{/*       
+      </Accordion>
+      
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -199,9 +200,9 @@ const Form = (props) => {
             />
           </Box>
         </AccordionDetails>
-      </Accordion> */}
+      </Accordion>
 
-      { recipe &&
+      { (recipe && recipe.image_url) &&
       <Accordion expanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -223,10 +224,10 @@ const Form = (props) => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-          {!recipe &&
+          {(!recipe || !recipe.image_url) &&
           <Typography sx={{ fontSize: 20 }}>Upload an Image*</Typography>
           }
-          { recipe &&
+          { (recipe && recipe.image_url) &&
           <Typography sx={{ fontSize: 20 }}>Replace the Current Image*</Typography>
           }
             </AccordionSummary>

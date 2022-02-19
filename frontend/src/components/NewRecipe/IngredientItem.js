@@ -40,7 +40,7 @@ const NewIngredientItem = (props) => {
             >
               <MenuItem key={1} value={"grams"}>grams</MenuItem>
               <MenuItem key={2} value={"milligrams"}>milligrams</MenuItem>
-              <MenuItem key={3} value={"kilograms"}>milligrams</MenuItem>
+              <MenuItem key={3} value={"kilograms"}>kilograms</MenuItem>
               <MenuItem key={4} value={"ounces"}>ounces</MenuItem>
               <MenuItem key={5} value={"tablespoons"}>tablespoons</MenuItem>
               <MenuItem key={6} value={"teaspoons"}>teaspoons</MenuItem>
