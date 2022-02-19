@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import NavBar from "./NavBar";
+import SearchBar from "./SearchBar";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   ...theme.typography.body2,
@@ -26,6 +27,10 @@ export default function ResponsiveGrid(props) {
         padding: 5,
       }}
     >
+      <Grid>
+      <SearchBar 
+          searchRecipe={props.searchRecipe}/>
+      </Grid>
       <Grid
         container
         spacing={{ sm: 2, md: 3 }}

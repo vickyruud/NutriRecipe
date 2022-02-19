@@ -6,51 +6,60 @@ import "../App.css";
 import RecipePage1 from "../components/RecipePage1";
 
 export default function Recipes(props) {
-  const [recipes, setRecipes] = useState(props.recipes||[]);
+  const [recipes, setRecipes] = useState(props.recipes || []);
   const [selectRecipe, setSelectRecipe] = useState(props.selectRecipe || null);
-  const [comments,setComments] = useState(props.comments || [])
-  const [ratings,setRatings] = useState([]);
+  const [comments, setComments] = useState(props.comments || []);
+  const [ratings, setRatings] = useState([]);
+  const [filterlist, setFilterList]=useState([]);
+  console.log("recipies",recipes);
+
   const fetchRecipes = () => {
     axios
-      .get("/recipes") 
+      .get("/recipes")
       .then((response) => {
-        // handle success
-        // console.log("response----->",response.data)
+        //console.log("response----->", response.data);
         setRecipes(response.data);
+        setFilterList(response.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  const fetchComments = ()=> {
+  const searchRecipe = (query) => {
+    
+    setFilterList(recipes.filter((recipe) => {
+      if (recipe.name.toLowerCase().includes(query.toLowerCase())) {
+        return true;
+      } else {
+        return false;
+      }
+    }));
+  };
+
+  const fetchComments = () => {
     axios
       .get("/comments")
-      .then((response) =>{
+      .then((response) => {
         setComments(response.data);
-        console.log("COMMENTS****----->",response.data)
+        // console.log("COMMENTS****----->", response.data);
       })
-      .catch((err) =>{
+      .catch((err) => {
         console.log(err);
-      })
+      });
+  };
 
-  }
-
-  
-  const fetchRatings = ()=> {
+  const fetchRatings = () => {
     axios
       .get("/ratings")
-      .then((response) =>{
-        console.log("ratings----->",response.data)
+      .then((response) => {
+        console.log("ratings----->", response.data);
         setRatings(response.data);
-
       })
-      .catch((err) =>{
+      .catch((err) => {
         console.log(err);
-      })
+      });
+  };
 
-  }
-
-  
   useEffect(() => {
     fetchComments();
     fetchRatings();
@@ -60,24 +69,29 @@ export default function Recipes(props) {
   }, []);
 
   console.log(props.selectRecipe);
-  
+
   return (
     <main>
       <div style={{ display: "flex", flexDirection: "row" }}></div>
-      {/* {console.log("COMMENTS__>",comments)} */}
       {selectRecipe ? (
-        <RecipePage1 fetchComments={fetchComments} selectRecipe={selectRecipe} comments={comments} user={props.user} ratings={ratings}/>
-        
+        <RecipePage1
+          fetchComments={fetchComments}
+          selectRecipe={selectRecipe}
+          comments={comments}
+          user={props.user}
+          ratings={ratings}
+        />
       ) : (
-        <RecipeList 
+        <RecipeList
           setSelectRecipe={setSelectRecipe}
-          recipes={recipes}
+          recipes={filterlist}
           user={props.user}
           viewRecipe={props.viewRecipe}
           onEdit={props.onEdit}
           onDelete={props.onDelete}
           ratings={ratings}
-            
+          
+          searchRecipe={searchRecipe}
         />
       )}
     </main>
