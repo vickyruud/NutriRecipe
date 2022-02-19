@@ -107,7 +107,9 @@ const ResponsiveAppBar = (props) => {
                   <Typography textAlign="center">
                     {/*page*/}
                     {/* {page==='Add New Recipe' && <Link1  to="/newrecipe" underline="none">Add a new Recipe</Link1>} */}
-                    {page==='My Recipes' && <Button  onClick={()=> window.location.href="/myrecipes"} underline="none">My Recipes</Button>}
+                    {/* {page==='My Recipes' && <Link1 to="/myrecipes" underline="none">My Recipes</Link1>} */}
+                    {page==='My Recipes' && <Button variant="contained" onClick={()=>{window.location.href="/myrecipes"}} underline="none">My Recipes</Button>}
+                  
                   </Typography>
 
                 </MenuItem>
@@ -134,8 +136,9 @@ const ResponsiveAppBar = (props) => {
               >
                 {/*page*/}
                 {/* {page==='Add New Recipe' && <Link1  to="/newrecipe">Add a new Recipe</Link1>} */}
-                {page==='My Recipes' && <Link1  to="/myrecipes" underline="none">My Recipes</Link1>}
-
+                {/* {page==='My Recipes' && <Link1 to="/myrecipes" underline="none">My Recipes</Link1>} */}
+                {page==='My Recipes' && <Button variant="contained" onClick={()=>{window.location.href="/myrecipes"}} underline="none">My Recipes</Button>}
+               
               </Button>
             ))}
           </Box>
