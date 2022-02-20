@@ -8,6 +8,7 @@ import Status from '../components/NewRecipe/Status';
 import Confirm from '../components/NewRecipe/Confirm';
 import Error from '../components/NewRecipe/Error';
 import useVisualMode from '../components/NewRecipe/hooks/useVisualMode';
+import { convertToRaw } from 'draft-js'
 
 export default function MyRecipes(props) {
   const EMPTY = "EMPTY";
@@ -30,16 +31,31 @@ export default function MyRecipes(props) {
   const [ratings,setRatings] = useState([]);
   const user = props.user;
 
+
+  // const converRTEtoShowUI = (RTEtext) => {
+  //   // const content = RTEtext.getCurrentContent().getPlainText();
+  //   const content = JSON.stringify(convertToRaw(RTEtext))
+  //   console.log (content);
+  //   return content;
+  // }
+
   const convertRecipeToSaveDB = (recipeUI) => {
     let json_ingredients = JSON.stringify(recipeUI.ingredients);
     let recipeDB = {...recipeUI, "ingredients": json_ingredients};
     return recipeDB;
   }
+
   const convertRecipeToShowUI = (recipeDB) => {
     let string_ingredients = eval(recipeDB.ingredients);
     let recipeUI = {...recipeDB, "ingredients": string_ingredients};
+    // if (recipeDB.id > 10) {
+    //   let steps_text = converRTEtoShowUI(recipeDB.steps);
+    //   recipeUI = {...recipeDB, "steps": steps_text};
+    // }
+
     return recipeUI;
   }
+
 
   const fetchMyRecipes = (user) => {
     if(!user.id) {

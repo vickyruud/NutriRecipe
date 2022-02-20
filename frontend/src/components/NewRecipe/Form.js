@@ -16,13 +16,20 @@ import UploadImage from "./UploadImage";
 import TextEditor from './TextEditor'
 import IngredientList from "./IngredientList"
 
+const styles = {
+  paperContainer: {
+      height: '100%',
+      backgroundImage: `url(${"https://res.cloudinary.com/de6puygvt/image/upload/v1645342161/recipes/wood-table-top-blur-kitchen-counter-room-background_254791-1293_zrvkre.jpg"})`
+  }
+};
+
 const Form = (props) => {
 
   const [recipe, setRecipe] = useState(props.recipe ? props.recipe : {});
   const categories=[].concat(props.cates);
   const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : [{name:"",unit:"",quantity:0}]);
   const [imageSelected, setImageSelected]= useState(props.recipe ? props.recipe.image_url : null);
- 
+
   const setSteps=(steps)=>{
     setRecipe({...recipe,steps})
   }
@@ -60,9 +67,9 @@ const Form = (props) => {
   },[]);
 
   return (
-    <div className="NewRecipe">
-          <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">{props.recipe ? "EDIT RECIPE" : "ADD A NEW RECIPE"}</Typography>
-      <Accordion>
+    <Box className="NewRecipe"style={styles.paperContainer}>
+      <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">{props.recipe ? "EDIT RECIPE" : "ADD A NEW RECIPE"}</Typography>
+      <Accordion >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -137,7 +144,7 @@ const Form = (props) => {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
+      <Accordion >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -159,7 +166,7 @@ const Form = (props) => {
         </AccordionDetails>
       </Accordion>
       
-      <Accordion>
+      <Accordion >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -172,13 +179,26 @@ const Form = (props) => {
             <TextEditor
               multiline
               maxRows={100}
+              rows={10}
               variant="standard"
               setSteps={setSteps}
               steps={props.recipe ? props.recipe.steps : null}
               name="steps"
-              //sdefaultValue={props.recipe ? props.recipe.steps : null}
+              id=""
             />
           </Box>
+          {/* <Box>
+            <label id="lblSteps">test</label>
+            <button onclick="myGeeks()">
+                Click Here!
+            </button>
+            <script>
+                {function myGeeks() {
+                var x = document.getElementById("lblSteps");
+                    x.innerHTML = recipe ? recipe.steps : props.recipe.steps;
+                }}
+            </script>
+          </Box> */}
         </AccordionDetails>
       </Accordion>
 
@@ -229,7 +249,7 @@ const Form = (props) => {
         </Stack>
       </Box>
 
-    </div>
+    </Box>
   );
 }
 export default Form
