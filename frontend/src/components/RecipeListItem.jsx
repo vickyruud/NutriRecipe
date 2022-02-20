@@ -8,6 +8,7 @@ import PageviewSharpIcon from '@mui/icons-material/PageviewSharp';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import Button from "./Button";
+import { Button as Button2 } from "@mui/material";
 import Rating from "./Rating";
 import Box from '@mui/material/Box';
 import "../App.css";
@@ -70,23 +71,16 @@ export default function RecipeListItem(props) {
           </Button>
         }
         {props.viewRecipe &&
-          <Box
-          sx={{
-            display: "flex",
-            //flexDirection: "row",
-            //justifyContent: "center",
-            padding: 2,
-            }}
-          >
-            <Button size="medium" onClick={()=>props.viewRecipe(recipe)} style={{ marginBottom: -50, padding: 2 }}>
+          <Box sx ={{display: "flex", justifyContent : "space-between",}}>          
+            <Button2 size="small" onClick={()=>props.viewRecipe(recipe)}>
               <PageviewSharpIcon />
-            </Button>
-            <Button size="small" onClick={() => props.onEdit(recipe)} style={{ marginBottom: -50 }}>
+            </Button2>
+            <Button2 size="small" onClick={() => props.onEdit(recipe)}>
               <EditIcon/>
-            </Button>
-            <Button size="small" onClick={()=>props.onDelete(recipe)} style={{ marginBottom: -50 }}>
+            </Button2>
+            <Button2 size="small" onClick={()=>props.onDelete(recipe)}>
               <DeleteForeverSharpIcon/>
-            </Button>
+            </Button2>
           </Box>
         }
         

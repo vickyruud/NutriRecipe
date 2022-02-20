@@ -66,3 +66,10 @@
   transform: translateY(100px) scale(0) rotateY(180deg);
   opacity: 0;
 }
+
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10;
+}

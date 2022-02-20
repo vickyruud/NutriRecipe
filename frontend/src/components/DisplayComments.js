@@ -18,7 +18,7 @@ const DisplayComments = (props) => {
   })
   return (
     <Container >
-      <Typography variant ="h4">
+      <Typography variant ="h4" style={{textAlign: "center", color:"#1976d2"}}>
         Comments
       </Typography>
       {/* <Button  onClick={props.hideComments} style={buttonStyle} variant='contained' color='primary'>Hide Comments</Button> */}
