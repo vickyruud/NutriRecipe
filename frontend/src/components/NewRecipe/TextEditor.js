@@ -32,15 +32,11 @@ const TextEditor = (props) => {
         <MUIRichTextEditor
           label="Share your great recipe here..."
           inlineToolbar={true}
-          height={80}
           onChange={onEditorChange}
           defaultValue={props.steps}
         />
       </ThemeProvider>
-
     </Box>
-    
-
   );
 }
 export default TextEditor

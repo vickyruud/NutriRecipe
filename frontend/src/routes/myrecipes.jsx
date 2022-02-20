@@ -10,6 +10,13 @@ import Error from '../components/NewRecipe/Error';
 import useVisualMode from '../components/NewRecipe/hooks/useVisualMode';
 import { convertToRaw } from 'draft-js'
 
+const styles = {
+  paperContainer: {
+      height: "1000",
+      backgroundImage: `url(${"https://res.cloudinary.com/de6puygvt/image/upload/v1645342161/recipes/wood-table-top-blur-kitchen-counter-room-background_254791-1293_zrvkre.jpg"})`
+  }
+};
+
 export default function MyRecipes(props) {
   const EMPTY = "EMPTY";
   const NONE = "NONE";
@@ -58,7 +65,7 @@ export default function MyRecipes(props) {
 
 
   const fetchMyRecipes = (user) => {
-    if(!user.id) {
+    if(!user) {
       return
     }
     axios
@@ -220,7 +227,7 @@ export default function MyRecipes(props) {
   return (
   
     <div>
-      {mode === EMPTY && <Empty 
+      {mode === EMPTY && <Empty style={styles.paperContainer}
         viewRecipe={viewRecipe}
         onEdit={editRecipe}
         onDelete={confirmRecipe}

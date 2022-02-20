@@ -9,22 +9,31 @@ import NavBar from "../NavBar";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
+const styles = {
+  paperContainer: {
+      height: "1000",
+      backgroundImage: `url(${"https://res.cloudinary.com/de6puygvt/image/upload/v1645342161/recipes/wood-table-top-blur-kitchen-counter-room-background_254791-1293_zrvkre.jpg"})`
+  }
+};
+
 export default function Empty(props) {
   return (
     <div>
+      {props.user &&
        <Box
-      sx={{
-        flexGrow: 1,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        paddingTop: 3,
-      }}
-    >
-      <Fab color="primary"label="Add your Recipe"onClick={props.onAdd}>
-        <AddIcon />
-      </Fab>
-      </Box>
+       sx={{
+         flexGrow: 1,
+         display: "flex",
+         flexDirection: "row",
+         justifyContent: "center",
+         paddingTop: 3,
+       }}
+     >
+       <Fab color="primary"label="Add your Recipe"onClick={props.onAdd}>
+         <AddIcon />
+       </Fab>
+       </Box>
+      }
     <Box
       sx={{
         flexGrow: 1,
@@ -55,7 +64,6 @@ export default function Empty(props) {
         ))}
       </Grid>
     </Box>
-    </div>
+</div>
   );
 }
-
