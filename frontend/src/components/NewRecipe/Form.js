@@ -18,24 +18,17 @@ import IngredientList from "./IngredientList"
 
 const Form = (props) => {
 
-  const [recipe, setRecipe] = useState(props.recipe);
+  const [recipe, setRecipe] = useState(props.recipe ? props.recipe : {});
   const categories=[].concat(props.cates);
   const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : [{name:"",unit:"",quantity:0}]);
   const [imageSelected, setImageSelected]= useState(props.recipe ? props.recipe.image_url : null);
   //const [steps, setSteps] = useState('');
+  //const [category, setCategory] = React.useState(props.recipe ? categories[props.recipe.category_id] : null);
+  // const [category, setCategory] = React.useState(props.recipe ? props.recipe.category_id : null);
  
-  // if (props.recipe) {
-  //   setIngredients(props.recipe.ingredients);
-  //   setImageSelected(props.recipe.image_url);
-  // }
   const setSteps=(steps)=>{
     setRecipe({...recipe,steps})
   }
-  const defaultIngredients = recipe
-
-  // const setIngredients=(ingredients)=>{
-  //   setRecipe({...recipe,ingredients})
-  // }
 
   console.log('ingredients:',ingredients);
   console.log('type of ingredients: ', typeof ingredients);
@@ -54,7 +47,7 @@ const Form = (props) => {
     let newIngredient = {...newIngredients[i],[event.target.name]:event.target.value};
     console.log('check status')
     newIngredients[i] = newIngredient;
-    setIngredients(newIngredients); //issue 
+    setIngredients(newIngredients);  
     let newRecipe = {...recipe,ingredients};
     setRecipe(newRecipe)
     let json_ingredients = JSON.stringify(recipe.ingredients);
@@ -63,6 +56,7 @@ const Form = (props) => {
   const handleChange = (event) => {
     let newRecipe = {...recipe,[event.target.name]:event.target.value};
     setRecipe(newRecipe);
+    console.log(recipe);
   }  
 
   useEffect(()=>{
@@ -70,10 +64,10 @@ const Form = (props) => {
     setRecipe(newRecipe)
   },[ingredients]);
 
-  useEffect(()=>{
-    let newRecipe = props.recipe;
-    setRecipe(newRecipe);
-  },[props.recipe]);
+  // useEffect(()=>{
+  //   let newRecipe = props.recipe;
+  //   setRecipe(newRecipe);
+  // },[props.recipe]);
 
   console.log('category name?:', props.recipe ? categories[props.recipe.category_id].name : "new mode");
   console.log('categories array:', categories)
@@ -140,14 +134,12 @@ const Form = (props) => {
             <Select
               required
               name="category_id"
-              // value={category}
-            
-              value={props.recipe ? categories[props.recipe.category_id].name : null}
+              value={recipe.category_id}
               onChange={handleChange}
               label="Set a Category"
             >
               {categories.map(category =>
-                <MenuItem key={category.id} >{category.name}</MenuItem>
+                <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
               )}
              
             </Select>
