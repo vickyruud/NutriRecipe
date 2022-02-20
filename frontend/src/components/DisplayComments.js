@@ -1,6 +1,6 @@
 import React from 'react'
 import OneComment from './OneComment';
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import CancelSharpIcon from '@mui/icons-material/CancelSharp';
 
@@ -18,8 +18,10 @@ const DisplayComments = (props) => {
   })
   return (
     <Container >
+      <Typography variant ="h4" style={{textAlign: "center", color:"#1976d2"}}>
+        Comments
+      </Typography>
       {/* <Button  onClick={props.hideComments} style={buttonStyle} variant='contained' color='primary'>Hide Comments</Button> */}
-      <h1>Comments</h1>
       {arrayOfComments.reverse()}
     </Container>
     

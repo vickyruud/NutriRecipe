@@ -14,6 +14,9 @@ import Rating from "./Rating";
 import Typography from "@mui/material/Typography";
 import AddComment from "./AddComment";
 import AverageRating from "./AverageRating";
+import AddIcon from '@mui/icons-material/Add';
+import { Modal} from "@mui/material";
+
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -32,6 +35,9 @@ export default function Recipe(props) {
   const [showNewComment, setShowNewComment] = useState(false);
   const openNewComment = () => setShowNewComment(true);
   const closeNewComment = () => setShowNewComment(false);
+  const [openAddComment, setOpenAddComment] = useState(false);
+  const handleOpenComment = () => setOpenAddComment(true);
+  const handleCloseComment = () => setOpenAddComment(false);
 
   const buttonStyle = { margin: "10px 0 0 0" };
   
@@ -43,7 +49,7 @@ export default function Recipe(props) {
     } else  if (props.user){
       return (
         <Button
-          onClick={openNewComment}
+          onClick={handleOpenComment}
           style={buttonStyle}
           variant="contained"
           color="primary"
@@ -74,6 +80,7 @@ export default function Recipe(props) {
                 ratings={props.ratings}
                 user={props.user}
                 setSelectRecipe={props.setSelectRecipe}
+                users={props.ratings.users}
               />
             </Item>
           </Grid>
@@ -87,20 +94,28 @@ export default function Recipe(props) {
               <NutriContent list={props.selectRecipe} />
             </Item>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
+            <Item>
+              {renderNewComment()}
+              <Modal open={openAddComment}>
+                <AddComment fetchComments={props.fetchComments} hideComment={handleCloseComment} list={props.selectRecipe} user={ props.user }/>
+            </Modal> 
+            </Item>
             <Item>
               <RecipeSteps list={props.selectRecipe} />
             </Item>
-          </Grid>
-          <Grid item xs={4}>
-            {renderNewComment()}
-          </Grid>
-          <Grid xs={8}>
+          </Grid>          
+          <Grid xs={6}>
+            
+            <Item>
             <DisplayComments
               hideComments={closeComments}
               comments={props.comments}
               list={props.selectRecipe}
-            />
+              />
+            </Item>
+          </Grid>
+          <Grid item xs={4}>
           </Grid>
         </Grid>
       </Box>
