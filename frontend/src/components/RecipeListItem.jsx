@@ -9,6 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import Button from "./Button";
 import Rating from "./Rating";
+import Box from '@mui/material/Box';
 import "../App.css";
 
 export default function RecipeListItem(props) {
@@ -65,12 +66,15 @@ export default function RecipeListItem(props) {
           </Button>
         }
         {props.viewRecipe &&
-          <div style={{
+          <Box
+          sx={{
             display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-end",
-          }}>
-            <Button size="small" onClick={()=>props.viewRecipe(recipe)} style={{ marginBottom: -50 }}>
+            //flexDirection: "row",
+            //justifyContent: "center",
+            padding: 2,
+            }}
+          >
+            <Button size="medium" onClick={()=>props.viewRecipe(recipe)} style={{ marginBottom: -50, padding: 2 }}>
               <PageviewSharpIcon />
             </Button>
             <Button size="small" onClick={() => props.onEdit(recipe)} style={{ marginBottom: -50 }}>
@@ -79,7 +83,7 @@ export default function RecipeListItem(props) {
             <Button size="small" onClick={()=>props.onDelete(recipe)} style={{ marginBottom: -50 }}>
               <DeleteForeverSharpIcon/>
             </Button>
-          </div>
+          </Box>
         }
         
       </CardActions>

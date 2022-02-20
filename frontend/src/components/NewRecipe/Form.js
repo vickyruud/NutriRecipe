@@ -22,16 +22,10 @@ const Form = (props) => {
   const categories=[].concat(props.cates);
   const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : [{name:"",unit:"",quantity:0}]);
   const [imageSelected, setImageSelected]= useState(props.recipe ? props.recipe.image_url : null);
-  //const [steps, setSteps] = useState('');
-  //const [category, setCategory] = React.useState(props.recipe ? categories[props.recipe.category_id] : null);
-  // const [category, setCategory] = React.useState(props.recipe ? props.recipe.category_id : null);
  
   const setSteps=(steps)=>{
     setRecipe({...recipe,steps})
   }
-
-  console.log('ingredients:',ingredients);
-  console.log('type of ingredients: ', typeof ingredients);
 
   const addIngredient=()=>{
     setIngredients([...ingredients,{name:"",unit:"",quantity:0}]);
@@ -49,6 +43,7 @@ const Form = (props) => {
     newIngredients[i] = newIngredient;
     setIngredients(newIngredients);  
     let newRecipe = {...recipe,ingredients};
+    console.log('new ingredients',newRecipe);
     setRecipe(newRecipe)
     let json_ingredients = JSON.stringify(recipe.ingredients);
   }
@@ -60,17 +55,9 @@ const Form = (props) => {
   }  
 
   useEffect(()=>{
-    let newRecipe = {...recipe,ingredients};
-    setRecipe(newRecipe)
-  },[ingredients]);
-
-  // useEffect(()=>{
-  //   let newRecipe = props.recipe;
-  //   setRecipe(newRecipe);
-  // },[props.recipe]);
-
-  console.log('category name?:', props.recipe ? categories[props.recipe.category_id].name : "new mode");
-  console.log('categories array:', categories)
+    let newRecipe = props.recipe;
+    setRecipe(newRecipe);
+  },[]);
 
   return (
     <div className="NewRecipe">
@@ -134,7 +121,7 @@ const Form = (props) => {
             <Select
               required
               name="category_id"
-              value={recipe.category_id}
+              value={recipe ? recipe.category_id : null}
               onChange={handleChange}
               label="Set a Category"
             >
@@ -161,7 +148,7 @@ const Form = (props) => {
         <AccordionDetails>
           <Typography>
             <IngredientList 
-              recipe = {recipe}
+              //recipe = {recipe}
               ingredients = {ingredients}
               addIngredient={addIngredient}
               deleteIngredient={deleteIngredient}
@@ -187,8 +174,9 @@ const Form = (props) => {
               maxRows={100}
               variant="standard"
               setSteps={setSteps}
+              steps={props.recipe ? props.recipe.steps : null}
               name="steps"
-              defaultValue={props.recipe ? props.recipe.steps : null}
+              //sdefaultValue={props.recipe ? props.recipe.steps : null}
             />
           </Box>
         </AccordionDetails>

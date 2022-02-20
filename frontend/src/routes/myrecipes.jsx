@@ -10,7 +10,6 @@ import Error from '../components/NewRecipe/Error';
 import useVisualMode from '../components/NewRecipe/hooks/useVisualMode';
 
 export default function MyRecipes(props) {
-  console.log('props: ',props);
   const EMPTY = "EMPTY";
   const NONE = "NONE";
   const SHOW = "SHOW";
@@ -30,27 +29,37 @@ export default function MyRecipes(props) {
   const [comments, setComments] = useState([]);
   const [ratings,setRatings] = useState([]);
   const user = props.user;
-  let initial_recipe = recipe ? recipe : {} //for Edit mode
+
+  const convertRecipeToSaveDB = (recipeUI) => {
+    let json_ingredients = JSON.stringify(recipeUI.ingredients);
+    let recipeDB = {...recipeUI, "ingredients": json_ingredients};
+    return recipeDB;
+  }
+  const convertRecipeToShowUI = (recipeDB) => {
+    let string_ingredients = eval(recipeDB.ingredients);
+    let recipeUI = {...recipeDB, "ingredients": string_ingredients};
+    return recipeUI;
+  }
 
   const fetchMyRecipes = (user) => {
     if(!user.id) {
       return
     }
-    console.log('user line 37 fetch My Recipes: ', user);
     axios
-      .get("/recipes") // You can simply make your requests to "/api/whatever you want"
+      .get("/recipes")
       .then((response) => {
         // handle success
-        console.log('all recipes:', response.data);
-        console.log('user: ',user)
         let filtered = response.data.filter(recipe => {
           if (recipe.user_id === user.id) {
-            return convertRecipeToShowUI(recipe);
+            return recipe;
           }
+        });
+        let converted = filtered.map(recipe => {
+          let temp_recipe = convertRecipeToShowUI(recipe);
+            return temp_recipe;
         })
-        console.log('filtered:', filtered);
+        setRecipes(converted);
         transition(EMPTY);
-        setRecipes(filtered);
       })
       .catch((err) => {
         console.log(err);
@@ -78,42 +87,15 @@ export default function MyRecipes(props) {
       })
   }
 
-  const fetchRecipes = () => {
-    axios
-      .get("/recipes") 
-      .then((response) => {
-        setRecipes(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const fetchRatings = ()=> {
     axios
       .get("/ratings")
       .then((response) =>{
-        console.log("ratings----->",response.data)
         setRatings(response.data);
       })
       .catch((err) =>{
         console.log(err);
       })
-  }
-
-  const convertRecipeToSaveDB = (recipeUI) => {
-    let json_ingredients = JSON.stringify(recipeUI.ingredients);
-    let recipeDB = {...recipeUI, "ingredients": json_ingredients};
-    // let string_steps = String(recipeUI.steps);
-    // recipeDB = {...recipeUI, "steps": string_steps};
-    return recipeDB;
-  }
-  const convertRecipeToShowUI = (recipeDB) => {
-    let string_ingredients = eval(recipeDB.ingredients);
-    let recipeUI = {...recipeDB, "ingredients": string_ingredients};
-  //  // let string_steps=String(recipeDB.steps);
-  //   recipeUI = {...recipeDB, "steps": string_steps};
-    return recipeUI;
   }
 
   const saveRecipe = (inputRecipe) => {
@@ -132,7 +114,6 @@ export default function MyRecipes(props) {
       transition(ERROR_SAVE_VALIDATION, false);
     } else {
       transition(SAVING);
-      //inputRecipe={...recipe};
       inputRecipe.user_id = props.user.id
       let recipeDB = convertRecipeToSaveDB(inputRecipe);
       console.log("recipe before saving to DB:",recipeDB)
@@ -150,8 +131,9 @@ export default function MyRecipes(props) {
           transition(ERROR_SAVE, true);
         })
       } else {
+        console.log('edited recipe before sending to DB:', recipe);
         axios
-        .put(`/recipes/${recipe.id}`,recipe)
+        .put(`/recipes/${recipe.id}`,recipeDB)
         .then((response) => {
           let tempRecipe = {...response.data};
           setRecipe(()=>convertRecipeToShowUI(tempRecipe));
@@ -162,7 +144,6 @@ export default function MyRecipes(props) {
           transition(ERROR_SAVE, true);
         })
       }
-      
     }
   }
 
@@ -180,7 +161,7 @@ export default function MyRecipes(props) {
       })
       console.log(filtered);
       setRecipes(filtered);
-      recipes.length > 0 ? transition(EMPTY) : transition(NONE);
+      transition(EMPTY)
     })
     .catch(error => {
       console.log(error);
@@ -218,11 +199,7 @@ export default function MyRecipes(props) {
     fetchRatings();
   },[]);
 
-
   const { mode, transition, back } = useVisualMode(props.mode);
-
-  console.log(mode);
-  console.log(user);
 
   return (
   
@@ -240,7 +217,6 @@ export default function MyRecipes(props) {
       />}
       {mode === SHOW &&
         <Show
-          // selectRecipe={props.recipe}
           selectRecipe={recipe}
           user={props.user}
           onEdit={editRecipe}
