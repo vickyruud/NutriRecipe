@@ -8,7 +8,7 @@ import Status from '../components/NewRecipe/Status';
 import Confirm from '../components/NewRecipe/Confirm';
 import Error from '../components/NewRecipe/Error';
 import useVisualMode from '../components/NewRecipe/hooks/useVisualMode';
-import None from '../components/My Recipes/SimpleAlert'
+
 
 export default function MyRecipes(props) {
   console.log('props: ',props);
@@ -220,13 +220,8 @@ export default function MyRecipes(props) {
     fetchRatings();
   },[]);
 
-  let temp_mode = recipes.length > 0 ? "EMPTY" : "NONE";
-  if (props.mode) {
-    if (props.mode !== "EMPTY" && props.mode !== "NONE") {
-      temp_mode = props.mode;
-  }}
 
-  const { mode, transition, back } = useVisualMode(temp_mode);
+  const { mode, transition, back } = useVisualMode(props.mode);
 
   console.log(mode);
   console.log(user);
@@ -234,14 +229,6 @@ export default function MyRecipes(props) {
   return (
   
     <div>
-      {mode === NONE && 
-        <None 
-        title={"No Recipe Found!"}
-        content={"You have no recipe."}
-        emph={"Let's create one now!"}
-        // url={"/newrecipe"}
-        onClick={addRecipe}
-      />}
       {mode === EMPTY && <Empty 
         viewRecipe={viewRecipe}
         onEdit={editRecipe}
@@ -270,6 +257,7 @@ export default function MyRecipes(props) {
           onCancel={back}
           onSave={saveRecipe}
           ratings={ratings}
+          setRecipe={setRecipe}
         />
       }
       {mode === SAVING && <Status message = {'Saving...'} />}
@@ -278,8 +266,8 @@ export default function MyRecipes(props) {
       {mode === EDIT && <Form 
         cates={categories}
         ratings={ratings}
-        recipe={initial_recipe}
-        // setRecipe={setRecipe}
+        recipe={recipe}
+        setRecipe={setRecipe}
         onCancel={back}
         onSave={saveRecipe}
       />}
