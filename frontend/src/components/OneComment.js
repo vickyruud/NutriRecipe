@@ -22,7 +22,7 @@ const OneComment = (props) => {
           </Grid>
           <Grid justifyContent='left' item xs zeroMinWidth>
             <h4 style={{ margin: 0, textAlign: "left" }}>{userName}</h4>
-            <p style={{ textAlign: "justify", paddingRight:50 }}>
+            <p style={{ textAlign: "justify", paddingRight:50}}>
               {props.comment.value}
             </p>
             <p style={{ textAlign: "left" }}>

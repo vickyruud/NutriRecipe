@@ -38,7 +38,7 @@ export default function DoughnutChart(props) {
   }
 
   return (
-    <div style={{ width: "350px", margin: "0 auto" }}>
+    <div style={{ width: "450px", margin: "0 auto" }}>
       <h5>Nutrition Content</h5>
       <Doughnut data={data} plugins={[ChartDataLabels]} options={options} height={"3%"} />
     </div>
