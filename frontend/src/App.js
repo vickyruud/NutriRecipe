@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
+import axios from "axios";
 import { Link, Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import "./App.css";
@@ -19,7 +20,7 @@ import MyRecipes from "./routes/myrecipes";
 const App = (props) => {
   // Instantiation
 
-
+  
   const [user, setUser] = useState({})
   const [show, setShow] = useState("")
 
@@ -29,9 +30,7 @@ const App = (props) => {
 
   const [signInOpen, setSignInOpen] = useState(false);
   const handleSignInOpen = () => setSignInOpen(true);
-  const handleSignInClose = () => setSignInOpen(false); 
-
-
+  const handleSignInClose = () => setSignInOpen(false);
 
 
   useEffect(() => {
@@ -45,6 +44,7 @@ const App = (props) => {
       })
       .then(resp => resp.json())
       .then(data => {
+        console.log('set user: ', data);
         setUser(data)
       })
     } else {
@@ -87,10 +87,7 @@ const App = (props) => {
     else {
       
         return null
-    }
-      
-        
-    
+    } 
   }
 
   return (
@@ -111,9 +108,11 @@ const App = (props) => {
         {/* <Recipes /> */}
       <Routes>
         <Route path="/" element={<Recipes user={user}/>} />
-        <Route path="recipes" element={<Recipes user={user}/>} />      
-        <Route path="newrecipe" element={<NewRecipe user={user}/>} />
-        <Route path="myrecipes" element={<MyRecipes user={user}/>} />
+        <Route path="/recipes" element={<Recipes user={user}/>} />      
+        {/* <Route path="/newrecipe" element={<MyRecipes user={user} mode={"CREATE"}/>}/> */}
+        <Route path="/myrecipes" element={<MyRecipes user={user} mode={"EMPTY"}/>}/>
+        {/* <Route path="newrecipe" element={<h1>Hello!</h1>} />       */}
+        {/* <Route path={`recipe/edit/${i}`} element={<MyRecipes user={user} mode="EMPTY" myRecipes = {myRecipes} edit={edit}/>} /> */}
       {/* {token && <Route path="secret" element={<Secret />}/>} */ }
     </Routes>
         <Outlet/>
