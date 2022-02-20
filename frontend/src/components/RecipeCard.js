@@ -18,10 +18,6 @@ export default function RecipeCard(props) {
   const [average, setAverage] = useState(props.list.average_rating)
 
   const [message, setMessage] = useState('');
-<<<<<<< HEAD
-
-  
-=======
   let sum = 0;
   let avg = 0;
   let val = 0;
@@ -67,7 +63,6 @@ export default function RecipeCard(props) {
   })
   
 
->>>>>>> ratings-fix
   
 
   const handleMessage = (input) => setMessage(input);
