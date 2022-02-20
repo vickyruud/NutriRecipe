@@ -80,7 +80,7 @@ export default function RecipeListItem(props) {
           </Button>
         }
         {props.viewRecipe &&
-          <Box sx ={{  width: '40vh'}}>          
+          <Box sx ={{ justifyContent:'flex-start'}}>          
             <Button2  onClick={()=>props.viewRecipe(recipe)}>
               <PageviewSharpIcon style ={styles.largeIcon}/>
             </Button2>
