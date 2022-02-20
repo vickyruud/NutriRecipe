@@ -6,7 +6,7 @@ import axios from 'axios'
 const NewRatings = (props) => {
 
 
-  const [rating, setRating] = useState({});
+  const [rating, setRating] = useState( rating || {});
   const [ratingStatus, setRatingStatus] = useState("");
   const [hover, setHover] = useState(null);
   
@@ -14,7 +14,7 @@ const NewRatings = (props) => {
   const handleUserRating = (ratings) => {
     ratings.ratings.forEach(element => {
       if (props.user.id === element.user_id && props.list.id === element.recipe_id) {
-        setRating(element);
+        setRating(prev => element);
       } else {
         setRating({});
       }
@@ -31,7 +31,7 @@ const NewRatings = (props) => {
     if (!ratingStatus) {
        axios.post("/ratings", ratingObject)
          .then(resp => {
-        setRating(resp.data);
+        setRating(prev => resp.data);
         setRatingStatus("done");
         props.handleMessage("Saved");
         props.setRatingUpdated(1);
@@ -41,10 +41,10 @@ const NewRatings = (props) => {
     } else {
       axios.put(`/ratings/${rating.id}`, ratingObject)
         .then(resp => {
-          setRating(resp.data);
-          setRatingStatus(true);
+          setRating(prev => resp.data);
+          setRatingStatus("done");
+          props.handleMessage("Saved")
           props.setRatingUpdated(1);
-           props.handleMessage("Saved")
 
       })
      

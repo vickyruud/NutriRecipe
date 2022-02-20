@@ -7,7 +7,6 @@ import './displayRatings.css'
 const DisplayRatings = (props) => {
 
   const [rating, setRating] = useState({});
-  console.log('recipeid: ', props.recipe.name, props.recipe.average_rating);
   
   useEffect(() => {
     setRating(props.recipe.average_rating);
