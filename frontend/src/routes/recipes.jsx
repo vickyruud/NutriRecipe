@@ -80,6 +80,7 @@ export default function Recipes(props) {
           comments={comments}
           user={props.user}
           ratings={ratings}
+          setSelectRecipe={setSelectRecipe}
         />
       ) : (
         <RecipeList

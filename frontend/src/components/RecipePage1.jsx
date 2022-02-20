@@ -72,12 +72,13 @@ export default function Recipe(props) {
             <Item>
               <RecipeCard selectRecipe={props.selectRecipe} list={props.selectRecipe}
                 ratings={props.ratings}
-                user={props.user}/>
+                user={props.user}
+                setSelectRecipe={props.setSelectRecipe}
+              />
             </Item>
           </Grid>
           <Grid item xs={4}>
             <Item>
-              {" "}
               <IngredientTable list={props.selectRecipe} />
             </Item>
           </Grid>

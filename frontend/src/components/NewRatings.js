@@ -1,13 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {FaStar} from 'react-icons/fa'
 import './newRatings.css'
 import axios from 'axios'
 
 const NewRatings = (props) => {
 
+
   const [rating, setRating] = useState({});
   const [ratingStatus, setRatingStatus] = useState("");
   const [hover, setHover] = useState(null);
+  
+
+  const handleUserRating = (ratings) => {
+    ratings.ratings.forEach(element => {
+      if (props.user.id === element.user_id && props.list.id === element.recipe_id) {
+        setRating(element);
+      } else {
+        setRating({});
+      }
+    });
+  }
+
+  useEffect(() => {
+    handleUserRating(props.ratings);
+  }, [props.ratings ]);
  
 
   const submitRating = (ratingObject) => {
@@ -17,19 +33,18 @@ const NewRatings = (props) => {
          .then(resp => {
         setRating(resp.data);
         setRatingStatus("done");
-        props.handleMessage("Saved!");
+        props.handleMessage("Saved");
         props.setRatingUpdated(1);
 
       })
       
     } else {
-      console.log('from the else statement', rating)
       axios.put(`/ratings/${rating.id}`, ratingObject)
         .then(resp => {
           setRating(resp.data);
           setRatingStatus(true);
           props.setRatingUpdated(1);
-           props.handleMessage("Updated!")
+           props.handleMessage("Saved")
 
       })
      

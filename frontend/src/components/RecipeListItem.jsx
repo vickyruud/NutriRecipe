@@ -11,6 +11,8 @@ import Button from "./Button";
 import Rating from "./Rating";
 import Box from '@mui/material/Box';
 import "../App.css";
+import AverageRating from "./AverageRating";
+import DisplayRatings from "./DisplayRating";
 
 export default function RecipeListItem(props) {
   const {
@@ -24,6 +26,8 @@ export default function RecipeListItem(props) {
     rating,
     image_url,
   } = props.recipe;
+
+  
 
   let recipe = props.recipe;
 
@@ -47,7 +51,7 @@ export default function RecipeListItem(props) {
       >
         <Typography gutterBottom variant="h8" component="div">
           {name}
-          <Rating></Rating>
+          <DisplayRatings recipe={props.recipe} />
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {readMore ? description : `${description.substring(0, 70)}...`}
