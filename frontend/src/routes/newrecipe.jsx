@@ -3,21 +3,23 @@
 // import Form from '../components/NewRecipe/Form'
 // // import Show from '../components/NewRecipe/Show'; // Recipe detail page
 // import Show from '../components/RecipePage1'; // Recipe detail page
-// import Empty from '../components/RecipeList'; // Main page
+// import Empty from '../components/My Recipes/Empty'; // Main page
 // import Status from '../components/NewRecipe/Status';
 // import Confirm from '../components/NewRecipe/Confirm';
 // import Error from '../components/NewRecipe/Error';
 // import useVisualMode from '../components/NewRecipe/hooks/useVisualMode';
-// import { useNavigate } from 'react-router';
-// import {
-//   BrowserRouter,
-//   Routes,
-//   Route
-// } from "react-router-dom";
-// import Recipes from "./recipes";
+// import { convertToRaw } from 'draft-js'
 
-// export default function Recipe(props) {
+// const styles = {
+//   paperContainer: {
+//       height: "1000",
+//       backgroundImage: `url(${"https://res.cloudinary.com/de6puygvt/image/upload/v1645342161/recipes/wood-table-top-blur-kitchen-counter-room-background_254791-1293_zrvkre.jpg"})`
+//   }
+// };
+
+// export default function MyRecipes(props) {
 //   const EMPTY = "EMPTY";
+//   const NONE = "NONE";
 //   const SHOW = "SHOW";
 //   const CREATE = "CREATE";
 //   const SAVING = "SAVING";
@@ -33,7 +35,59 @@
 //   const [recipe, setRecipe] = useState({});
 //   const [recipes, setRecipes] = useState([]);
 //   const [comments, setComments] = useState([]);
+//   const [ratings,setRatings] = useState([]);
+//   const user = props.user;
 
+
+//   // const converRTEtoShowUI = (RTEtext) => {
+//   //   // const content = RTEtext.getCurrentContent().getPlainText();
+//   //   const content = JSON.stringify(convertToRaw(RTEtext))
+//   //   console.log (content);
+//   //   return content;
+//   // }
+
+//   const convertRecipeToSaveDB = (recipeUI) => {
+//     let json_ingredients = JSON.stringify(recipeUI.ingredients);
+//     let recipeDB = {...recipeUI, "ingredients": json_ingredients};
+//     return recipeDB;
+//   }
+
+//   const convertRecipeToShowUI = (recipeDB) => {
+//     let string_ingredients = eval(recipeDB.ingredients);
+//     let recipeUI = {...recipeDB, "ingredients": string_ingredients};
+//     // if (recipeDB.id > 10) {
+//     //   let steps_text = converRTEtoShowUI(recipeDB.steps);
+//     //   recipeUI = {...recipeDB, "steps": steps_text};
+//     // }
+
+//     return recipeUI;
+//   }
+
+
+//   const fetchMyRecipes = (user) => {
+//     if(!user) {
+//       return
+//     }
+//     axios
+//       .get("/recipes")
+//       .then((response) => {
+//         // handle success
+//         let filtered = response.data.filter(recipe => {
+//           if (recipe.user_id === user.id) {
+//             return recipe;
+//           }
+//         });
+//         let converted = filtered.map(recipe => {
+//           let temp_recipe = convertRecipeToShowUI(recipe);
+//             return temp_recipe;
+//         })
+//         setRecipes(converted);
+//         transition(EMPTY);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   };
 //   const fetchCategories = () => {
 //     axios
 //     .get("/categories")
@@ -56,62 +110,37 @@
 //       })
 //   }
 
-//   const fetchRecipes = () => {
+//   const fetchRatings = ()=> {
 //     axios
-//       .get("/recipes") // You can simply make your requests to "/api/whatever you want"
-//       .then((response) => {
-//         // handle success
-//         setRecipes(response.data);
+//       .get("/ratings")
+//       .then((response) =>{
+//         setRatings(response.data);
 //       })
-//       .catch((err) => {
+//       .catch((err) =>{
 //         console.log(err);
-//       });
-//   };
-
-//   const fetchRecipe = (id) => {
-//     axios
-//       .get(`/recipes/${id}`)
-//       .then((response) => {
-//         console.log(response.data[0].name); // The entire response from the Rails API
-//         props.setRecipe(response.data);
 //       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-
-//   const convertRecipeToSaveDB = (recipeUI) => {
-//     let json_ingredients = JSON.stringify(recipeUI.ingredients);
-//     let recipeDB = {...recipeUI, "ingredients": json_ingredients};
-//     // let string_steps = String(recipeUI.steps);
-//     // recipeDB = {...recipeUI, "steps": string_steps};
-//     return recipeDB;
-//   }
-//   const convertRecipeToShowUI = (recipeDB) => {
-//     let string_ingredients = eval(recipeDB.ingredients);
-//     let recipeUI = {...recipeDB, "ingredients": string_ingredients};
-//   //  // let string_steps=String(recipeDB.steps);
-//   //   recipeUI = {...recipeDB, "steps": string_steps};
-//     return recipeUI;
 //   }
 
 //   const saveRecipe = (inputRecipe) => {
-//    if (recipe.name === null
-//     || recipe.ingredients === null 
-//     || recipe.category_id === null
-//     || recipe.estimated_time === null
-//     || recipe.description === null
-//     || recipe.serving_size === null
-//     || recipe.steps === null
-//     || recipe.image_url === null
+//    if (!inputRecipe
+//     || inputRecipe.name === null
+//     || !inputRecipe.ingredients
+//     || inputRecipe.ingredients.indexOf([{name:"",unit:"",quantity:0}]) >= 0
+//     || inputRecipe.category_id === null
+//     || inputRecipe.estimated_time === null
+//     || inputRecipe.description === null
+//     || inputRecipe.serving_size === null
+//     || inputRecipe.steps === null
+//     || inputRecipe.image_url === null
 //     ) {
-//       transition(ERROR_SAVE_VALIDATION, true);
+//       setRecipe(inputRecipe);
+//       transition(ERROR_SAVE_VALIDATION, false);
 //     } else {
 //       transition(SAVING);
-//       inputRecipe={...recipe};
 //       inputRecipe.user_id = props.user.id
 //       let recipeDB = convertRecipeToSaveDB(inputRecipe);
-//       if (!recipe.id) {
+//       console.log("recipe before saving to DB:",recipeDB)
+//       if (!recipe) {
 //         axios
 //         .post("/recipes", recipeDB)
 //         .then((response) => {
@@ -125,8 +154,9 @@
 //           transition(ERROR_SAVE, true);
 //         })
 //       } else {
+//         console.log('edited recipe before sending to DB:', recipe);
 //         axios
-//         .put(`/recipes/${recipe.id}`,recipe)
+//         .put(`/recipes/${recipe.id}`,recipeDB)
 //         .then((response) => {
 //           let tempRecipe = {...response.data};
 //           setRecipe(()=>convertRecipeToShowUI(tempRecipe));
@@ -137,29 +167,24 @@
 //           transition(ERROR_SAVE, true);
 //         })
 //       }
-      
 //     }
 //   }
 
-//   const { mode, transition, back } = useVisualMode(
-//     Object.keys(recipe).length > 0 ? SHOW  : CREATE
-//   );
-
-//   function destroy(recipe) {
+//   function destroy(recipe, user) {
 //     transition(DELETING, true);
 //     console.log(`Deleting recipe id = ${recipe.id}`);
 //     axios
 //     .delete(`/recipes/${recipe.id}`, recipe)
 //     .then((response)=>{
-//       let tempRecipes = response.data.map(recipe => {
-//         let temp_recipe = convertRecipeToShowUI(recipe);
-//         return temp_recipe;
-//       });
-//       console.log(tempRecipes);
-//       setRecipes(tempRecipes)
-//       transition(EMPTY);
-
-
+//       let filtered = response.data.filter(recipe => {
+//         if (recipe.user_id === user.id) {
+//           let temp_recipe = convertRecipeToShowUI(recipe);
+//           return temp_recipe;
+//         }
+//       })
+//       console.log(filtered);
+//       setRecipes(filtered);
+//       transition(EMPTY)
 //     })
 //     .catch(error => {
 //       console.log(error);
@@ -167,48 +192,82 @@
 //     })
 //   }
 
+//   const viewRecipe = (recipe) => {
+//     setRecipe(recipe);
+//     transition(SHOW);
+//   }
+
+//   const editRecipe = (recipe) => {
+//     setRecipe(recipe);
+//     transition(EDIT);
+//   }
+
+//   const confirmRecipe = (recipe) => {
+//     setRecipe(recipe);
+//     transition(CONFIRM);
+//   }
+
+//   const addRecipe = () => {
+//     setRecipe(null);
+//     transition(CREATE);
+//   }
+
+//   useEffect (()=>{
+//     fetchMyRecipes(user);
+//   },[user]);
+
 //   useEffect (()=>{
 //     fetchCategories();
 //     fetchComments();
+//     fetchRatings();
 //   },[]);
+
+//   const { mode, transition, back } = useVisualMode(props.mode);
 
 //   return (
   
 //     <div>
-//       {mode === EMPTY && <Empty 
-//         viewRecipe={()=>transition(SHOW)}
-//         onEdit={()=>{transition(EDIT)}}
-//         onDelete={destroy}
+//       {mode === EMPTY && <Empty style={styles.paperContainer}
+//         viewRecipe={viewRecipe}
+//         onEdit={editRecipe}
+//         onDelete={confirmRecipe}
+//         onAdd={addRecipe}
 //         setSelectRecipe={setRecipe}
 //         recipes={recipes}
 //         user={props.user}
+//         comments = {comments}
+//         ratings={ratings}
 //       />}
 //       {mode === SHOW &&
 //         <Show
-//           // selectRecipe={props.recipe}
 //           selectRecipe={recipe}
 //           user={props.user}
-//           onDelete={()=>transition(CONFIRM)}
-//           onEdit={()=>{
-//             console.log('view = Edit')
-//             // console.log(props.recipe);
-//             transition(EDIT)
-//           }}
+//           onEdit={editRecipe}
+//           onDelete={confirmRecipe}
 //           comments = {comments}
-//         />}
-//         { /*   <Recipes 
-//         //     selectRecipe={recipe}
-//         //     onDelete={()=>transition(CONFIRM)}
-//         //     onEdit={()=>{transition(EDIT)}}
-//         //     user={props.user}
-//         //     comments={comments}
-//         //   />
-//         // </div>} */ }
-//       {mode === CREATE && <Form cates={categories} onCancel={back} onSave={saveRecipe} onDelete={destroy} setRecipe={setRecipe} recipe={recipe}/>}
+//           ratings={ratings}
+//         />
+//         }
+//       {mode === CREATE && 
+//         <Form 
+//           cates={categories}
+//           onCancel={back}
+//           onSave={saveRecipe}
+//           ratings={ratings}
+//           setRecipe={setRecipe}
+//         />
+//       }
 //       {mode === SAVING && <Status message = {'Saving...'} />}
 //       {mode === DELETING && <Status message = {'Deleting...'} />}
-//       {mode === CONFIRM && <Confirm message = {'Delete? ... Really?'} onCancel={back} onConfirm={() => destroy(recipe)}/>}
-//       {mode === EDIT && <Form cates={categories} recipe={recipe} onCancel={back} onSave={saveRecipe} onDelete={destroy} setRecipe={setRecipe} mode="EDIT"/>}
+//       {mode === CONFIRM && <Confirm message = {'Delete?... Really?'} user={user} onCancel={back} onConfirm={() => destroy(recipe,user)}/>}
+//       {mode === EDIT && <Form 
+//         cates={categories}
+//         ratings={ratings}
+//         recipe={recipe}
+//         setRecipe={setRecipe}
+//         onCancel={back}
+//         onSave={saveRecipe}
+//       />}
 //       {mode === ERROR_SAVE && <Error message={'Error saving encountered. Sorry!'} onClose={back} />}
 //       {mode === ERROR_DELETE && <Error message={'Error deleting encountered. Sorry!'} onClose={back} />}
 //       {mode === ERROR_SAVE_VALIDATION && <Error message={'Please fill data in all required fields (*)'} onClose={back} />}

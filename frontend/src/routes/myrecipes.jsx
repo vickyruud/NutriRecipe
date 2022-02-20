@@ -223,6 +223,7 @@ export default function MyRecipes(props) {
   },[]);
 
   const { mode, transition, back } = useVisualMode(props.mode);
+  console.log(mode)
 
   return (
   

@@ -106,7 +106,7 @@ const ResponsiveAppBar = (props) => {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     {/*page*/}
-                    {/* {page==='Add New Recipe' && <Link1  to="/newrecipe" underline="none">Add a new Recipe</Link1>} */}
+                    {/* {page==='Add New Recipe' && <Button variant="contained" onClick={()=>{window.location.href="/newrecipe"}} underline="none">New Recipe</Button>} */}
                     {/* {page==='My Recipes' && <Link1 to="/myrecipes" underline="none">My Recipes</Link1>} */}
                     {page==='My Recipes' && <Button variant="contained" onClick={()=>{window.location.href="/myrecipes"}} underline="none">My Recipes</Button>}
                   
@@ -135,7 +135,7 @@ const ResponsiveAppBar = (props) => {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {/*page*/}
-                {/* {page==='Add New Recipe' && <Link1  to="/newrecipe">Add a new Recipe</Link1>} */}
+                {/* {page==='Add New Recipe' && <Button variant="contained" onClick={()=>{window.location.href="/newrecipe"}} underline="none">New Recipe</Button>} */}
                 {/* {page==='My Recipes' && <Link1 to="/myrecipes" underline="none">My Recipes</Link1>} */}
                 {page==='My Recipes' && <Button variant="contained" onClick={()=>{window.location.href="/myrecipes"}} underline="none">My Recipes</Button>}
                
