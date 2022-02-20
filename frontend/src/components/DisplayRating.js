@@ -11,7 +11,7 @@ const DisplayRatings = (props) => {
   
   useEffect(() => {
     setRating(props.recipe.average_rating);
-  }, [props.recipe.average_rating])
+  }, [])
   
   return (
     <div>

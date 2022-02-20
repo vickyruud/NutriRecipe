@@ -27,6 +27,8 @@ export default function RecipeListItem(props) {
     image_url,
   } = props.recipe;
 
+  
+
   let recipe = props.recipe;
 
   const viewRecipe = () => {

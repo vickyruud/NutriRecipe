@@ -13,6 +13,8 @@ import './recipeCard.css'
 export default function RecipeCard(props) {
   const [ratingUpdated, setRatingUpdated] = useState(0);
   const [message, setMessage] = useState('');
+
+  
   
 
   const handleMessage = (input) => setMessage(input);
