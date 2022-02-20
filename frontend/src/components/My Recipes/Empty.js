@@ -9,15 +9,7 @@ import NavBar from "../NavBar";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
-// const Item = styled(Paper)(({ theme }) => ({
-//   ...theme.typography.body2,
-//   padding: theme.spacing(2),
-//   textAlign: "center",
-//   color: theme.palette.text.secondary,
-// }));
-
 export default function Empty(props) {
-  console.log(props.ratings);
   return (
     <div>
        <Box
@@ -26,10 +18,10 @@ export default function Empty(props) {
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        padding: 5,
+        paddingTop: 3,
       }}
     >
-      <Fab color="primary" label="Add your Recipe"onClick={props.onAdd}>
+      <Fab color="primary"label="Add your Recipe"onClick={props.onAdd}>
         <AddIcon />
       </Fab>
       </Box>
@@ -39,7 +31,7 @@ export default function Empty(props) {
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        padding: 5,
+        paddingTop: 3,
       }}
     >
       <Grid
@@ -48,7 +40,7 @@ export default function Empty(props) {
         columns={{ xs: 4, sm: 5, md: 20 }}
       >
         {props.recipes.map((recipe, index) => (
-          <Grid item xs={10} sm={10} md={20} key={index}>
+          <Grid item xs={7} sm={7} md={10} key={index}>
             <RecipeListItem
               setSelectRecipe={props.setSelectRecipe}
               recipe={recipe}
