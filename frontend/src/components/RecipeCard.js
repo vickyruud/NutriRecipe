@@ -18,6 +18,8 @@ export default function RecipeCard(props) {
   const [average, setAverage] = useState(props.list.average_rating)
 
   const [message, setMessage] = useState('');
+
+  
   let sum = 0;
   let avg = 0;
   let val = 0;
@@ -36,8 +38,10 @@ export default function RecipeCard(props) {
     
     roundedAvg = Math.round(avg * 10 / 10);
     console.log(roundedAvg)
+
     updateAvgRating({
       ...props.list,
+      id: props.list.id,
       average_rating: roundedAvg
     })
     
@@ -86,7 +90,7 @@ export default function RecipeCard(props) {
         {ratingUpdated === 1 && <RatingUpdated message={message} setRatingUpdated={setRatingUpdated}/>}
          Your Rating: <NewRatings setRatingUpdated={setRatingUpdated} handleMessage={handleMessage} setRatingUpdated={setRatingUpdated} user={props.user }ratings={props.ratings} list={props.selectRecipe} />
         </div>
-        Average Rating : <DisplayRatings recipe={props.list}/>
+        Average Rating : {average}
         <Typography variant="body2" color="text.secondary">
             {props.selectRecipe.description}
           </Typography>
