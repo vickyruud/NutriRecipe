@@ -1,12 +1,29 @@
 import React, { useState } from 'react'
 import {FaStar} from 'react-icons/fa'
 import './newRatings.css'
+import axios from 'axios'
 
-const NewRatings = () => {
+const NewRatings = (props) => {
 
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
+  const submitRating = (rating) => {
+    axios.post("/ratings", rating)
+      .then(resp => {
+        console.log(resp.data);
+        setRating(rating);
+    })
+  }
+
+  const changeRating = (value) => {
+    const rating = {
+      user_id: props.user.id,
+      recipe_id: props.list.id,
+      rating: value
+    }
+    submitRating(rating);
+  }
 
   return (
     <div>
@@ -18,7 +35,7 @@ const NewRatings = () => {
               type="radio"
               name="rating"
               value={ratingValue}
-              onClick={() => setRating(ratingValue)}
+              onClick={() => changeRating(ratingValue)}
               
                 
             /> 

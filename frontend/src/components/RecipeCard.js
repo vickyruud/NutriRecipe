@@ -21,7 +21,7 @@ export default function RecipeCard(props) {
           <Typography gutterBottom variant="h5" component="div">
             {props.selectRecipe.name}
         </Typography>
-        <NewRatings/>
+        <NewRatings user={props.user }ratings={props.ratings} list={props.selectRecipe} />
           <AverageRating list={props.selectRecipe}
                 ratings={props.ratings}/>      
           <Typography variant="body2" color="text.secondary">

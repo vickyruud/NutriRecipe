@@ -71,7 +71,8 @@ export default function Recipe(props) {
           <Grid item xs={4}>
             <Item>
               <RecipeCard selectRecipe={props.selectRecipe} list={props.selectRecipe}
-                ratings={props.ratings}/>
+                ratings={props.ratings}
+                user={props.user}/>
             </Item>
           </Grid>
           <Grid item xs={4}>
