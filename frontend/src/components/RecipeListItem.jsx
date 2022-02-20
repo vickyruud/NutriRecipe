@@ -15,6 +15,15 @@ import "../App.css";
 import AverageRating from "./AverageRating";
 import DisplayRatings from "./DisplayRating";
 
+const styles = {
+
+  largeIcon: {
+    width: 40,
+    height: 40,
+  },
+
+};
+
 export default function RecipeListItem(props) {
   const {
     id,
@@ -71,15 +80,15 @@ export default function RecipeListItem(props) {
           </Button>
         }
         {props.viewRecipe &&
-          <Box sx ={{display: "flex", justifyContent : "space-between",}}>          
-            <Button2 size="small" onClick={()=>props.viewRecipe(recipe)}>
-              <PageviewSharpIcon />
+          <Box sx ={{  width: '40vh'}}>          
+            <Button2  onClick={()=>props.viewRecipe(recipe)}>
+              <PageviewSharpIcon style ={styles.largeIcon}/>
             </Button2>
-            <Button2 size="small" onClick={() => props.onEdit(recipe)}>
-              <EditIcon/>
+            <Button2 onClick={() => props.onEdit(recipe)}>
+              <EditIcon style ={styles.largeIcon}/>
             </Button2>
-            <Button2 size="small" onClick={()=>props.onDelete(recipe)}>
-              <DeleteForeverSharpIcon/>
+            <Button2 onClick={()=>props.onDelete(recipe)}>
+              <DeleteForeverSharpIcon style ={styles.largeIcon}/>
             </Button2>
           </Box>
         }
