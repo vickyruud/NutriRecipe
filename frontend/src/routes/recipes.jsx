@@ -11,13 +11,12 @@ export default function Recipes(props) {
   const [comments, setComments] = useState(props.comments || []);
   const [ratings, setRatings] = useState([]);
   const [filterlist, setFilterList]=useState([]);
-  console.log("recipies",recipes);
 
   const fetchRecipes = () => {
     axios
       .get("/recipes")
       .then((response) => {
-        //console.log("response----->", response.data);
+        console.log("from fetch recipes", response.data)
         setRecipes(response.data);
         setFilterList(response.data);
       })
@@ -81,6 +80,7 @@ export default function Recipes(props) {
           user={props.user}
           ratings={ratings}
           setSelectRecipe={setSelectRecipe}
+          users={props.ratings}
         />
       ) : (
         <RecipeList
