@@ -5,33 +5,57 @@ import axios from 'axios'
 
 const NewRatings = (props) => {
 
-  const [rating, setRating] = useState(null);
+  const [rating, setRating] = useState({});
+  const [ratingStatus, setRatingStatus] = useState("");
   const [hover, setHover] = useState(null);
+ 
 
-  const submitRating = (rating) => {
-    axios.post("/ratings", rating)
-      .then(resp => {
-        console.log(resp.data);
-        setRating(rating);
-    })
-  }
+  const submitRating = (ratingObject) => {
 
-  const changeRating = (value) => {
-    const rating = {
-      user_id: props.user.id,
-      recipe_id: props.list.id,
-      rating: value
+    if (!ratingStatus) {
+       axios.post("/ratings", ratingObject)
+         .then(resp => {
+        setRating(resp.data);
+        setRatingStatus("done");
+        props.handleMessage("Saved!");
+        props.setRatingUpdated(1);
+
+      })
+      
+    } else {
+      console.log('from the else statement', rating)
+      axios.put(`/ratings/${rating.id}`, ratingObject)
+        .then(resp => {
+          setRating(resp.data);
+          setRatingStatus(true);
+          props.setRatingUpdated(1);
+           props.handleMessage("Updated!")
+
+      })
+     
     }
-    submitRating(rating);
   }
+
+  const changeRating = (rating1) => {
+      const rating = {
+        user_id: props.user.id,
+        recipe_id: props.list.id,
+        value: rating1,
+      }
+      submitRating(rating);
+  }
+
+
 
   return (
     <div>
-      {[...Array(5)].map((heart, i) => {
+      {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1
+        let id = 1;
         return (
           <label>
             <input
+              id = {id + 1}
               type="radio"
               name="rating"
               value={ratingValue}
@@ -43,7 +67,7 @@ const NewRatings = (props) => {
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}
               className='heart'
-              color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"} size={25} />
+              color={ratingValue <= (hover || rating.value) ? "#ffc107" : "#e4e5e9"} size={25} />
           </label>);
       })}      
     </div>
