@@ -249,6 +249,7 @@ export default function MyRecipes(props) {
           onDelete={confirmRecipe}
           comments = {comments}
           ratings={ratings}
+          fetchComments={fetchComments}
         />
         }
       {mode === CREATE && 

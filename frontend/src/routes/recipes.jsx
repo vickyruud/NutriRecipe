@@ -107,8 +107,8 @@ export default function Recipes(props) {
       
       {selectRecipe ? (
         <RecipePage1
-          fetchComments={fetchComments}
           selectRecipe={selectRecipe}
+          fetchComments={fetchComments}
           comments={comments}
           user={props.user}
           ratings={ratings}
