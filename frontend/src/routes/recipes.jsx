@@ -99,8 +99,8 @@ export default function Recipes(props) {
         flexGrow: 1,
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
-        padding: 5,
+            justifyContent: "center",
+        padding : "2px 0px 10px 0px"
       }}/>
           
       </div>

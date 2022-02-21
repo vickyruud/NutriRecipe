@@ -40,7 +40,7 @@ export default function ResponsiveGrid(props) {
         )
       } else {
         arrayOfRecipes = props.recipes.map((recipe, index) => (
-          <Grid item xs={4} sm={4} md={4} key={index}>
+          <Grid item xs={4} key={index}>
             <RecipeListItem
               setSelectRecipe={props.setSelectRecipe}
               recipe={recipe}
@@ -69,7 +69,8 @@ export default function ResponsiveGrid(props) {
   return (
    <div>
      <Box>
-      <Grid
+        <Grid
+        style={{padding : "5px 50px 10px 50px"}}
         container
         spacing={{ sm: 2, md: 3 }}
         columns={{ xs: 4, sm: 5, md: 20 }}
