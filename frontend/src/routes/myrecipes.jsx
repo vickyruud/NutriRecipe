@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from '../components/NewRecipe/Form'
-// import Show from '../components/NewRecipe/Show'; // Recipe detail page
 import Show from '../components/RecipePage1'; // Recipe detail page
-import Empty from '../components/My Recipes/Empty'; // Main page
+import Empty from '../components/RecipeList'; // Main page
 import Status from '../components/NewRecipe/Status';
 import Confirm from '../components/NewRecipe/Confirm';
 import Error from '../components/NewRecipe/Error';
 import useVisualMode from '../components/NewRecipe/hooks/useVisualMode';
 import { convertToRaw } from 'draft-js'
-
-const styles = {
-  paperContainer: {
-      height: "1000",
-      backgroundImage: `url(${"https://res.cloudinary.com/de6puygvt/image/upload/v1645342161/recipes/wood-table-top-blur-kitchen-counter-room-background_254791-1293_zrvkre.jpg"})`
-  }
-};
 
 export default function MyRecipes(props) {
   const EMPTY = "EMPTY";
@@ -228,7 +220,7 @@ export default function MyRecipes(props) {
   return (
   
     <div>
-      {mode === EMPTY && <Empty style={styles.paperContainer}
+      {mode === EMPTY && <Empty
         viewRecipe={viewRecipe}
         onEdit={editRecipe}
         onDelete={confirmRecipe}
@@ -260,7 +252,7 @@ export default function MyRecipes(props) {
       }
       {mode === SAVING && <Status message = {'Saving...'} />}
       {mode === DELETING && <Status message = {'Deleting...'} />}
-      {mode === CONFIRM && <Confirm message = {'Delete?... Really?'} user={user} onCancel={back} onConfirm={() => destroy(recipe,user)}/>}
+      {mode === CONFIRM && <Confirm message = {'Getting ready...Are you sure?'} user={user} onCancel={back} onConfirm={() => destroy(recipe,user)}/>}
       {mode === EDIT && <Form 
         cates={categories}
         ratings={ratings}
