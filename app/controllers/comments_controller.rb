@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     if @comment.save
       render :json => @comment
     else
-      notice 'error saving!'
+      render json: {failure: "Cannot Save Comment!"}
     end
   end
 
