@@ -10,12 +10,7 @@ import SearchBar from "./SearchBar";
 import '../App.js'
 import { Button } from "@mui/material";
 
-// const Item = styled(Paper)(({ theme }) => ({
-//   ...theme.typography.body2,
-//   padding: theme.spacing(2),
-//   textAlign: "center",
-//   color: theme.palette.text.secondary,
-// }));
+
 
 export default function ResponsiveGrid(props) {
 
@@ -67,7 +62,6 @@ export default function ResponsiveGrid(props) {
       
     
   const renderSearch = () => {
-    console.log(props.openSearch);
     if (props.openSearch !== false) {
       return <SearchBar 
         searchRecipe={props.searchRecipe} closeSearch={ props.closeSearch}/>
