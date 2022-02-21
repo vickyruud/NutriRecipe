@@ -23,6 +23,7 @@ import useVisualMode from './NewRecipe/hooks/useVisualMode';
 import Recipe from './NewRecipe/index';
 import Search from "@mui/icons-material/Search";
 
+
 const ResponsiveAppBar = (props) => {
   let name = '';
   let pages = [];

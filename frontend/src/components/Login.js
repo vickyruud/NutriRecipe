@@ -40,10 +40,10 @@ const Login = (props) => {
         .then(data => {
           localStorage.setItem("token", data.jwt)
           props.handleLogin(data.user)
-        })
-      setUsername("")
-      setPassword("")
-      props.cancel()
+        }).catch(error => { 
+          console.log('login error', error.response.data.message);
+        });
+        props.cancel()
     }
     
   

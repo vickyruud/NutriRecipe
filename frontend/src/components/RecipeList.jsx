@@ -12,6 +12,7 @@ import { Button } from "@mui/material";
 
 
 
+
 export default function ResponsiveGrid(props) {
 
 
@@ -58,7 +59,9 @@ export default function ResponsiveGrid(props) {
     }
     return arrayOfRecipes
   }
-        
+      
+  
+
       
     
   const renderSearch = () => {
@@ -66,8 +69,10 @@ export default function ResponsiveGrid(props) {
       return <SearchBar 
         searchRecipe={props.searchRecipe} closeSearch={ props.closeSearch}/>
     } else {
-      return <Button variant="contained" onClick={props.showSearch}>Search Recipes</Button>
-    }
+      return (
+        <Button variant="contained" onClick={props.showSearch}>Search Recipes</Button>
+      )
+      }
   }
 
   return (
