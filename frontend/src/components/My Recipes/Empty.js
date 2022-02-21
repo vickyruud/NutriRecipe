@@ -1,15 +1,14 @@
-// // import React from "react"
-// import RecipeListItem from "./RecipeListItem";
-// import * as React from "react";
-// import { experimentalStyled as styled } from "@mui/material/styles";
-// import Box from "@mui/material/Box";
-// import Paper from "@mui/material/Paper";
-// import Grid from "@mui/material/Grid";
-// import NavBar from "./NavBar";
-// import SearchBar from "./SearchBar";
-// import '../App.js'
-// import { Button } from "@mui/material";
-
+import React from "react"
+import RecipeListItem from "./RecipeListItem";
+import { experimentalStyled as styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import NavBar from "./NavBar";
+import SearchBar from "./SearchBar";
+import '../App.js'
+import { Button } from "@mui/material";
+import Fab from '@mui/material/Fab';
 
 export default function Empty(props) {
 
@@ -56,6 +55,7 @@ export default function Empty(props) {
     return arrayOfRecipes
   }
   return (
+    <>
     <div>
       {props.user &&
        <Box
@@ -65,13 +65,14 @@ export default function Empty(props) {
          flexDirection: "row",
          justifyContent: "center",
          paddingTop: 3,
-       }}
-     >
+        }}
+        >
        <Fab color="primary"label="Add your Recipe"onClick={props.onAdd}>
          <AddIcon />
        </Fab>
        </Box>
       }
+      </div>
     <Box
       sx={{
         flexGrow: 1,
@@ -91,6 +92,6 @@ export default function Empty(props) {
      
       </Grid>
     </Box>
-</div>
+</>
   );
 }

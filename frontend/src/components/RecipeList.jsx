@@ -64,31 +64,11 @@ export default function ResponsiveGrid(props) {
 
       
     
-  const renderSearch = () => {
-    if (props.openSearch !== false) {
-      return <SearchBar 
-        searchRecipe={props.searchRecipe} closeSearch={ props.closeSearch}/>
-    } else {
-      return (
-        <Button variant="contained" onClick={props.showSearch}>Search Recipes</Button>
-      )
-      }
-  }
+ 
 
   return (
-    <div className="search-location">
-      <br></br>
-      {renderSearch()}
-    <Box
-      sx={{
-        flexGrow: 1,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        padding: 5,
-      }}
-    >
-     
+   <div>
+     <Box>
       <Grid
         container
         spacing={{ sm: 2, md: 3 }}
