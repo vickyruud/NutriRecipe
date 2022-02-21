@@ -12,6 +12,7 @@ import { Button } from "@mui/material";
 import Fab from '@mui/material/Fab';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { Box } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
 
 export default function MyRecipes(props) {
@@ -240,7 +241,7 @@ export default function MyRecipes(props) {
         }}
         >
        <Fab color="primary"label="Add your Recipe"onClick={() => addRecipe()}>
-         <AddCircleRoundedIcon variant="contained" />
+         <AddIcon />
        </Fab>
        </Box>
        </div>

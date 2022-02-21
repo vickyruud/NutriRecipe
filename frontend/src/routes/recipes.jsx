@@ -93,7 +93,7 @@ export default function Recipes(props) {
     <main>
        <div className="search-location">
       <br></br>
-      {renderSearch()}
+      {selectRecipe ? null : renderSearch()}
       <Box
         sx={{
         flexGrow: 1,
