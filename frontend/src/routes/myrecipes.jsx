@@ -229,23 +229,6 @@ export default function MyRecipes(props) {
   return (
   
     <div>
-      {props.user &&
-       <div>
-       <Box
-       sx={{
-         flexGrow: 1,
-         display: "flex",
-         flexDirection: "row",
-         justifyContent: "center",
-         padding: 5,
-        }}
-        >
-       <Fab color="primary"label="Add your Recipe"onClick={() => addRecipe()}>
-         <AddIcon />
-       </Fab>
-       </Box>
-       </div>
-      }
       {mode === EMPTY && <Empty
         viewRecipe={viewRecipe}
         onEdit={editRecipe}
