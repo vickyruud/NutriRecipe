@@ -4,7 +4,7 @@ import Form from '../components/NewRecipe/Form'
 import Show from '../components/RecipePage1'; // Recipe detail page
 import Empty from '../components/RecipeList'; // Main page
 import Status from '../components/NewRecipe/Status';
-import Confirm from '../components/NewRecipe/Confirm';
+import Confirm from '../components/My Recipes/Confirm';
 import Error from '../components/NewRecipe/Error';
 import useVisualMode from '../components/NewRecipe/hooks/useVisualMode';
 import { convertToRaw } from 'draft-js'
@@ -252,7 +252,7 @@ export default function MyRecipes(props) {
       }
       {mode === SAVING && <Status message = {'Saving...'} />}
       {mode === DELETING && <Status message = {'Deleting...'} />}
-      {mode === CONFIRM && <Confirm message = {'Getting ready...Are you sure?'} user={user} onCancel={back} onConfirm={() => destroy(recipe,user)}/>}
+      {mode === CONFIRM && <Confirm title = "Delete?" message = {'Looks like a great recipe.\nAre you sure?'} user={user} onCancel={back} onConfirm={() => destroy(recipe,user)}/>}
       {mode === EDIT && <Form 
         cates={categories}
         ratings={ratings}
