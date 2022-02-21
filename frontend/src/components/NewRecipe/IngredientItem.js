@@ -54,7 +54,7 @@ const NewIngredientItem = (props) => {
             value={props.ingredient.quantity}
             
           />
-          <Fab color="primary" aria-label="Delete">
+          <Fab color="secondary" aria-label="Delete">
             <DeleteIcon onClick={props.onDelete}/>
           </Fab>
         </div>

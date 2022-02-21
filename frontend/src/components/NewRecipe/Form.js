@@ -15,6 +15,8 @@ import Stack from '@mui/material/Stack';
 import UploadImage from "./UploadImage";
 import TextEditor from './TextEditor'
 import IngredientList from "./IngredientList"
+import Paper from '@mui/material/Paper';
+
 
 const styles = {
   paperContainer: {
@@ -67,7 +69,7 @@ const Form = (props) => {
   },[]);
 
   return (
-    <Box className="NewRecipe"style={styles.paperContainer}>
+    <Paper className="NewRecipe"style={styles.paperContainer}>
       <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">{props.recipe ? "EDIT RECIPE" : "ADD A NEW RECIPE"}</Typography>
       <Accordion >
         <AccordionSummary
@@ -177,9 +179,8 @@ const Form = (props) => {
         <AccordionDetails>
           <Box>
             <TextEditor
-              multiline
-              maxRows={100}
-              rows={10}
+              multilines
+              lines={1000}
               variant="standard"
               setSteps={setSteps}
               steps={props.recipe ? props.recipe.steps : null}
@@ -245,11 +246,11 @@ const Form = (props) => {
       <Box display="flex" flex-direction="row" justifyContent="center" paddingTop={5}>
         <Stack direction="row" spacing={10} >
           <Button variant="contained" onClick={()=>props.onSave(recipe)}>Save your Recipe</Button>
-          <Button variant="outlined" onClick={props.onCancel}>Cancel</Button>
+          <Button variant="contained"onClick={props.onCancel}color="secondary">Cancel</Button>
         </Stack>
       </Box>
 
-    </Box>
+    </Paper>
   );
 }
 export default Form

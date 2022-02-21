@@ -109,7 +109,7 @@ const App = (props) => {
       <Routes>
         <Route path="/" element={<Recipes user={user}/>} />
         <Route path="/recipes" element={<Recipes user={user}/>} />      
-        {/* <Route path="/newrecipe" element={<MyRecipes user={user} mode={"CREATE"}/>}/> */}
+        <Route path="/newrecipe" element={<MyRecipes user={user} mode={"CREATE"}/>}/>
         <Route path="/myrecipes" element={<MyRecipes user={user} mode={"EMPTY"}/>}/>
         {/* <Route path="newrecipe" element={<h1>Hello!</h1>} />       */}
         {/* <Route path={`recipe/edit/${i}`} element={<MyRecipes user={user} mode="EMPTY" myRecipes = {myRecipes} edit={edit}/>} /> */}
