@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, Paper, Avatar, Typography, TextField, Button } from '@mui/material';
 import './login.css'
 import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
-import axios from 'axios';
 
 
 const Login = (props) => {
