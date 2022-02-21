@@ -74,7 +74,6 @@ export default function Recipes(props) {
     }
   }, []);
 
-  console.log(props.selectRecipe);
 
   return (
     <main>
