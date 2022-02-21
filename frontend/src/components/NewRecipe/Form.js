@@ -71,7 +71,7 @@ const Form = (props) => {
   return (
     <Paper className="NewRecipe"style={styles.paperContainer}>
       <Typography sx={{ fontSize: 20 }}fontWeight="bold"align="center">{props.recipe ? "EDIT RECIPE" : "ADD A NEW RECIPE"}</Typography>
-      <Accordion >
+      <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
