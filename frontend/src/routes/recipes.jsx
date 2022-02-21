@@ -4,13 +4,20 @@ import { Link } from "react-router-dom";
 import RecipeList from "../components/RecipeList";
 import "../App.css";
 import RecipePage1 from "../components/RecipePage1";
+import { Button } from "@mui/material";
 
 export default function Recipes(props) {
   const [recipes, setRecipes] = useState(props.recipes || []);
   const [selectRecipe, setSelectRecipe] = useState(props.selectRecipe || null);
   const [comments, setComments] = useState(props.comments || []);
   const [ratings, setRatings] = useState([]);
-  const [filterlist, setFilterList]=useState([]);
+  const [filterlist, setFilterList] = useState([]);
+  const [openSearch, setOpenSearch] = React.useState(false);
+  const showSearch = () => setOpenSearch(true);
+  const closeSearch = () => {
+    setOpenSearch(false);
+    setFilterList(recipes);
+  };
 
   const fetchRecipes = () => {
     axios
@@ -71,6 +78,7 @@ export default function Recipes(props) {
 
   return (
     <main>
+      
       <div style={{ display: "flex", flexDirection: "row" }}></div>
       {selectRecipe ? (
         <RecipePage1
@@ -91,8 +99,10 @@ export default function Recipes(props) {
           onEdit={props.onEdit}
           onDelete={props.onDelete}
           ratings={ratings}
-          
           searchRecipe={searchRecipe}
+          closeSearch={closeSearch}
+          showSearch={showSearch}
+          openSearch={openSearch}
         />
       )}
     </main>
