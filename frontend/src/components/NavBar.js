@@ -62,17 +62,24 @@ const ResponsiveAppBar = (props) => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
             <Link href="/">
-              <Avatar alt="NutriRecipe" src="//res.cloudinary.com/de6puygvt/image/upload/v1644038875/recipes/Nutrition-Wave-Article-Marty-Gallagher_lwzop4.jpg" />
+              <Avatar alt="NutriRecipe" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format" />
             </Link>
             <Link href="/" color="#ffffff" underline="none">NutriRecipe</Link>
           </Typography>
+            <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+          >
           <Link href="/" color="#ffffff" underline="none">Nutrition Facts Simplified</Link>
+          </Typography>
             
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -128,7 +135,7 @@ const ResponsiveAppBar = (props) => {
             </Link>
               NutriRecipe
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, padding: "0 0 0 50px" }}>
             {pages.map((page) => (
               <Button
                 key={page}

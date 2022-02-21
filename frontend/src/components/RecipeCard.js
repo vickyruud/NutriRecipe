@@ -86,10 +86,10 @@ export default function RecipeCard(props) {
         <Typography>
           <p>Posted by:  {userName}</p>
         </Typography>
-        <div className='ratings-on-card'>
-        {ratingUpdated === 1 && <RatingUpdated message={message} setRatingUpdated={setRatingUpdated}/>}
-         Your Rating: <NewRatings setRatingUpdated={setRatingUpdated} handleMessage={handleMessage} setRatingUpdated={setRatingUpdated} user={props.user }ratings={props.ratings} list={props.selectRecipe} />
-        </div>
+        {props.user && <div className='ratings-on-card'>
+          {ratingUpdated === 1 && <RatingUpdated message={message} setRatingUpdated={setRatingUpdated} />}
+          Your Rating: <NewRatings setRatingUpdated={setRatingUpdated} handleMessage={handleMessage} setRatingUpdated={setRatingUpdated} user={props.user} ratings={props.ratings} list={props.selectRecipe} />
+        </div>}
         Average Rating : {average}
         <Typography variant="body2" color="text.secondary">
             {props.selectRecipe.description}
