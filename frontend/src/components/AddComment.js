@@ -61,7 +61,7 @@ const AddComment = (props) => {
             autoComplete="off">
           
           Add your comment below:
-          <TextField required name="name" label='Add Comment' variant="outlined" onChange={e => handleCommentChange(e.target.value)} defaultValue={commentValue}/>
+          <TextField required name="name" label='Add Comment' variant="outlined" onChange={e => handleCommentChange(e.target.value)} defaultValue={commentValue} autoFocus/>
           </Box>
           <div className='comment-buttons'>
           <Button onClick={handleCommentSubmit} style={buttonStyle} variant='contained' color='primary'>Submit</Button>

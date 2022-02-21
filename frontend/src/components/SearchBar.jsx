@@ -20,6 +20,7 @@ export default function SearchBar(props) {
       props.searchRecipe(e.target.value)}
       
         inputProps={{ 'aria-label': 'search google maps' }}
+        autoFocus
       />
       <IconButton  sx={{ p: '10px' }} aria-label="search">
           <CancelTwoToneIcon onClick = {props.closeSearch} />

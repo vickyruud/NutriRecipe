@@ -60,7 +60,7 @@ const Login = (props) => {
           <h2 style ={headerStyle}>Login</h2>
         </Grid>
         <form className='login-form' onSubmit={handleSubmit}>
-          <TextField onChange={handleUsernameChange} style={textFieldStyle} variant='standard' fullWidth label='Username' placeholder='Enter your username' />
+          <TextField onChange={handleUsernameChange} style={textFieldStyle} variant='standard' fullWidth label='Username' placeholder='Enter your username' autofocus />
           <TextField onChange={handlePasswordChange} style={textFieldStyle} variant='standard' fullWidth label='Password' type="password" placeholder='Enter a password' />
           <div className='signup-buttons'>
           <Button style={loginButtonStyle} type='submit' variant='contained' color='primary'>Login</Button>
