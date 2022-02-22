@@ -123,20 +123,20 @@ export default function MyRecipes(props) {
   }
 
   const saveRecipe = (inputRecipe) => {
-   if (!inputRecipe
-    || inputRecipe.name === null
-    || !inputRecipe.ingredients
-    || inputRecipe.ingredients.indexOf([{name:"",unit:"",quantity:0}]) >= 0
-    || inputRecipe.category_id === null
-    || inputRecipe.estimated_time === null
-    || inputRecipe.description === null
-    || inputRecipe.serving_size === null
-    || inputRecipe.steps === null
-    || inputRecipe.image_url === null
-    ) {
-      setRecipe(inputRecipe);
-      transition(ERROR_SAVE_VALIDATION, false);
-    } else {
+  //  if (!inputRecipe
+  //   || !inputRecipe.name
+  //   || !inputRecipe.ingredients
+  //   || inputRecipe.ingredients.indexOf([{name:"",unit:"",quantity:0}]) >= 0
+  //   || !inputRecipe.category_id
+  //   || !inputRecipe.estimated_time
+  //   || !inputRecipe.description
+  //   || !inputRecipe.serving_size
+  //   || !inputRecipe.steps
+  //   || !inputRecipe.image_url
+  //   ) {
+  //     setRecipe(inputRecipe);
+  //     transition(ERROR_SAVE_VALIDATION, false);
+  //   } else {
       transition(SAVING);
       inputRecipe.user_id = props.user.id
       let recipeDB = convertRecipeToSaveDB(inputRecipe);
@@ -168,7 +168,7 @@ export default function MyRecipes(props) {
           transition(ERROR_SAVE, true);
         })
       }
-    }
+    //}
   }
 
   function destroy(recipe, user) {
