@@ -18,6 +18,7 @@
     "@mui/x-data-grid-generator": "^5.5.1",
     "@rpldy/upload-button": "^0.17.3",
     "@rpldy/uploady": "^0.17.3",
+    "avataaars": "^2.0.0",
     "axios": "^0.18.0",
     "chart.js": "^3.7.1",
     "chartjs-plugin-colorschemes": "^0.4.0",
@@ -38,7 +39,7 @@
     "timeago-react": "^3.0.4"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
