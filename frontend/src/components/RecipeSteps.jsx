@@ -14,7 +14,6 @@ export default function RecipeSteps(props) {
 
 ////////// Data Conversion ///////////////////////////////////////////////////////////////////
   let stringSteps = props.list.steps;
-  console.log(stringSteps);
   if (stringSteps.indexOf("blocks") > -1 && stringSteps.indexOf("key") > -1) {
     let convertedSteps = "";
     let posStart = stringSteps.indexOf("text") + 7;
@@ -29,7 +28,6 @@ export default function RecipeSteps(props) {
       posStart = stringSteps.indexOf("text") + 7;
 
     }
-    console.log("Extractions: ", convertedSteps);
     recipeSteps = convertedSteps.split('.');
     recipeSteps.pop();
   }

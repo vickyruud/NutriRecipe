@@ -44,17 +44,20 @@ const Form = (props) => {
   const deleteIngredient=(i)=>{
     let newIngredients = [...ingredients];
     newIngredients.splice(i,1);
-    setIngredients(newIngredients);
+    setIngredients([...newIngredients]);
   }
   let handleIngredients = (event, i) => {
     let newIngredients = [...ingredients];
     let newIngredient = {...newIngredients[i],[event.target.name]:event.target.value};
-    console.log('check status')
     newIngredients[i] = newIngredient;
-    setIngredients(newIngredients);  
+    setIngredients([...newIngredients]);
     let newRecipe = {...recipe,ingredients};
+<<<<<<< HEAD
     console.log('new ingredients',newRecipe);
     setRecipe(newRecipe)
+=======
+    setRecipe(newRecipe);
+>>>>>>> 1c5c88e3604493649d0b9d958ffe6bc22595a065
   }
 
   const handleChange = (event) => {
@@ -67,6 +70,13 @@ const Form = (props) => {
     let newRecipe = props.recipe;
     setRecipe(newRecipe);
   },[]);
+
+  useEffect(()=>{
+    let newRecipe = {...recipe,ingredients};
+    setRecipe(newRecipe);
+    console.log('newRecipe ', newRecipe);
+    console.log('recipe after set: ', recipe);
+  },[ingredients]);
 
   return (
     <Paper className="NewRecipe"style={styles.paperContainer}>
@@ -157,7 +167,6 @@ const Form = (props) => {
         <AccordionDetails>
           <Typography>
             <IngredientList 
-              //recipe = {recipe}
               ingredients = {ingredients}
               addIngredient={addIngredient}
               deleteIngredient={deleteIngredient}
@@ -188,18 +197,6 @@ const Form = (props) => {
               id=""
             />
           </Box>
-          {/* <Box>
-            <label id="lblSteps">test</label>
-            <button onclick="myGeeks()">
-                Click Here!
-            </button>
-            <script>
-                {function myGeeks() {
-                var x = document.getElementById("lblSteps");
-                    x.innerHTML = recipe ? recipe.steps : props.recipe.steps;
-                }}
-            </script>
-          </Box> */}
         </AccordionDetails>
       </Accordion>
 
