@@ -52,12 +52,7 @@ const Form = (props) => {
     newIngredients[i] = newIngredient;
     setIngredients([...newIngredients]);
     let newRecipe = {...recipe,ingredients};
-<<<<<<< HEAD
-    console.log('new ingredients',newRecipe);
-    setRecipe(newRecipe)
-=======
     setRecipe(newRecipe);
->>>>>>> 1c5c88e3604493649d0b9d958ffe6bc22595a065
   }
 
   const handleChange = (event) => {
