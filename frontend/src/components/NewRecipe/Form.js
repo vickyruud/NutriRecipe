@@ -30,7 +30,7 @@ const Form = (props) => {
 
   const [recipe, setRecipe] = useState(props.recipe ? props.recipe : {});
   const categories=[].concat(props.cates);
-  const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : [{name:"",unit:"",quantity:0}]);
+  const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : [{name:"",unit:"",quantity:''}]);
   const [imageSelected, setImageSelected]= useState(props.recipe ? props.recipe.image_url : null);
 
   const setSteps=(steps)=>{
@@ -55,7 +55,6 @@ const Form = (props) => {
     let newRecipe = {...recipe,ingredients};
     console.log('new ingredients',newRecipe);
     setRecipe(newRecipe)
-    let json_ingredients = JSON.stringify(recipe.ingredients);
   }
 
   const handleChange = (event) => {

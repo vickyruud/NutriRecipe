@@ -138,7 +138,8 @@ export default function MyRecipes(props) {
       transition(ERROR_SAVE_VALIDATION, false);
     } else {
       transition(SAVING);
-      inputRecipe.user_id = props.user.id
+     inputRecipe.user_id = props.user.id
+     console.log(inputRecipe);
       let recipeDB = convertRecipeToSaveDB(inputRecipe);
       console.log("recipe before saving to DB:",recipeDB)
       if (!recipe) {
