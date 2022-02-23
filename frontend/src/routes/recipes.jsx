@@ -8,7 +8,6 @@ import { Button } from "@mui/material";
 import SearchBar from "../components/SearchBar";
 import Box from "@mui/material/Box";
 
-
 export default function Recipes(props) {
   const [recipes, setRecipes] = useState(props.recipes || []);
   const [selectRecipe, setSelectRecipe] = useState(props.selectRecipe || null);
@@ -26,7 +25,7 @@ export default function Recipes(props) {
     axios
       .get("/recipes")
       .then((response) => {
-        console.log("from fetch recipes", response.data)
+        console.log("from fetch recipes", response.data);
         setRecipes(response.data);
         setFilterList(response.data);
       })
@@ -35,14 +34,15 @@ export default function Recipes(props) {
       });
   };
   const searchRecipe = (query) => {
-    
-    setFilterList(recipes.filter((recipe) => {
-      if (recipe.name.toLowerCase().includes(query.toLowerCase())) {
-        return true;
-      } else {
-        return false;
-      }
-    }));
+    setFilterList(
+      recipes.filter((recipe) => {
+        if (recipe.name.toLowerCase().includes(query.toLowerCase())) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
   };
 
   const fetchComments = () => {
@@ -50,7 +50,6 @@ export default function Recipes(props) {
       .get("/comments")
       .then((response) => {
         setComments(response.data);
-        // console.log("COMMENTS****----->", response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -77,34 +76,36 @@ export default function Recipes(props) {
     }
   }, []);
 
-   const renderSearch = () => {
+  const renderSearch = () => {
     if (openSearch === true) {
-      return <SearchBar 
-        searchRecipe={searchRecipe} closeSearch={ closeSearch}/>
+      return (
+        <SearchBar searchRecipe={searchRecipe} closeSearch={closeSearch} />
+      );
     } else {
       return (
-        <Button variant="contained" onClick={showSearch}>Search Recipes</Button>
-      )
-      }
-  }
-
+        <Button variant="contained" onClick={showSearch}>
+          Search Recipes
+        </Button>
+      );
+    }
+  };
 
   return (
     <main>
-       <div className="search-location">
-      <br></br>
-      {selectRecipe ? null : renderSearch()}
-      <Box
-        sx={{
-        flexGrow: 1,
-        display: "flex",
-        flexDirection: "row",
+      <div className="search-location">
+        <br></br>
+        {selectRecipe ? null : renderSearch()}
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "row",
             justifyContent: "center",
-        padding : "2px 0px 10px 0px"
-      }}/>
-          
+            padding: "2px 0px 10px 0px",
+          }}
+        />
       </div>
-      
+
       {selectRecipe ? (
         <RecipePage1
           selectRecipe={selectRecipe}
