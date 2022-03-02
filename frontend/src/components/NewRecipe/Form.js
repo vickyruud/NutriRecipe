@@ -17,7 +17,6 @@ import TextEditor from './TextEditor'
 import IngredientList from "./IngredientList"
 import Paper from '@mui/material/Paper';
 
-
 const styles = {
   paperContainer: {
     height: '100%',
@@ -59,7 +58,21 @@ const Form = (props) => {
     let newRecipe = {...recipe,[event.target.name]:event.target.value};
     setRecipe(newRecipe);
     console.log(recipe);
-  }  
+  }
+
+  const generateKey = () =>  {
+    let result           = '';
+    let characters       = 'abcdefghijklmnopqrstuvwxyz';
+    let numbers          =  '0123456789'
+    let charactersLength = characters.length;
+    for ( let i = 0; i < 3; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    for ( let i = 0; i < 2; i++ ) {
+      result += numbers.charAt(Math.floor(Math.random() * 10));
+    }
+    return result;
+  }
 
   useEffect(()=>{
     let newRecipe = props.recipe;
@@ -72,6 +85,33 @@ const Form = (props) => {
     console.log('newRecipe ', newRecipe);
     console.log('recipe after set: ', recipe);
   },[ingredients]);
+
+  console.log(props.recipe);
+
+  if (recipe) {
+    if (recipe.steps.indexOf("blocks") < 0) {
+      let no_enter_string = recipe.steps.replaceAll('\n','.');
+      console.log(no_enter_string);
+      let strings = no_enter_string.split('.');
+      let block_header = '{"blocks":[';
+      let block_footer = '],"entityMap":{}}';
+      let text_footer = '","type":"ordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}';
+      let converted_string = strings.map(string => {
+        let text_header = '{"key":"' + generateKey() + '","text":"';
+          return text_header + string + "." + text_footer;
+      })
+      let new_tring = converted_string.reduce((sum, str, index) => {
+        if (index > 0) {
+         sum = sum + ',' + str ;
+        } else {
+          sum = sum + str;
+        }
+        return sum;
+      });
+      let converted_content = block_header + new_tring + block_footer;
+      props.recipe.steps = converted_content;
+    } 
+  }
 
   return (
     <Paper className="NewRecipe"style={styles.paperContainer}>
