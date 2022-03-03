@@ -40,7 +40,7 @@ export default function Empty(props) {
         )
       } else {
         arrayOfRecipes = props.recipes.map((recipe, index) => (
-          <Grid item xs={4} sm={4} md={4} key={index}>
+          <Grid item marginLeft={6} width={320} height={450}  key={index}>
             <RecipeListItem
               setSelectRecipe={props.setSelectRecipe}
               recipe={recipe}
