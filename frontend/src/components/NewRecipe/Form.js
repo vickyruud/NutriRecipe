@@ -62,14 +62,10 @@ const Form = (props) => {
 
   const generateKey = () =>  {
     let result           = '';
-    let characters       = 'abcdefghijklmnopqrstuvwxyz';
-    let numbers          =  '0123456789'
+    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
-    for ( let i = 0; i < 3; i++ ) {
+    for ( let i = 0; i < 5; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    for ( let i = 0; i < 2; i++ ) {
-      result += numbers.charAt(Math.floor(Math.random() * 10));
     }
     return result;
   }
@@ -82,11 +78,7 @@ const Form = (props) => {
   useEffect(()=>{
     let newRecipe = {...recipe,ingredients};
     setRecipe(newRecipe);
-    console.log('newRecipe ', newRecipe);
-    console.log('recipe after set: ', recipe);
   },[ingredients]);
-
-  console.log(props.recipe);
 
   if (recipe) {
     if (recipe.steps.indexOf("blocks") < 0) {
