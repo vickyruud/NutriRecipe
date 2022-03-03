@@ -80,9 +80,9 @@ const Form = (props) => {
     setRecipe(newRecipe);
   },[ingredients]);
 
-  if (recipe) {
-    if (recipe.steps.indexOf("blocks") < 0) {
-      let no_enter_string = recipe.steps.replaceAll('\n','.');
+  if (props.recipe) {
+    if (props.recipe.steps.indexOf("blocks") < 0) {
+      let no_enter_string = props.recipe.steps.replaceAll('\n','.');
       console.log(no_enter_string);
       let strings = no_enter_string.split('.');
       let block_header = '{"blocks":[';
