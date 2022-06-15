@@ -37,5 +37,5 @@ In your browser, go to `localhost:3000`
 
 ## Screenshots
 
-![image](https://github.com/vickyruud/fun-with-gpt-3/blob/main/demo/demo1.gif)
+![image](https://github.com/vickyruud/NutriRecipe/blob/main/nurti.png)
 
