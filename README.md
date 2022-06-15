@@ -34,3 +34,8 @@ In your browser, go to `localhost:3000`
 - PostgreSQL 9.x
 - Node 16.0 or above
 - NPM 8.4 or above
+
+## Screenshots
+
+![image](https://github.com/vickyruud/fun-with-gpt-3/blob/main/demo/demo1.gif)
+
